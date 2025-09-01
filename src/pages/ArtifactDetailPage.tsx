@@ -13,8 +13,13 @@ const ArtifactDetailPage: React.FC = () => {
 
   if (!artifact) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
+      <div 
+        className="min-h-screen bg-cover bg-fixed bg-center flex items-center justify-center" 
+        style={{ 
+          backgroundImage: 'url(\'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/12/15/jadu_ghor_3-min.jpg?v=2\')' 
+        }}
+      >
+        <div className="text-center bg-gray-200 bg-opacity-80 rounded-lg p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Artifact Not Found</h2>
           <p className="text-gray-600 mb-6">The requested artifact could not be found.</p>
           <Link 
@@ -42,21 +47,27 @@ const ArtifactDetailPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div 
+      className="min-h-screen bg-cover bg-fixed bg-center" 
+      style={{ 
+        backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2303.jpg\')' 
+      }}
+    >
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-          <Link to="/" className="hover:text-green-600">Home</Link>
+        <div className="flex items-center space-x-2 text-sm text-gray-200 mb-8 bg-gray-800 bg-opacity-60 rounded-lg px-4 py-2">
+          <Link to="/" className="hover:text-green-300">Home</Link>
           <span>/</span>
-          <Link to="/search" className="hover:text-green-600">Collection</Link>
+          <Link to="/search" className="hover:text-green-300">Collection</Link>
           <span>/</span>
-          <span className="text-gray-900">{artifact.objectHead}</span>
+          <span className="text-white">{artifact.objectHead}</span>
         </div>
 
         {/* Back Button */}
         <Link
           to="/search"
-          className="inline-flex items-center text-green-700 hover:text-green-800 mb-6 transition-colors"
+          className="inline-flex items-center text-green-300 hover:text-green-200 mb-6 transition-colors bg-gray-800 bg-opacity-60 rounded-lg px-4 py-2"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Collection
@@ -64,7 +75,7 @@ const ArtifactDetailPage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Media Viewer */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden">
             <div className="aspect-w-4 aspect-h-3">
               <img
                 src={artifact.images[selectedImage]}
@@ -111,7 +122,7 @@ const ArtifactDetailPage: React.FC = () => {
           </div>
 
           {/* Artifact Information */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300">
             {/* Header */}
             <div className="p-6 border-b border-gray-200">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -255,7 +266,7 @@ const ArtifactDetailPage: React.FC = () => {
                   <div className="space-y-4">
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">APA Format</h4>
-                      <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="bg-gray-300 bg-opacity-70 p-4 rounded-lg">
                         <p className="text-sm text-gray-700 font-mono">{citationFormats.apa}</p>
                         <button className="mt-2 text-green-700 hover:text-green-800 text-sm font-medium">
                           Copy APA Citation
@@ -265,7 +276,7 @@ const ArtifactDetailPage: React.FC = () => {
 
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">MLA Format</h4>
-                      <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="bg-gray-300 bg-opacity-70 p-4 rounded-lg">
                         <p className="text-sm text-gray-700 font-mono">{citationFormats.mla}</p>
                         <button className="mt-2 text-green-700 hover:text-green-800 text-sm font-medium">
                           Copy MLA Citation
@@ -275,7 +286,7 @@ const ArtifactDetailPage: React.FC = () => {
 
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Chicago Format</h4>
-                      <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="bg-gray-300 bg-opacity-70 p-4 rounded-lg">
                         <p className="text-sm text-gray-700 font-mono">{citationFormats.chicago}</p>
                         <button className="mt-2 text-green-700 hover:text-green-800 text-sm font-medium">
                           Copy Chicago Citation
@@ -291,7 +302,7 @@ const ArtifactDetailPage: React.FC = () => {
 
         {/* Related Artifacts */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Artifacts</h2>
+          <h2 className="text-2xl font-bold text-white mb-8 bg-gray-800 bg-opacity-60 rounded-lg px-4 py-2">Related Artifacts</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {artifacts
               .filter(a => a.id !== artifact.id && a.isPublic)
@@ -300,7 +311,7 @@ const ArtifactDetailPage: React.FC = () => {
                 <Link
                   key={relatedArtifact.id}
                   to={`/artifact/${relatedArtifact.id}`}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+                  className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <img
                     src={relatedArtifact.images[0]}

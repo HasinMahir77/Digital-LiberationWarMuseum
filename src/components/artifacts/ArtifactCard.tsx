@@ -11,7 +11,7 @@ interface ArtifactCardProps {
 const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
   if (viewMode === 'list') {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+      <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 p-6 hover:shadow-md transition-shadow">
         <div className="flex gap-6">
           <div className="flex-shrink-0">
             <img
@@ -63,7 +63,7 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+    <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow">
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={artifact.images[0]}

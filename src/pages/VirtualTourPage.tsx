@@ -43,21 +43,30 @@ const VirtualTourPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div 
+      className="min-h-screen bg-cover bg-fixed bg-center" 
+      style={{ 
+        backgroundImage: 'url(\'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/12/15/jadu_ghor_3-min.jpg\')' 
+      }}
+    >
+      {/* Darker overlay for virtual tour page */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="mb-8 bg-gray-800 bg-opacity-60 rounded-lg p-6">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Virtual Tour
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl">
+          <p className="text-lg text-gray-200 max-w-3xl">
             Take a virtual journey through the Bangladesh Liberation War Museum and its surroundings. 
             Explore the museum grounds, galleries, and memorial areas using Google Street View technology.
           </p>
         </div>
 
         {/* Virtual Tour Component */}
-        <div className="bg-white rounded-2xl shadow-lg p-6">
+        <div className="bg-gray-200 bg-opacity-80 rounded-2xl shadow-lg p-6">
           <VirtualTour
             apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string}
             mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || "DEMO_MAP_ID"}
@@ -70,7 +79,7 @@ const VirtualTourPage: React.FC = () => {
 
         {/* Additional Information */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-gray-200 bg-opacity-80 rounded-xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               How to Use the Virtual Tour
             </h3>
@@ -94,7 +103,7 @@ const VirtualTourPage: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-gray-200 bg-opacity-80 rounded-xl shadow-md p-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               About the Museum
             </h3>

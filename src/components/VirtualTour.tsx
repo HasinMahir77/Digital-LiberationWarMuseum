@@ -85,13 +85,10 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
   libraries,
   className,
 }) => {
-  const mapDivRef = useRef<HTMLDivElement | null>(null);
   const svDivRef = useRef<HTMLDivElement | null>(null);
 
   const mapRef = useRef<google.maps.Map>();
   const panoRef = useRef<google.maps.StreetViewPanorama>();
-  const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
-  const polylineRef = useRef<google.maps.Polyline>();
   const infoWindowRef = useRef<google.maps.InfoWindow>();
   const svServiceRef = useRef<google.maps.StreetViewService>();
   const autoplayTimerRef = useRef<number | null>(null);
@@ -127,12 +124,12 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 
         if (cancelled) return;
 
-        // Map
-        const map = new google.maps.Map(mapDivRef.current as HTMLDivElement, {
+        // Map (hidden - only used for Street View integration)
+        const map = new google.maps.Map(document.createElement('div'), {
           center: stops.length ? stops[0].position : { lat: 23.777, lng: 90.38 },
           zoom: stops.length === 1 ? initialZoom : 14,
           mapTypeControl: false,
-          streetViewControl: false, // we render our own StreetView panel
+          streetViewControl: false,
           fullscreenControl: false,
           clickableIcons: true,
           gestureHandling: "greedy",
@@ -156,64 +153,12 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
         );
         panoRef.current = pano;
 
-        // Tie Street View to the map (so pegman etc. work consistently if enabled later)
-        map.setStreetView(pano);
-
         // Services
         infoWindowRef.current = new google.maps.InfoWindow();
         svServiceRef.current = new google.maps.StreetViewService();
 
-        // Markers
-        markersRef.current = stops.map((s, i) => {
-          // Create a custom element for the marker with number label
-          const markerElement = document.createElement('div');
-          markerElement.style.cssText = `
-            background-color: #1f2937;
-            color: white;
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            cursor: pointer;
-          `;
-          markerElement.textContent = String(i + 1);
-          markerElement.title = s.title;
-
-          const marker = new google.maps.marker.AdvancedMarkerElement({
-            position: s.position,
-            map,
-            content: markerElement,
-            title: s.title,
-          });
-          
-          markerElement.addEventListener("click", () => goToStop(i));
-          return marker;
-        });
-
-        // Route polyline (simple path through stops)
-        polylineRef.current = new google.maps.Polyline({
-          path: stops.map((s) => s.position),
-          geodesic: true,
-          strokeOpacity: 0.9,
-          strokeWeight: 3,
-          // use provided or default color; let your Tailwind palette drive the UI, not the map
-          ...polylineOptions,
-        });
-        polylineRef.current.setMap(map);
-
-        // Fit to bounds (if > 1 stop)
-        if (stops.length > 1 && bounds) {
-          setTimeout(() => map.fitBounds(bounds), 50);
-        }
-
         // Jump to initial stop
-        await openStreetViewForStop(0, { centerMap: true, openInfo: false });
+        await openStreetViewForStop(0, { openInfo: false });
 
         setIsReady(true);
         if (autoPlay) startAutoplay();
@@ -229,8 +174,6 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
       stopAutoplay();
       // Clean up
       infoWindowRef.current?.close();
-      polylineRef.current?.setMap(null as any);
-      markersRef.current.forEach((m) => m.map = null);
       panoRef.current?.setVisible(false);
       // Let the DOM nodes be GC'd by React unmount
     };
@@ -258,10 +201,10 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
     else startAutoplay();
   };
 
-  // Jump to a given stop (updates map, info window, and Street View)
+  // Jump to a given stop (updates Street View)
   const goToStop = async (idx: number, opts?: { smooth?: boolean }) => {
     setActiveIdx(idx);
-    await openStreetViewForStop(idx, { centerMap: true, openInfo: true, smooth: opts?.smooth });
+    await openStreetViewForStop(idx, { openInfo: true, smooth: opts?.smooth });
   };
 
   // Core function to open the panorama for a stop (by panoId or nearest-by-location)
@@ -270,18 +213,9 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
     opts?: { centerMap?: boolean; openInfo?: boolean; smooth?: boolean }
   ) => {
     const s = stops[idx];
-    const map = mapRef.current!;
     const pano = panoRef.current!;
     const svc = svServiceRef.current!;
     const iw = infoWindowRef.current!;
-    const marker = markersRef.current[idx];
-
-    // Center the base map
-    if (opts?.centerMap) {
-      if (opts.smooth && map.panTo) map.panTo(s.position);
-      else map.setCenter(s.position);
-      if (stops.length === 1) map.setZoom(map.getZoom() ?? 17);
-    }
 
     // Street View: explicit panoId if provided, else find nearest panorama
     const applyPov = () => {
@@ -296,13 +230,8 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 
     const showInfo = () => {
       if (!opts?.openInfo) return;
-      iw.setContent(
-        `<div style="max-width:260px">
-          <div style="font-weight:700;margin-bottom:4px">${idx + 1}. ${escapeHtml(s.title)}</div>
-          ${s.description ? `<div style="font-size:12px;opacity:.85">${escapeHtml(s.description)}</div>` : ""}
-        </div>`
-      );
-      iw.open({ map, anchor: marker });
+      // Info window functionality removed since we don't have markers anymore
+      // The sidebar already shows the stop information
     };
 
     if (s.panoId) {
@@ -434,10 +363,9 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
         </footer>
       </aside>
 
-      {/* Main Map + Street View area */}
-      <section className="col-span-9 grid grid-rows-2 gap-4">
-        <div ref={mapDivRef} className="row-span-1 rounded-2xl border shadow overflow-hidden min-h-[32vh]" />
-        <div ref={svDivRef} className="row-span-1 rounded-2xl border shadow overflow-hidden min-h-[32vh]" />
+      {/* Street View area */}
+      <section className="col-span-9">
+        <div ref={svDivRef} className="w-full h-[78vh] rounded-2xl border shadow overflow-hidden" />
       </section>
     </div>
   );

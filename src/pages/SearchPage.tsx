@@ -53,10 +53,16 @@ const SearchPage: React.FC = () => {
   const hasActiveFilters = Object.values(filters).some(value => value !== 'all');
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div 
+      className="min-h-screen bg-cover bg-fixed bg-center" 
+      style={{ 
+        backgroundImage: 'url(\'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/12/15/jadu_ghor_3-min.jpg\')' 
+      }}
+    >
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search Header */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 p-6 mb-8">
           <form onSubmit={handleSearch} className="mb-6">
             <div className="relative">
               <input
@@ -128,7 +134,7 @@ const SearchPage: React.FC = () => {
 
           {/* Filter Panel */}
           {showFilters && (
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <div className="mt-6 p-4 bg-gray-300 bg-opacity-70 rounded-lg">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Object Type</label>
@@ -194,7 +200,7 @@ const SearchPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
+            <div className="text-center py-12 bg-gray-200 bg-opacity-75 rounded-lg p-8">
               <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No artifacts found</h3>
               <p className="text-gray-600 mb-6">
