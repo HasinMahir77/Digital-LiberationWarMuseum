@@ -49,8 +49,7 @@ const VirtualTourPage: React.FC = () => {
         backgroundImage: 'url(\'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/12/15/jadu_ghor_3-min.jpg\')' 
       }}
     >
-      {/* Darker overlay for virtual tour page */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
       
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -66,7 +65,10 @@ const VirtualTourPage: React.FC = () => {
         </div>
 
         {/* Virtual Tour Component */}
-        <div className="bg-gray-200 bg-opacity-80 rounded-2xl shadow-lg p-6">
+        <div className="bg-gray-200 bg-opacity-80 rounded-2xl shadow-lg p-6 relative">
+          {/* Darker overlay just for the virtual tour area */}
+          <div className="absolute inset-0 bg-black bg-opacity-30 rounded-2xl pointer-events-none"></div>
+          <div className="relative z-10">
           <VirtualTour
             apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string}
             mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || "DEMO_MAP_ID"}
@@ -75,6 +77,7 @@ const VirtualTourPage: React.FC = () => {
             autoPlayIntervalMs={6000}
             className="max-w-full"
           />
+          </div>
         </div>
 
         {/* Additional Information */}
