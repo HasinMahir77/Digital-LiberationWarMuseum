@@ -169,14 +169,22 @@ interface TimelineEvent {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div 
+      className="min-h-screen bg-cover bg-fixed bg-center" 
+      style={{ 
+        backgroundImage: 'url(\'https://cdn.britannica.com/46/272246-050-FFB13F7C/general-jagjit-singh-aurora-general-amir-abdullah-khan-niazi-sign-papers-to-end-indo-pakistani-war-1971.jpg\')' 
+      }}
+    >
+
+      
+      {/* Content */}
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 bg-black bg-opacity-30 rounded-lg p-8">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Liberation War Timeline
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
             Follow the chronological events of Bangladesh's struggle for independence from March to December 1971
           </p>
         </div>
@@ -207,15 +215,15 @@ interface TimelineEvent {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div className="relative bg-black bg-opacity-20 rounded-lg p-8">
           {/* Timeline Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300 z-0"></div>
 
           {/* Timeline Events */}
           <div className="space-y-8">
             {['1970', '1971', '1972'].map((year) => (
               <div key={year} id={`year-${year}`} className="pt-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-gray-300 pb-2">
+                <h2 className="text-3xl font-bold text-white mb-6 border-b-2 border-white pb-2 relative z-10 bg-black bg-opacity-40 px-4 py-2 rounded-lg">
                   {year}
                 </h2>
                 {timelineEvents.filter((event) => event.year === year).map((event, index) => (
@@ -226,7 +234,7 @@ interface TimelineEvent {
                     </div>
 
                     {/* Event Content */}
-                    <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div className="flex-1 bg-white bg-opacity-90 rounded-lg shadow-sm border border-gray-200 p-6">
                       <div className="flex justify-between items-start mb-3">
                         <div>
                           <h3 className="text-xl font-semibold text-gray-900 mb-1">
@@ -273,24 +281,24 @@ interface TimelineEvent {
         </div>
 
         {/* Additional Resources */}
-        <div className="mt-16 bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Explore Further</h2>
+        <div className="mt-16 bg-black bg-opacity-30 rounded-lg shadow-sm border border-gray-200 p-8">
+          <h2 className="text-2xl font-bold text-white mb-6">Explore Further</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Key Figures</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-lg font-semibold text-white mb-3">Key Figures</h3>
+              <p className="text-gray-200 mb-4">
                 Learn about the important personalities who shaped Bangladesh's independence movement.
               </p>
-              <button className="text-green-700 hover:text-green-800 font-medium text-sm">
+              <button className="text-green-300 hover:text-green-200 font-medium text-sm">
                 View Key Figures →
               </button>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Battle Maps</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-lg font-semibold text-white mb-3">Battle Maps</h3>
+              <p className="text-gray-200 mb-4">
                 Explore interactive maps showing major battles and strategic movements during the war.
               </p>
-              <button className="text-green-700 hover:text-green-800 font-medium text-sm">
+              <button className="text-green-300 hover:text-green-200 font-medium text-sm">
                 View Battle Maps →
               </button>
             </div>
