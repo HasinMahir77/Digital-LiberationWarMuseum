@@ -30,9 +30,9 @@ const Header: React.FC = () => {
   return (
     <header className="bg-white shadow-lg border-b border-gray-200">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
             <div className="w-10 h-10 bg-gradient-to-br from-green-700 to-green-800 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">LW</span>
             </div>
@@ -42,63 +42,66 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className={`text-sm font-medium transition-colors ${
-                isActive('/') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-              }`}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/search" 
-              className={`text-sm font-medium transition-colors ${
-                isActive('/search') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-              }`}
-            >
-              Browse Collection
-            </Link>
-            <Link 
-              to="/timeline" 
-              className={`text-sm font-medium transition-colors ${
-                isActive('/timeline') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-              }`}
-            >
-              Timeline
-            </Link>
-            <Link 
-              to="/exhibitions" 
-              className={`text-sm font-medium transition-colors ${
-                isActive('/exhibitions') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-              }`}
-            >
-              Exhibitions
-            </Link>
-            <Link 
-              to="/virtual-tour" 
-              className={`text-sm font-medium transition-colors ${
-                isActive('/virtual-tour') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-              }`}
-            >
-              Virtual Tour
-            </Link>
-          </nav>
+          {/* Centered Navigation and Search */}
+          <div className="flex-1 flex items-center justify-center space-x-8 mx-8">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link 
+                to="/" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/search" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/search') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Browse Collection
+              </Link>
+              <Link 
+                to="/timeline" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/timeline') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Timeline
+              </Link>
+              <Link 
+                to="/exhibitions" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/exhibitions') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Exhibitions
+              </Link>
+              <Link 
+                to="/virtual-tour" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/virtual-tour') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Virtual Tour
+              </Link>
+            </nav>
 
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-md mx-8">
-            <div className="relative w-full">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search artifacts, collections..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            </div>
-          </form>
+            {/* Search Bar */}
+            <form onSubmit={handleSearch} className="hidden lg:flex items-center">
+              <div className="relative w-64">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search artifacts, collections..."
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              </div>
+            </form>
+          </div>
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">

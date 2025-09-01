@@ -3,6 +3,8 @@
 // Drop this file into your project and render <VirtualTour apiKey="YOUR_KEY" />
 // or pass stops to customize the tour.
 //
+// Required: For Advanced Markers to work, you need a valid Map ID from Google Cloud Console.
+// Create a map style in Google Cloud Console and use its Map ID here.
 // Optional: For TypeScript IntelliSense, install @types/google.maps
 // and (if needed) add "types": ["google.maps"] to tsconfig.json's compilerOptions.
 //
@@ -38,12 +40,14 @@ type VirtualTourProps = {
   autoPlayIntervalMs?: number;
   /** Initial map zoom for single-stop cases. */
   initialZoom?: number;
+  /** Map ID for Advanced Markers (required for Advanced Markers to work). */
+  mapId?: string;
   /** Map style or options override. */
   mapOptions?: google.maps.MapOptions;
   /** Polyline options override. */
   polylineOptions?: google.maps.PolylineOptions;
   /** Street View options override. */
-  streetViewOptions?: google.maps.StreetViewOptions;
+  streetViewOptions?: google.maps.StreetViewPanoramaOptions;
   /** Libraries to load (advanced users). */
   libraries?: Array<("places" | "geometry" | "marker" | "maps")>;
   /** ClassName passthrough for the outermost container. */
@@ -74,6 +78,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
   autoPlay = false,
   autoPlayIntervalMs = 5500,
   initialZoom = 17,
+  mapId = "DEMO_MAP_ID",
   mapOptions,
   polylineOptions,
   streetViewOptions,
@@ -85,7 +90,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 
   const mapRef = useRef<google.maps.Map>();
   const panoRef = useRef<google.maps.StreetViewPanorama>();
-  const markersRef = useRef<google.maps.Marker[]>([]);
+  const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
   const polylineRef = useRef<google.maps.Polyline>();
   const infoWindowRef = useRef<google.maps.InfoWindow>();
   const svServiceRef = useRef<google.maps.StreetViewService>();
@@ -113,7 +118,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
     const loader = new Loader({
       apiKey,
       version: "weekly",
-      libraries: libraries ?? ["places"],
+      libraries: libraries ?? ["places", "marker"],
     });
 
     (async () => {
@@ -131,6 +136,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
           fullscreenControl: false,
           clickableIcons: true,
           gestureHandling: "greedy",
+          mapId, // Required for Advanced Markers
           ...mapOptions,
         });
         mapRef.current = map;
@@ -159,17 +165,34 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 
         // Markers
         markersRef.current = stops.map((s, i) => {
-          const marker = new google.maps.Marker({
+          // Create a custom element for the marker with number label
+          const markerElement = document.createElement('div');
+          markerElement.style.cssText = `
+            background-color: #1f2937;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            cursor: pointer;
+          `;
+          markerElement.textContent = String(i + 1);
+          markerElement.title = s.title;
+
+          const marker = new google.maps.marker.AdvancedMarkerElement({
             position: s.position,
             map,
-            label: {
-              text: String(i + 1),
-              fontSize: "12px",
-              fontWeight: "700",
-            },
+            content: markerElement,
             title: s.title,
           });
-          marker.addListener("click", () => goToStop(i));
+          
+          markerElement.addEventListener("click", () => goToStop(i));
           return marker;
         });
 
@@ -207,7 +230,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
       // Clean up
       infoWindowRef.current?.close();
       polylineRef.current?.setMap(null as any);
-      markersRef.current.forEach((m) => m.setMap(null as any));
+      markersRef.current.forEach((m) => m.map = null);
       panoRef.current?.setVisible(false);
       // Let the DOM nodes be GC'd by React unmount
     };
