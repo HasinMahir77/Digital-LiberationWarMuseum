@@ -9,7 +9,8 @@ import {
   Download,
   Upload,
   Eye,
-  Calendar
+  Calendar,
+  Trophy // Added Trophy icon for competitions
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
@@ -18,6 +19,7 @@ import UserManagement from './UserManagement';
 import ReportsPage from './ReportsPage';
 import AddArtifactPage from './AddArtifactPage';
 import CreateExhibitionPage from './CreateExhibitionPage';
+import CompetitionManagementPage from './CompetitionManagementPage'; // Import the new competition management page
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
@@ -32,6 +34,9 @@ const AdminDashboard: React.FC = () => {
     { id: 'add-artifact', label: 'Add Artifact', icon: Plus, path: '/admin/add-artifact' },
     ...(user?.role === 'super_admin' ? [
       { id: 'users', label: 'Users', icon: Users, path: '/admin/users' }
+    ] : []),
+    ...(user?.role === 'super_admin' || user?.role === 'archivist' ? [
+      { id: 'competition-management', label: 'Competitions', icon: Trophy, path: '/admin/competition-management' }
     ] : []),
     { id: 'reports', label: 'Reports', icon: Download, path: '/admin/reports' },
   ];
@@ -213,6 +218,7 @@ const AdminDashboard: React.FC = () => {
               <Route path="/create-exhibition" element={<CreateExhibitionPage />} />
               <Route path="/users" element={<UserManagement />} />
               <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/competition-management" element={<CompetitionManagementPage />} />
             </Routes>
           </div>
         </div>

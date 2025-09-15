@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ArrowRight, Clock, Image, FileText, Map } from 'lucide-react';
+import { Search, ArrowRight, Clock, Image, FileText, Map, Trophy } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 
 const HomePage: React.FC = () => {
@@ -33,6 +33,13 @@ const HomePage: React.FC = () => {
             >
               <Clock className="w-5 h-5 mr-2" />
               Historical Timeline
+            </Link>
+            <Link 
+              to="/competitions"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-green-800 transition-colors inline-flex items-center justify-center"
+            >
+              <Trophy className="w-5 h-5 mr-2" />
+              Competitions
             </Link>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { Artifact, Competition, CompetitionSubmission, CompetitionStatus, SubmissionStatus } from '../types';
 
 export interface Artifact {
   id: string;
@@ -27,6 +28,16 @@ interface DataContextType {
   updateArtifact: (id: string, artifact: Partial<Artifact>) => void;
   deleteArtifact: (id: string) => void;
   searchArtifacts: (query: string, filters?: any) => Artifact[];
+  competitions: Competition[];
+  addCompetition: (competition: Omit<Competition, 'id' | 'dateCreated'>) => void;
+  updateCompetition: (id: string, competition: Partial<Competition>) => void;
+  deleteCompetition: (id: string) => void;
+  getCompetitionById: (id: string) => Competition | undefined;
+  competitionSubmissions: CompetitionSubmission[];
+  submitCompetitionEntry: (submission: Omit<CompetitionSubmission, 'id' | 'submissionDate' | 'status'>) => void;
+  updateSubmissionStatus: (id: string, status: SubmissionStatus, score?: number, feedback?: string) => void;
+  withdrawCompetitionEntry: (competitionId: string, userId: string) => void; // Added withdraw function
+  getSubmissionsForCompetition: (competitionId: string) => CompetitionSubmission[];
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -133,8 +144,67 @@ const mockArtifacts: Artifact[] = [
   },
 ];
 
+const mockCompetitions: Competition[] = [
+  {
+    id: 'comp-1',
+    title: 'District Level Essay Competition: Liberation War',
+    description: 'Write an essay on the significance of the Bangladesh Liberation War.',
+    level: 'district',
+    eligibilityCriteria: 'Open to all Bangladeshi citizens aged 18-30',
+    startDate: '2025-09-01T00:00:00Z',
+    endDate: '2025-09-30T23:59:59Z',
+    judgingCriteria: 'Originality, historical accuracy, and writing style.',
+    rewards: 'Certificate of participation, top 3 qualify for division round.',
+    status: 'open',
+    adminUserId: '2', // archivist
+    dateCreated: '2025-08-15T10:00:00Z',
+    nextCompetitionId: 'comp-2' // Link to the division level competition
+  },
+  {
+    id: 'comp-2',
+    title: 'Division Level Art Competition: Figures of 1971',
+    description: 'Create artwork depicting key figures or events from the Liberation War.',
+    level: 'division',
+    eligibilityCriteria: 'Open to district round qualifiers and invited artists.',
+    startDate: '2025-10-15T00:00:00Z',
+    endDate: '2025-11-15T23:59:59Z',
+    judgingCriteria: 'Creativity, artistic skill, and relevance to the theme.',
+    rewards: 'Cash prize, exhibition opportunity, top 2 qualify for national round.',
+    status: 'open',
+    adminUserId: '3', // curator
+    dateCreated: '2025-09-20T11:00:00Z',
+    nextCompetitionId: 'comp-3' // Link to the national level competition
+  },
+  {
+    id: 'comp-3',
+    title: 'National Level Photography Competition: Echoes of Liberation',
+    description: 'Submit photographs that capture the spirit and legacy of the Liberation War.',
+    level: 'national',
+    eligibilityCriteria: 'Open to division round qualifiers and professional photographers.',
+    startDate: '2025-12-01T00:00:00Z',
+    endDate: '2025-12-31T23:59:59Z',
+    judgingCriteria: 'Impact, technical quality, and narrative power.',
+    rewards: 'Grand prize, national recognition, featured in museum\'s digital archive.',
+    status: 'draft',
+    adminUserId: '1', // super_admin
+    dateCreated: '2025-11-01T09:00:00Z',
+  }
+];
+
+const mockCompetitionSubmissions: CompetitionSubmission[] = [
+  {
+    id: 'sub-1',
+    competitionId: 'comp-1',
+    userId: 'public-user-1',
+    submissionDate: '2025-09-10T14:30:00Z',
+    status: 'submitted',
+  }
+];
+
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [artifacts, setArtifacts] = useState<Artifact[]>(mockArtifacts);
+  const [competitions, setCompetitions] = useState<Competition[]>(mockCompetitions);
+  const [competitionSubmissions, setCompetitionSubmissions] = useState<CompetitionSubmission[]>(mockCompetitionSubmissions);
 
   const addArtifact = (artifactData: Omit<Artifact, 'id' | 'dateCreated'>) => {
     const newArtifact: Artifact = {
@@ -181,6 +251,61 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return filtered;
   };
 
+  const addCompetition = (competitionData: Omit<Competition, 'id' | 'dateCreated'>) => {
+    const newCompetition: Competition = {
+      ...competitionData,
+      id: `comp-${Date.now()}`,
+      dateCreated: new Date().toISOString(),
+    };
+    setCompetitions(prev => [...prev, newCompetition]);
+  };
+
+  const updateCompetition = (id: string, updates: Partial<Competition>) => {
+    setCompetitions(prev => 
+      prev.map(comp => 
+        comp.id === id ? { ...comp, ...updates } : comp
+      )
+    );
+  };
+
+  const deleteCompetition = (id: string) => {
+    setCompetitions(prev => prev.filter(comp => comp.id !== id));
+    // Also delete associated submissions
+    setCompetitionSubmissions(prev => prev.filter(sub => sub.competitionId !== id));
+  };
+
+  const getCompetitionById = (id: string) => {
+    return competitions.find(comp => comp.id === id);
+  };
+
+  const submitCompetitionEntry = (submissionData: Omit<CompetitionSubmission, 'id' | 'submissionDate' | 'status'>) => {
+    const newSubmission: CompetitionSubmission = {
+      ...submissionData,
+      id: `sub-${Date.now()}`,
+      submissionDate: new Date().toISOString(),
+      status: 'submitted',
+    };
+    setCompetitionSubmissions(prev => [...prev, newSubmission]);
+  };
+
+  const updateSubmissionStatus = (id: string, status: SubmissionStatus, score?: number, feedback?: string) => {
+    setCompetitionSubmissions(prev =>
+      prev.map(sub =>
+        sub.id === id ? { ...sub, status, score, feedback } : sub
+      )
+    );
+  };
+
+  const getSubmissionsForCompetition = (competitionId: string) => {
+    return competitionSubmissions.filter(sub => sub.competitionId === competitionId);
+  };
+
+  const withdrawCompetitionEntry = (competitionId: string, userId: string) => {
+    setCompetitionSubmissions(prev => 
+      prev.filter(sub => !(sub.competitionId === competitionId && sub.userId === userId))
+    );
+  };
+
   return (
     <DataContext.Provider value={{
       artifacts,
@@ -188,6 +313,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       updateArtifact,
       deleteArtifact,
       searchArtifacts,
+      competitions,
+      addCompetition,
+      updateCompetition,
+      deleteCompetition,
+      getCompetitionById,
+      competitionSubmissions,
+      submitCompetitionEntry,
+      updateSubmissionStatus,
+      withdrawCompetitionEntry,
+      getSubmissionsForCompetition,
     }}>
       {children}
     </DataContext.Provider>
