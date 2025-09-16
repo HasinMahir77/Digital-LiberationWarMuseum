@@ -29,7 +29,7 @@ const CompetitionDetailPage: React.FC = () => {
     return <LoadingSpinner />;
   }
 
-  const isCompetitionOpen = competition.status === 'open' && new Date(competition.endDate) > new Date();
+  const isCompetitionOpen = (competition.status === 'open' || competition.status === 'judging') && new Date(competition.endDate) > new Date();
 
   const handleApply = async () => {
     if (!user || !id) return; // Should not happen if button is correctly conditional

@@ -158,7 +158,7 @@ const mockCompetitions: Competition[] = [
     status: 'open',
     adminUserId: '2', // archivist
     dateCreated: '2025-08-15T10:00:00Z',
-    nextCompetitionId: 'comp-2' // Link to the division level competition
+    thumbnail: 'https://s3.amazonaws.com/thumbnails.thecrimson.com/photos/2018/10/15/132830_1333019.jpg.1500x1000_q95_crop-smart_upscale.jpg',
   },
   {
     id: 'comp-2',
@@ -173,6 +173,7 @@ const mockCompetitions: Competition[] = [
     status: 'open',
     adminUserId: '3', // curator
     dateCreated: '2025-09-20T11:00:00Z',
+    thumbnail:'https://static.wixstatic.com/media/c995a3_f793fd38a79741c89f371d107d974aa2~mv2.jpg/v1/fill/w_768,h_544,al_c,lg_1,q_85/c995a3_f793fd38a79741c89f371d107d974aa2~mv2.jpg',
     nextCompetitionId: 'comp-3' // Link to the national level competition
   },
   {

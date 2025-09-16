@@ -17,6 +17,7 @@ export interface Competition {
   id: string;
   title: string;
   description: string;
+  thumbnail: string;
   level: CompetitionLevel;
   eligibilityCriteria: string; // e.g., "Open to all Bangladeshi citizens aged 18-30"
   startDate: string; // ISO date string

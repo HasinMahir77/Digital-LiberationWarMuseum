@@ -24,13 +24,14 @@ const CompetitionsPage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {competitions
-              .filter(comp => comp.status !== 'draft') // Filter out draft competitions
+              .filter(comp => comp.status !== 'draft' && comp.status !== 'completed') // Filter out draft and completed competitions
               .map((comp) => (
               <Link 
                 to={`/competitions/${comp.id}`}
                 key={comp.id}
                 className="block bg-gray-200 bg-opacity-80 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out overflow-hidden"
               >
+                <img src={comp.thumbnail} alt={comp.title} className="w-full h-48 object-cover" />
                 <div className="p-6">
                   <h2 className="text-xl font-semibold text-gray-900 mb-2">{comp.title}</h2>
                   <p className="text-gray-700 text-sm mb-3 line-clamp-3">{comp.description}</p>
