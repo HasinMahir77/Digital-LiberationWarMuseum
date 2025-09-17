@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // Import useState
-import { useParams, /* Link, */ useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 import { useAuth } from '../contexts/AuthContext'; // Import useAuth
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -79,81 +79,96 @@ const CompetitionDetailPage: React.FC = () => {
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-fixed bg-center" 
+      className="min-h-screen bg-cover bg-fixed bg-center text-gray-900 py-12"
       style={{ 
-        backgroundImage: 'url(\'https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/12/15/jadu_ghor_3-min.jpg\')' 
+        backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2305.jpeg\')' 
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold mb-4 text-white text-center bg-gray-800 bg-opacity-60 rounded-lg p-4">
-          {competition.title}
-        </h1>
-        <p className="text-lg text-gray-200 mb-6 text-center bg-gray-800 bg-opacity-60 rounded-lg p-2">Level: <span className="capitalize">{competition.level.replace('_', ' ')}</span></p>
+        <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-xl p-8 md:p-12">
+          <Link to="/competitions" className="text-gray-700 hover:text-gray-900 mb-4 inline-block">
+            &larr; Back to Competitions
+          </Link>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-center md:text-left">{competition.title}</h1>
+          <p className="text-lg text-gray-700 mb-6 text-center md:text-left">Level: <span className="capitalize">{competition.level.replace('_', ' ')}</span></p>
 
-        <div className="mb-6 text-center">
-          {!user ? (
-            <button
-              onClick={() => navigate('/login')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-            >
-              Log in to Join
-            </button>
-          ) : userSubmission ? (
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-gray-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-600 transition-colors inline-block"
-            >
-              View/Withdraw Application
-            </button>
-          ) : isCompetitionOpen ? (
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors inline-block"
-            >
-              Join Competition
-            </button>
-          ) : (
-            <p className="text-gray-600">This competition is currently {competition.status}.</p>
-          )}
+          <div className="flex flex-col md:flex-row gap-8">
+            {competition.thumbnail && (
+              <div className="md:w-1/2 flex flex-col items-center">
+                <img 
+                  src={competition.thumbnail} 
+                  alt={competition.title} 
+                  className="w-full h-96 object-contain rounded-lg shadow-md mb-6"
+                />
+                <div className="w-full text-center">
+                  {!user ? (
+                    <button
+                      onClick={() => navigate('/login')}
+                      className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors"
+                    >
+                      Log in to Join
+                    </button>
+                  ) : userSubmission ? (
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="bg-gray-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-600 transition-colors inline-block"
+                    >
+                      View/Withdraw Application
+                    </button>
+                  ) : isCompetitionOpen ? (
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors inline-block"
+                    >
+                      Join Competition
+                    </button>
+                  ) : (
+                    <p className="text-gray-600">This competition is currently {competition.status}.</p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="md:w-1/2 flex flex-col justify-between">
+              <div className="text-gray-700 leading-relaxed text-lg mb-8">
+                <h2 className="text-2xl font-semibold mb-3 text-gray-900">Description</h2>
+                <p>{competition.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800">
+                <div>
+                  <h2 className="font-semibold text-xl mb-2 text-gray-900">Eligibility Criteria</h2>
+                  <p>{competition.eligibilityCriteria}</p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-xl mb-2 text-gray-900">Important Dates</h2>
+                  <p><strong>Start Date:</strong> {new Date(competition.startDate).toLocaleDateString()}</p>
+                  <p><strong>Submission Deadline:</strong> {new Date(competition.endDate).toLocaleDateString()}</p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-xl mb-2 text-gray-900">Judging Criteria</h2>
+                  <p>{competition.judgingCriteria}</p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-xl mb-2 text-gray-900">Rewards</h2>
+                  <p>{competition.rewards}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="bg-gray-200 bg-opacity-80 shadow-lg rounded-lg p-6 mb-6">
-          <h2 className="text-2xl font-semibold mb-3">Description</h2>
-          <p className="text-gray-800 leading-relaxed">{competition.description}</p>
-        </div>
-
-        <div className="bg-gray-200 bg-opacity-80 shadow-lg rounded-lg p-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h2 className="text-2xl font-semibold mb-3">Eligibility Criteria</h2>
-            <p className="text-gray-800">{competition.eligibilityCriteria}</p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-3">Important Dates</h2>
-            <p><strong>Start Date:</strong> {new Date(competition.startDate).toLocaleDateString()}</p>
-            <p><strong>Submission Deadline:</strong> {new Date(competition.endDate).toLocaleDateString()}</p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-3">Judging Criteria</h2>
-            <p className="text-gray-800">{competition.judgingCriteria}</p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-3">Rewards</h2>
-            <p className="text-gray-800">{competition.rewards}</p>
-          </div>
-        </div>
-
       </div>
 
       {/* Application Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full flex justify-center items-center">
-          <div className="relative p-8 w-96 shadow-lg rounded-md text-center" style={{ backgroundColor: 'rgba(240, 240, 240, 0.9)' }}> {/* Changed rgba to off-white, removed border */}
-            <h3 className="text-2xl font-bold text-gray-900 mb-4"> {/* Changed text-white to text-gray-900 */}
+          <div className="relative p-8 w-96 shadow-lg rounded-md text-center" style={{ backgroundColor: 'rgba(240, 240, 240, 0.9)' }}>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
               {userSubmission ? 'Your Application' : 'Confirm Application'}
             </h3>
             {!userSubmission ? (
               <>
-                <p className="text-gray-700 mb-6"> {/* Changed text-gray-200 to text-gray-700 */}
+                <p className="text-gray-700 mb-6">
                   By clicking 'Apply Now', you confirm your interest in participating in the <br />
                   <span className="font-semibold">{competition.title}</span>. 
                   Submission details will be provided externally.
@@ -173,11 +188,11 @@ const CompetitionDetailPage: React.FC = () => {
               </>
             ) : (
               <>
-                <p className="text-green-700 font-semibold mb-4">You have successfully applied to this competition!</p> {/* Changed text-green-300 to text-green-700 */}
-                <p className="text-gray-700 mb-2">Your application status: <span className="capitalize">{userSubmission.status.replace('_', ' ')}</span></p> {/* Changed text-gray-200 to text-gray-700 */}
+                <p className="text-green-700 font-semibold mb-4">You have successfully applied to this competition!</p>
+                <p className="text-gray-700 mb-2">Your application status: <span className="capitalize">{userSubmission.status.replace('_', ' ')}</span></p>
                 {userSubmission.score && <p className="text-gray-700 mb-2">Score: {userSubmission.score}</p>}
                 {userSubmission.feedback && <p className="text-gray-700 mb-4">Feedback: {userSubmission.feedback}</p>}
-                <p className="text-gray-700 text-sm">Applied on: {new Date(userSubmission.submissionDate).toLocaleDateString()}</p> {/* Changed text-gray-200 to text-gray-700 */}
+                <p className="text-gray-700 text-sm">Applied on: {new Date(userSubmission.submissionDate).toLocaleDateString()}</p>
                 
                 {withdrawSuccess ? (
                   <p className="text-green-700 text-sm mt-4">{withdrawSuccess}</p>
@@ -186,7 +201,7 @@ const CompetitionDetailPage: React.FC = () => {
                 ) : (
                   <button
                     onClick={handleWithdraw}
-                    className="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 mr-2" // Added mr-2 for spacing
+                    className="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 mr-2" 
                     disabled={isWithdrawing}
                   >
                     {isWithdrawing ? 'Withdrawing...' : 'Withdraw Application'}

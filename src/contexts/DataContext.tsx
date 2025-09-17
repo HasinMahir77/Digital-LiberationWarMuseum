@@ -1,26 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Artifact, Competition, CompetitionSubmission, CompetitionStatus, SubmissionStatus } from '../types';
-
-export interface Artifact {
-  id: string;
-  collectionNumber: string;
-  accessionNumber: string;
-  collectionDate: string;
-  contributorName: string;
-  objectType: string;
-  objectHead: string;
-  description: string;
-  measurement: string;
-  images: string[];
-  galleryNumber: string;
-  foundPlace: string;
-  experimentFormula?: string;
-  significanceComment: string;
-  correction?: string;
-  dateCreated: string;
-  tags: string[];
-  isPublic: boolean;
-}
+import { Artifact, Competition, CompetitionSubmission, CompetitionStatus, SubmissionStatus, CompetitionType } from '../types';
 
 interface DataContextType {
   artifacts: Artifact[];
@@ -150,6 +129,7 @@ const mockCompetitions: Competition[] = [
     title: 'District Level Essay Competition: Liberation War',
     description: 'Write an essay on the significance of the Bangladesh Liberation War.',
     level: 'district',
+    type: 'essay',
     eligibilityCriteria: 'Open to all Bangladeshi citizens aged 18-30',
     startDate: '2025-09-01T00:00:00Z',
     endDate: '2025-09-30T23:59:59Z',
@@ -165,6 +145,7 @@ const mockCompetitions: Competition[] = [
     title: 'Division Level Art Competition: Figures of 1971',
     description: 'Create artwork depicting key figures or events from the Liberation War.',
     level: 'division',
+    type: 'art',
     eligibilityCriteria: 'Open to district round qualifiers and invited artists.',
     startDate: '2025-10-15T00:00:00Z',
     endDate: '2025-11-15T23:59:59Z',
@@ -181,6 +162,7 @@ const mockCompetitions: Competition[] = [
     title: 'National Level Photography Competition: Echoes of Liberation',
     description: 'Submit photographs that capture the spirit and legacy of the Liberation War.',
     level: 'national',
+    type: 'photography',
     eligibilityCriteria: 'Open to division round qualifiers and professional photographers.',
     startDate: '2025-12-01T00:00:00Z',
     endDate: '2025-12-31T23:59:59Z',
@@ -189,7 +171,72 @@ const mockCompetitions: Competition[] = [
     status: 'draft',
     adminUserId: '1', // super_admin
     dateCreated: '2025-11-01T09:00:00Z',
-  }
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Indian_soldiers_in_Bangladesh_Liberation_War.jpg/1200px-Indian_soldiers_in_Bangladesh_Liberation_War.jpg',
+  },
+  {
+    id: 'comp-4',
+    title: 'Poem Writing Competition: Verses of Valor',
+    description: 'Compose a poem reflecting on the bravery and sacrifices of the Liberation War. Express emotions, historical context, and aspirations for the future.',
+    level: 'national',
+    type: 'poem-writing',
+    eligibilityCriteria: 'Open to all citizens, amateur and professional poets.',
+    startDate: '2025-11-01T00:00:00Z',
+    endDate: '2025-11-30T23:59:59Z',
+    judgingCriteria: 'Creativity, emotional depth, and thematic relevance.',
+    rewards: 'Publication in museum anthology, cash prize, certificate.',
+    status: 'open',
+    adminUserId: '2',
+    dateCreated: '2025-10-01T10:00:00Z',
+    thumbnail: 'https://miro.medium.com/1*a-AQ061Ce9uBvL7mrkyZ6g.jpeg',
+  },
+  {
+    id: 'comp-5',
+    title: 'Singing Competition: Melodies of Freedom',
+    description: 'Perform patriotic songs from the Liberation War era or original compositions inspired by the war. Solo and group performances welcome.',
+    level: 'division',
+    type: 'singing',
+    eligibilityCriteria: 'Open to amateur and professional singers.',
+    startDate: '2025-10-01T00:00:00Z',
+    endDate: '2025-10-31T23:59:59Z',
+    judgingCriteria: 'Vocal quality, emotional delivery, and connection to the theme.',
+    rewards: 'Recording contract, cash prize, performance at national events.',
+    status: 'open',
+    adminUserId: '3',
+    dateCreated: '2025-09-10T11:00:00Z',
+    thumbnail: 'https://iansportalimages.s3.amazonaws.com/ianslive_watermark/1c43ecd03a19080ef821f6953fa65596.jpg',
+  },
+  {
+    id: 'comp-6',
+    title: 'Debate Competition: Historical Perspectives',
+    description: 'Engage in a debate on various historical perspectives and interpretations of the Liberation War. Critical thinking and evidence-based arguments are key.',
+    level: 'national',
+    type: 'debate',
+    eligibilityCriteria: 'Open to university students and young professionals.',
+    startDate: '2025-11-15T00:00:00Z',
+    endDate: '2025-12-15T23:59:59Z',
+    judgingCriteria: 'Argumentation, research, public speaking skills.',
+    rewards: 'Scholarship, mentorship opportunity, certificate.',
+    status: 'upcoming',
+    adminUserId: '1',
+    dateCreated: '2025-10-20T12:00:00Z',
+    thumbnail: 'https://www.dcgpsc.edu.bd/media/imgAll/31-03-2016-1459438238.jpg',
+  },
+  {
+    id: 'comp-7',
+    title: 'Quiz Competition: Know Your History',
+    description: 'Test your knowledge about the Bangladesh Liberation War in this exciting quiz competition. Teams of three.',
+    level: 'division',
+    type: 'quiz',
+    eligibilityCriteria: 'Open to high school and college students.',
+    startDate: '2025-10-20T00:00:00Z',
+    endDate: '2025-11-20T23:59:59Z',
+    judgingCriteria: 'Accuracy of answers, speed, teamwork.',
+    rewards: 'Educational tour, books, certificate.',
+    status: 'open',
+    adminUserId: '2',
+    dateCreated: '2025-09-25T09:00:00Z',
+    thumbnail: 'https://assets.thehansindia.com/h-upload/2023/12/18/1407606-quiz.webp',
+  },
 ];
 
 const mockCompetitionSubmissions: CompetitionSubmission[] = [
@@ -236,7 +283,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       filtered = filtered.filter(artifact =>
         artifact.objectHead.toLowerCase().includes(lowercaseQuery) ||
         artifact.description.toLowerCase().includes(lowercaseQuery) ||
-        artifact.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery)) ||
+        artifact.tags.some((tag: string) => tag.toLowerCase().includes(lowercaseQuery)) ||
         artifact.contributorName.toLowerCase().includes(lowercaseQuery)
       );
     }

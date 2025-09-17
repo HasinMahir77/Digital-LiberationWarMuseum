@@ -11,7 +11,8 @@ export interface Exhibition {
 }
 
 export type CompetitionLevel = 'district' | 'division' | 'national';
-export type CompetitionStatus = 'draft' | 'open' | 'closed' | 'judging' | 'completed';
+export type CompetitionStatus = 'draft' | 'open' | 'closed' | 'judging' | 'completed' | 'upcoming';
+export type CompetitionType = 'essay' | 'art' | 'photography' | 'poem-writing' | 'singing' | 'debate' | 'quiz';
 
 export interface Competition {
   id: string;
@@ -19,6 +20,7 @@ export interface Competition {
   description: string;
   thumbnail: string;
   level: CompetitionLevel;
+  type: CompetitionType;
   eligibilityCriteria: string; // e.g., "Open to all Bangladeshi citizens aged 18-30"
   startDate: string; // ISO date string
   endDate: string; // ISO date string - submission deadline
