@@ -10,7 +10,9 @@ const CompetitionManagementPage: React.FC = () => {
   const [formState, setFormState] = useState<Omit<Competition, 'id' | 'dateCreated'> & { id?: string }>({
     title: '',
     description: '',
+    thumbnail: '',
     level: 'district',
+    type: 'essay',
     eligibilityCriteria: '',
     startDate: '',
     endDate: '',
@@ -33,7 +35,9 @@ const CompetitionManagementPage: React.FC = () => {
       setFormState({
         title: '',
         description: '',
+        thumbnail: '',
         level: 'district',
+        type: 'essay',
         eligibilityCriteria: '',
         startDate: '',
         endDate: '',
@@ -55,7 +59,7 @@ const CompetitionManagementPage: React.FC = () => {
     const { name, value } = e.target;
     setFormState(prev => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'maxParticipants' ? (value === '' ? undefined : Number(value)) : value,
     }));
   };
 
@@ -166,11 +170,27 @@ const CompetitionManagementPage: React.FC = () => {
                 <textarea name="description" id="description" value={formState.description} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
               </div>
               <div className="mb-4">
+                <label htmlFor="thumbnail" className="block text-gray-700 text-sm font-bold mb-2">Thumbnail URL</label>
+                <input type="url" name="thumbnail" id="thumbnail" value={(formState as any).thumbnail || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+              </div>
+              <div className="mb-4">
                 <label htmlFor="level" className="block text-gray-700 text-sm font-bold mb-2">Level</label>
                 <select name="level" id="level" value={formState.level} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                   <option value="district">District</option>
                   <option value="division">Division</option>
                   <option value="national">National</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">Type</label>
+                <select name="type" id="type" value={(formState as any).type || 'essay'} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                  <option value="essay">Essay</option>
+                  <option value="art">Art</option>
+                  <option value="photography">Photography</option>
+                  <option value="poem-writing">Poem Writing</option>
+                  <option value="singing">Singing</option>
+                  <option value="debate">Debate</option>
+                  <option value="quiz">Quiz</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -203,7 +223,23 @@ const CompetitionManagementPage: React.FC = () => {
                   <option value="completed">Completed</option>
                 </select>
               </div>
-              {/* TODO: Add nextCompetitionId and relatedExhibitionId fields */}
+              <div className="mb-4">
+                <label htmlFor="adminUserId" className="block text-gray-700 text-sm font-bold mb-2">Admin User ID</label>
+                <input type="text" name="adminUserId" id="adminUserId" value={formState.adminUserId} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+              </div>
+              {/* Optional fields */}
+              <div className="mb-4">
+                <label htmlFor="relatedExhibitionId" className="block text-gray-700 text-sm font-bold mb-2">Related Exhibition ID (optional)</label>
+                <input type="text" name="relatedExhibitionId" id="relatedExhibitionId" value={(formState as any).relatedExhibitionId || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="nextCompetitionId" className="block text-gray-700 text-sm font-bold mb-2">Next Competition ID (optional)</label>
+                <input type="text" name="nextCompetitionId" id="nextCompetitionId" value={(formState as any).nextCompetitionId || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="maxParticipants" className="block text-gray-700 text-sm font-bold mb-2">Max Participants (optional)</label>
+                <input type="number" name="maxParticipants" id="maxParticipants" value={(formState as any).maxParticipants ?? ''} onChange={handleChange} min={1} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
               <div className="flex items-center justify-between">
                 <button
                   type="submit"

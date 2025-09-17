@@ -119,23 +119,6 @@ const Header: React.FC = () => {
                   )}
                 </AnimatePresence>
               </div>
-              <Link 
-                to="/virtual-tour" 
-                className={`text-sm font-medium transition-colors ${
-                  isActive('/virtual-tour') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-                }`}
-              >
-                Virtual Tour
-              </Link>
-              <Link 
-                to="/news" 
-                className={`text-sm font-medium transition-colors ${
-                  isActive('/news') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-                }`}
-              >
-                News
-              </Link>
-
               {/* Program Dropdown */}
               <div
                 className="relative group"
@@ -198,6 +181,22 @@ const Header: React.FC = () => {
                   )}
                 </AnimatePresence>
               </div>
+              <Link 
+                to="/news" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/news') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                News
+              </Link>
+              <Link 
+                to="/virtual-tour" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/virtual-tour') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                Virtual Tour
+              </Link>
             </nav>
 
             {/* Removed Search Bar */}
@@ -337,20 +336,6 @@ const Header: React.FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
-                <Link 
-                  to="/virtual-tour" 
-                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Virtual Tour
-                </Link>
-                <Link 
-                  to="/news" 
-                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  News
-                </Link>
                 {/* Program Dropdown for Mobile */}
                 <div>
                   <button
@@ -405,6 +390,20 @@ const Header: React.FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
+                <Link 
+                  to="/news" 
+                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  News
+                </Link>
+                <Link 
+                  to="/virtual-tour" 
+                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Virtual Tour
+                </Link>
               </nav>
             </div>
           </div>

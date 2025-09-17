@@ -14,7 +14,9 @@ import {
   BarChart,
   LineChart,
   PieChart,
-  Share2 // Added Share2 icon for social media analytics
+  Share2, // Added Share2 icon for social media analytics
+  CalendarDays,
+  Newspaper
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
@@ -25,6 +27,8 @@ import AddArtifactPage from './AddArtifactPage';
 import CreateExhibitionPage from './CreateExhibitionPage';
 import CompetitionManagementPage from './CompetitionManagementPage'; // Import the new competition management page
 import SocialMediaAnalyticsPage from './SocialMediaAnalyticsPage'; // Import the social media analytics page
+import EventManagementPage from './EventManagementPage';
+import NewsManagementPage from './NewsManagementPage';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
@@ -42,6 +46,8 @@ const AdminDashboard: React.FC = () => {
     ] : []),
     ...(user?.role === 'super_admin' || user?.role === 'archivist' ? [
       { id: 'competition-management', label: 'Competitions', icon: Trophy, path: '/admin/competition-management' },
+      { id: 'event-management', label: 'Events', icon: CalendarDays, path: '/admin/event-management' },
+      { id: 'news-management', label: 'News', icon: Newspaper, path: '/admin/news-management' },
       { id: 'social-media-analytics', label: 'Social Media', icon: Share2, path: '/admin/social-media-analytics' } // New social media analytics link
     ] : []),
     { id: 'reports', label: 'Reports', icon: Download, path: '/admin/reports' },
@@ -225,6 +231,8 @@ const AdminDashboard: React.FC = () => {
               <Route path="/users" element={<UserManagement />} />
               <Route path="/reports" element={<ReportsPage />} />
               <Route path="/competition-management" element={<CompetitionManagementPage />} />
+              <Route path="/event-management" element={<EventManagementPage />} />
+              <Route path="/news-management" element={<NewsManagementPage />} />
               <Route path="/social-media-analytics" element={<SocialMediaAnalyticsPage />} />
             </Routes>
           </div>

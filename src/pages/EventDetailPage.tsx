@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import newlyBuiltLiberation from '../assets/images/newly-built-liberation.jpg';
 import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
+import victoryBackground from '../assets/images/victory.jpg';
 
 // Assuming Event interface and sampleEvents are defined in EventsPage.tsx or a shared types file
 // For now, I'll copy the interface and a simplified version of sampleEvents here
@@ -99,9 +100,9 @@ const EventDetailPage: React.FC = () => {
   if (!event) {
     return (
       <div 
-        className="min-h-screen bg-cover bg-fixed bg-center text-gray-900 py-12"
-        style={{ 
-          backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2305.jpeg\')' 
+        className="min-h-screen bg-cover bg-fixed bg-center text-white py-12"
+        style={{
+          backgroundImage: `url(${victoryBackground})`
         }}
       >
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-white text-center bg-gray-800 bg-opacity-60 rounded-lg p-8">
@@ -117,17 +118,17 @@ const EventDetailPage: React.FC = () => {
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-fixed bg-center text-gray-900 py-12"
+      className="min-h-screen bg-cover bg-fixed bg-center text-white py-12"
       style={{
-        backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2305.jpeg\')'
+        backgroundImage: `url(${victoryBackground})`
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-xl p-8 md:p-12">
-          <Link to="/events" className="inline-block text-green-700 hover:text-green-900 transition-colors mb-6 text-lg font-medium">
+        <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-8 md:p-12">
+          <Link to="/events" className="inline-block text-green-400 hover:text-green-500 transition-colors mb-6 text-lg font-medium">
             &larr; Back to All Events
           </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center md:text-left">{event.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center md:text-left">{event.title}</h1>
           
           <div className="flex flex-col md:flex-row gap-8">
             {event.imageUrl && (
@@ -141,7 +142,7 @@ const EventDetailPage: React.FC = () => {
             )}
 
             <div className="md:w-1/2 flex flex-col justify-between">
-              <div className="grid grid-cols-1 gap-4 mb-8 text-gray-800">
+              <div className="grid grid-cols-1 gap-4 mb-8 text-gray-200">
                 <div>
                   <p className="font-semibold text-lg">Date:</p>
                   <p className="text-md">{event.date}</p>
@@ -160,7 +161,7 @@ const EventDetailPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-gray-700 leading-relaxed text-lg">
+              <div className="text-gray-200 leading-relaxed text-lg">
                 <p>{event.description}</p>
               </div>
             </div>

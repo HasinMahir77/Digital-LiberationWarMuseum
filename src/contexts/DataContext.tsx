@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Artifact, Competition, CompetitionSubmission, CompetitionStatus, SubmissionStatus, CompetitionType } from '../types';
+import { Artifact, Competition, CompetitionSubmission, SubmissionStatus, NewsArticle, MuseumEvent } from '../types';
 
 interface DataContextType {
   artifacts: Artifact[];
@@ -15,8 +15,18 @@ interface DataContextType {
   competitionSubmissions: CompetitionSubmission[];
   submitCompetitionEntry: (submission: Omit<CompetitionSubmission, 'id' | 'submissionDate' | 'status'>) => void;
   updateSubmissionStatus: (id: string, status: SubmissionStatus, score?: number, feedback?: string) => void;
-  withdrawCompetitionEntry: (competitionId: string, userId: string) => void; // Added withdraw function
+  withdrawCompetitionEntry: (competitionId: string, userId: string) => void;
   getSubmissionsForCompetition: (competitionId: string) => CompetitionSubmission[];
+  news: NewsArticle[];
+  addNews: (article: Omit<NewsArticle, 'id'>) => void;
+  updateNews: (id: string, article: Partial<NewsArticle>) => void;
+  deleteNews: (id: string) => void;
+  getNewsArticleById: (id: string) => NewsArticle | undefined;
+  events: MuseumEvent[];
+  addEvent: (event: Omit<MuseumEvent, 'id' | 'dateCreated'>) => void;
+  updateEvent: (id: string, event: Partial<MuseumEvent>) => void;
+  deleteEvent: (id: string) => void;
+  getEventById: (id: string) => MuseumEvent | undefined;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -239,6 +249,84 @@ const mockCompetitions: Competition[] = [
   },
 ];
 
+const mockNews: NewsArticle[] = [
+  {
+    id: 'news-1',
+    title: 'Historic Surrender of Pakistan Army in Dhaka',
+    imageUrl: 'https://static.theprint.in/wp-content/uploads/2019/10/1971_Instrument_of_Surrender-696x392.jpg?compress=true&quality=80&w=376&dpr=2.6',
+    date: '1971-12-16',
+    author: 'Liberation War Museum Archives',
+    summary: 'On December 16, 1971, the Pakistan Army officially surrendered to the joint forces of Bangladesh and India, marking the end of the Liberation War and the birth of independent Bangladesh.',
+    content: 'The instrument of surrender was signed by Lieutenant General A. A. K. Niazi, commander of the Pakistani forces in East Pakistan, and Lieutenant General Jagjit Singh Aurora, GOC-in-C of the Indian and Bangladesh forces, at the Ramna Race Course in Dhaka. This historic event led to the unconditional surrender of approximately 93,000 Pakistani troops, the largest surrender since World War II. The joyous occasion was met with widespread celebrations across Bangladesh, symbolizing the culmination of nine months of valiant struggle and immense sacrifice.',
+    tags: ['Surrender', 'Victory Day', '1971', 'Dhaka', 'Pakistan Army'],
+  },
+  {
+    id: 'news-2',
+    title: 'The Role of Mukti Bahini in Bangladesh\'s Independence',
+    imageUrl: 'https://images.news18.com/ibnlive/uploads/2021/03/1616766970_bangladesh-liberation-war.png',
+    date: '1971-07-20',
+    author: 'Historical Review Board',
+    summary: 'The Mukti Bahini, or Freedom Fighters, played a pivotal role in the Bangladesh Liberation War, employing guerrilla tactics and immense bravery against the Pakistani military.',
+    content: 'Comprised of Bengali military, paramilitary, and civilians, the Mukti Bahini emerged as a formidable force following the crackdown by the Pakistani army on March 25, 1971. Their guerrilla warfare disrupted Pakistani supply lines, ambushed convoys, and liberated various areas, significantly contributing to the morale of the Bengali populace and weakening the Pakistani occupation forces. Their unwavering commitment and sacrifice were instrumental in achieving the long-sought independence.',
+    tags: ['Mukti Bahini', 'Freedom Fighters', 'Guerrilla Warfare', '1971', 'Independence'],
+  },
+  {
+    id: 'news-3',
+    title: 'March 7 Speech: A Call for Independence',
+    imageUrl: 'https://cdn.daily-sun.com/public/news_images/2024/03/07/1709785712-311914fe43ab0f3455975f00cd7df8e9.gif',
+    date: '1971-03-07',
+    author: 'Bangabandhu Research Institute',
+    summary: 'Sheikh Mujibur Rahman\'s historic speech on March 7, 1971, at the Ramna Race Course in Dhaka, effectively declared Bangladesh\'s independence and galvanized the nation.',
+    content: 'In front of a massive gathering, Bangabandhu Sheikh Mujibur Rahman delivered a powerful and inspiring speech that is considered a de facto declaration of Bangladesh\'s independence. He famously declared, "The struggle this time is for our emancipation! The struggle this time is for our independence!" The speech outlined the grievances against West Pakistan, called for a non-cooperation movement, and prepared the Bengali people for the impending war. It remains a foundational document in the history of Bangladesh.',
+    tags: ['March 7 Speech', 'Bangabandhu', 'Sheikh Mujibur Rahman', 'Independence', 'Historic Speech'],
+  },
+  {
+    id: 'news-4',
+    title: 'The Genocide of 1971: A Dark Chapter',
+    imageUrl: 'https://ecdn.dhakatribune.net/contents/cache/images/640x359x1/uploads/dten/2022/03/08/1971.jpeg',
+    date: '1971-03-25',
+    author: 'Human Rights Watch',
+    summary: 'The 1971 Bangladesh Genocide, initiated by the Pakistani military\'s Operation Searchlight, resulted in the systematic killing of millions of Bengalis and widespread atrocities.',
+    content: 'Beginning on March 25, 1971, with Operation Searchlight, the Pakistani army launched a brutal campaign of genocide against the Bengali population, targeting intellectuals, students, Hindus, and political activists. Estimates suggest that between 500,000 and 3,000,000 Bengalis were killed, and millions more were displaced and sought refuge in India. The atrocities included mass murders, rape, and forced displacement, leaving an indelible scar on the nation\'s history and highlighting the immense human cost of the Liberation War.',
+    tags: ['Genocide', 'Operation Searchlight', '1971', 'War Crimes', 'Human Rights'],
+  },
+  {
+    id: 'news-5',
+    title: 'International Support for Bangladesh\'s Liberation War',
+    imageUrl: 'https://www.netmaps.net/wp-content/uploads/2015/07/world-globe-presentation-map.jpg',
+    date: '1971-12-03',
+    author: 'Global History Review',
+    summary: 'The Bangladesh Liberation War garnered significant international support, particularly from India, which played a crucial role in providing military and humanitarian aid.',
+    content: 'Beyond India\'s direct military intervention, various countries and international organizations voiced support for Bangladesh\'s independence. India provided sanctuary to millions of refugees, trained and equipped the Mukti Bahini, and eventually intervened militarily. Other nations, through diplomatic pressure and humanitarian assistance, also contributed to the global recognition of the atrocities committed by Pakistan and the legitimacy of Bangladesh\'s struggle for self-determination. This international solidarity was vital in securing Bangladesh\'s swift victory.',
+    tags: ['International Support', 'India', 'Refugees', 'Diplomacy', '1971'],
+  },
+];
+
+const mockEvents: MuseumEvent[] = [
+  {
+    id: 'evt-1',
+    title: 'Victory Day Celebration: Remembering Our Heroes',
+    date: '2025-12-16',
+    time: '10:00-14:00 BST',
+    location: 'Museum Main Hall & Online',
+    type: 'Festivals and Event Series',
+    description: 'A grand celebration to honor the martyrs and freedom fighters of the Liberation War. Featuring speeches, cultural performances, and a special exhibition.',
+    imageUrl: 'https://raw.githubusercontent.com/hasin/Digital-LiberationWarMuseum/assets/newly-built-liberation.jpg',
+    dateCreated: '2025-08-01T10:00:00Z',
+  },
+  {
+    id: 'evt-2',
+    title: 'Oral Histories Project: Share Your Story',
+    date: '2025-11-05',
+    time: '10:00-16:00 BST',
+    location: 'Museum Archive Wing',
+    type: 'Workshops & Talks',
+    description: 'An opportunity for freedom fighters, their families, and witnesses to share their personal stories and contribute to the museum\'s oral history collection.',
+    imageUrl: 'https://raw.githubusercontent.com/hasin/Digital-LiberationWarMuseum/assets/687-400x200.jpg',
+    dateCreated: '2025-08-15T10:00:00Z',
+  },
+];
+
 const mockCompetitionSubmissions: CompetitionSubmission[] = [
   {
     id: 'sub-1',
@@ -253,6 +341,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [artifacts, setArtifacts] = useState<Artifact[]>(mockArtifacts);
   const [competitions, setCompetitions] = useState<Competition[]>(mockCompetitions);
   const [competitionSubmissions, setCompetitionSubmissions] = useState<CompetitionSubmission[]>(mockCompetitionSubmissions);
+  const [news, setNews] = useState<NewsArticle[]>(mockNews);
+  const [events, setEvents] = useState<MuseumEvent[]>(mockEvents);
 
   const addArtifact = (artifactData: Omit<Artifact, 'id' | 'dateCreated'>) => {
     const newArtifact: Artifact = {
@@ -354,6 +444,47 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
+  const getNewsArticleById = (id: string) => {
+    return news.find(article => article.id === id);
+  };
+
+  const addNews = (articleData: Omit<NewsArticle, 'id'>) => {
+    const newArticle: NewsArticle = {
+      ...articleData,
+      id: `news-${Date.now()}`,
+    };
+    setNews(prev => [newArticle, ...prev]);
+  };
+
+  const updateNews = (id: string, updates: Partial<NewsArticle>) => {
+    setNews(prev => prev.map(n => (n.id === id ? { ...n, ...updates } : n)));
+  };
+
+  const deleteNews = (id: string) => {
+    setNews(prev => prev.filter(n => n.id !== id));
+  };
+
+  const addEvent = (eventData: Omit<MuseumEvent, 'id' | 'dateCreated'>) => {
+    const newEvent: MuseumEvent = {
+      ...eventData,
+      id: `evt-${Date.now()}`,
+      dateCreated: new Date().toISOString(),
+    };
+    setEvents(prev => [newEvent, ...prev]);
+  };
+
+  const updateEvent = (id: string, updates: Partial<MuseumEvent>) => {
+    setEvents(prev => prev.map(e => (e.id === id ? { ...e, ...updates } : e)));
+  };
+
+  const deleteEvent = (id: string) => {
+    setEvents(prev => prev.filter(e => e.id !== id));
+  };
+
+  const getEventById = (id: string) => {
+    return events.find(e => e.id === id);
+  };
+
   return (
     <DataContext.Provider value={{
       artifacts,
@@ -371,6 +502,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       updateSubmissionStatus,
       withdrawCompetitionEntry,
       getSubmissionsForCompetition,
+      news,
+      addNews,
+      updateNews,
+      deleteNews,
+      getNewsArticleById,
+      events,
+      addEvent,
+      updateEvent,
+      deleteEvent,
+      getEventById,
     }}>
       {children}
     </DataContext.Provider>

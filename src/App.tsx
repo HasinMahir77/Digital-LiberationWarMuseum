@@ -21,6 +21,7 @@ import CompetitionDetailPage from './pages/CompetitionDetailPage'; // Import the
 import NewsPage from './pages/NewsPage'; // Import the new NewsPage
 import EventsPage from './pages/EventsPage'; // Import the new EventsPage
 import EventDetailPage from './pages/EventDetailPage'; // Import the new EventDetailPage
+import NewsDetailPage from './pages/NewsDetailPage'; // Import the new NewsDetailPage
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +54,7 @@ function AppContent() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="flex flex-col">
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">
@@ -65,7 +66,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <HomePage />
                 </motion.div>
@@ -78,7 +79,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <SearchPage />
                 </motion.div>
@@ -91,7 +92,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <ArtifactDetailPage />
                 </motion.div>
@@ -104,7 +105,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <TimelinePage />
                 </motion.div>
@@ -117,7 +118,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <ExhibitionsPage />
                 </motion.div>
@@ -130,7 +131,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <ExhibitionDetailPage />
                 </motion.div>
@@ -143,7 +144,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <VirtualTourPage />
                 </motion.div>
@@ -156,7 +157,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <CompetitionsPage />
                 </motion.div>
@@ -169,7 +170,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <CompetitionDetailPage />
                 </motion.div>
@@ -182,9 +183,22 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <NewsPage />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/news/:id"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <NewsDetailPage />
                 </motion.div>
               }
             />
@@ -195,7 +209,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <EventsPage />
                 </motion.div>
@@ -208,7 +222,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <EventDetailPage />
                 </motion.div>
@@ -221,7 +235,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <LoginPage />
                 </motion.div>
@@ -234,7 +248,7 @@ function AppContent() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <PrivateRoute requiredRole="archivist">
                     <AdminDashboard />

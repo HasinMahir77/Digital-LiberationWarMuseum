@@ -36,18 +36,16 @@ const ExhibitionDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <LoadingSpinner />
-      </div>
+      <LoadingSpinner />
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6 text-red-700">
+      <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6 text-red-400">
         <h2 className="text-2xl font-bold mb-4">Error</h2>
         <p className="text-lg mb-6">{error}</p>
-        <Link to="/exhibitions" className="text-green-700 hover:underline flex items-center">
+        <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Exhibitions
         </Link>
@@ -57,10 +55,10 @@ const ExhibitionDetailPage: React.FC = () => {
 
   if (!exhibition) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
-        <h2 className="text-2xl font-bold mb-4">Exhibition Not Found</h2>
-        <p className="text-lg mb-6">The exhibition you are looking for does not exist.</p>
-        <Link to="/exhibitions" className="text-green-700 hover:underline flex items-center">
+      <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6">
+        <h2 className="text-2xl font-bold mb-4 text-white">Exhibition Not Found</h2>
+        <p className="text-lg mb-6 text-gray-200">The exhibition you are looking for does not exist.</p>
+        <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Exhibitions
         </Link>
@@ -69,7 +67,7 @@ const ExhibitionDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/exhibitions"

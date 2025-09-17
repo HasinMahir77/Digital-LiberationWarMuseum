@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 import { Competition } from '../types';
+import victoryBackground from '../assets/images/victory.jpg';
 
 const CompetitionsPage: React.FC = () => {
   const { competitions } = useData();
@@ -59,7 +60,7 @@ const CompetitionsPage: React.FC = () => {
     <div 
       className="min-h-screen bg-cover bg-fixed bg-center text-gray-900 py-12"
       style={{ 
-        backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2305.jpeg\')' 
+        backgroundImage: `url(${victoryBackground})`
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,11 +70,11 @@ const CompetitionsPage: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar for Filters */}
-          <div className="md:w-1/4 bg-gray-200 bg-opacity-80 rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-900">Filters</h2>
+          <div className="md:w-1/4 bg-gray-800 bg-opacity-70 rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-semibold mb-4 text-white">Filters</h2>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Time</label>
+                <label className="block text-sm font-medium text-white mb-2">Filter by Time</label>
                 <div className="space-y-2">
                   {competitionTimes.map(timeCategory => (
                     <div key={timeCategory} className="flex items-center">
@@ -84,16 +85,16 @@ const CompetitionsPage: React.FC = () => {
                         value={timeCategory}
                         checked={selectedTime.includes(timeCategory)}
                         onChange={() => handleTimeChange(timeCategory)}
-                        className="h-4 w-4 text-green-700 border-gray-300 rounded focus:ring-green-500"
+                        className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`time-${timeCategory}`} className="ml-2 text-sm text-gray-700 capitalize">{timeCategory}</label>
+                      <label htmlFor={`time-${timeCategory}`} className="ml-2 text-sm text-gray-200 capitalize">{timeCategory}</label>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Type</label>
+                <label className="block text-sm font-medium text-white mb-2">Filter by Type</label>
                 <div className="space-y-2">
                   {competitionTypes.map(type => (
                     <div key={type} className="flex items-center">
@@ -104,16 +105,16 @@ const CompetitionsPage: React.FC = () => {
                         value={type}
                         checked={selectedType.includes(type)}
                         onChange={() => handleTypeChange(type)}
-                        className="h-4 w-4 text-green-700 border-gray-300 rounded focus:ring-green-500"
+                        className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-700 capitalize">{type}</label>
+                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-200 capitalize">{type}</label>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Level</label>
+                <label className="block text-sm font-medium text-white mb-2">Filter by Level</label>
                 <div className="space-y-2">
                   {competitionLevels.map(level => (
                     <div key={level} className="flex items-center">
@@ -124,9 +125,9 @@ const CompetitionsPage: React.FC = () => {
                         value={level}
                         checked={selectedLevel.includes(level)}
                         onChange={() => handleLevelChange(level)}
-                        className="h-4 w-4 text-green-700 border-gray-300 rounded focus:ring-green-500"
+                        className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`level-${level}`} className="ml-2 text-sm text-gray-700 capitalize">{level.replace('_', ' ')}</label>
+                      <label htmlFor={`level-${level}`} className="ml-2 text-sm text-gray-200 capitalize">{level.replace('_', ' ')}</label>
                     </div>
                   ))}
                 </div>
@@ -147,17 +148,17 @@ const CompetitionsPage: React.FC = () => {
                   <Link 
                     to={`/competitions/${comp.id}`}
                     key={comp.id}
-                    className="block bg-gray-200 bg-opacity-80 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out overflow-hidden"
+                    className="block bg-gray-800 bg-opacity-70 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out overflow-hidden"
                   >
                     <img src={comp.thumbnail} alt={comp.title} className="w-full h-48 object-cover" />
                     <div className="p-6">
-                      <h2 className="text-xl font-semibold text-gray-900 mb-2">{comp.title}</h2>
-                      <p className="text-gray-700 text-sm mb-3 line-clamp-3">{comp.description}</p>
-                      <div className="flex justify-between items-center text-sm text-gray-700">
+                      <h2 className="text-xl font-semibold text-white mb-2">{comp.title}</h2>
+                      <p className="text-gray-200 text-sm mb-3 line-clamp-3">{comp.description}</p>
+                      <div className="flex justify-between items-center text-sm text-gray-200">
                         <span className="capitalize">Level: {comp.level.replace('_', ' ')}</span>
                         <span className="capitalize">Status: {comp.status.replace('_', ' ')}</span>
                       </div>
-                      <p className="text-xs text-gray-700 mt-2">Ends: {new Date(comp.endDate).toLocaleDateString()}</p>
+                      <p className="text-xs text-gray-200 mt-2">Ends: {new Date(comp.endDate).toLocaleDateString()}</p>
                     </div>
                   </Link>
                 ))}

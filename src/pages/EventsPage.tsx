@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import newlyBuiltLiberation from '../assets/images/newly-built-liberation.jpg';
 import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
+import victoryBackground from '../assets/images/victory.jpg';
 
 interface Event {
   id: string;
@@ -124,7 +125,7 @@ const EventsPage: React.FC = () => {
     <div 
       className="min-h-screen bg-cover bg-fixed bg-center text-gray-900 py-12"
       style={{ 
-        backgroundImage: 'url(\'https://www.aiub.edu/Files/Uploads/original/arcaiubmus2305.jpeg\')' 
+        backgroundImage: `url(${victoryBackground})`
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,11 +133,11 @@ const EventsPage: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar for Filters */}
-          <div className="md:w-1/4 bg-gray-200 bg-opacity-80 rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-900">Filters</h2>
+          <div className="md:w-1/4 bg-gray-800 bg-opacity-70 rounded-lg shadow-md p-6">
+            <h2 className="text-2xl font-semibold mb-4 text-white">Filters</h2>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Month</label>
+                <label className="block text-sm font-medium text-white mb-2">Filter by Month</label>
                 <div className="space-y-2">
                   {months.map(month => (
                     <div key={month} className="flex items-center">
@@ -147,16 +148,16 @@ const EventsPage: React.FC = () => {
                         value={month}
                         checked={selectedMonth.includes(month)}
                         onChange={() => handleMonthChange(month)}
-                        className="h-4 w-4 text-green-700 border-gray-300 rounded focus:ring-green-500"
+                        className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`month-${month}`} className="ml-2 text-sm text-gray-700 capitalize">{month}</label>
+                      <label htmlFor={`month-${month}`} className="ml-2 text-sm text-gray-200 capitalize">{month}</label>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Event Type</label>
+                <label className="block text-sm font-medium text-white mb-2">Filter by Event Type</label>
                 <div className="space-y-2">
                   {eventTypes.map(type => (
                     <div key={type} className="flex items-center">
@@ -167,9 +168,9 @@ const EventsPage: React.FC = () => {
                         value={type}
                         checked={selectedEventType.includes(type)}
                         onChange={() => handleEventTypeChange(type)}
-                        className="h-4 w-4 text-green-700 border-gray-300 rounded focus:ring-green-500"
+                        className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-700 capitalize">{type}</label>
+                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-200 capitalize">{type}</label>
                     </div>
                   ))}
                 </div>
@@ -181,29 +182,29 @@ const EventsPage: React.FC = () => {
           <div className="md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filterEvents().map(event => (
-                <div key={event.id} className="bg-gray-200 bg-opacity-80 rounded-lg shadow-md overflow-hidden">
+                <div key={event.id} className="bg-gray-800 bg-opacity-70 rounded-lg shadow-md overflow-hidden">
                   {event.imageUrl && (
                     <img src={event.imageUrl} alt={event.title} className="w-full h-48 object-cover" />
                   )}
                   <div className="p-6">
                     <h2 className="text-xl font-semibold mb-2">
-                      <Link to={`/events/${event.id}`} className="hover:text-indigo-600 text-gray-900">
+                      <Link to={`/events/${event.id}`} className="hover:text-green-400 text-white">
                         {event.title}
                       </Link>
                     </h2>
-                    <p className="text-gray-700 mb-1">
+                    <p className="text-gray-200 mb-1">
                       <span className="font-medium">Date:</span> {event.date}
                     </p>
-                    <p className="text-gray-700 mb-1">
+                    <p className="text-gray-200 mb-1">
                       <span className="font-medium">Time:</span> {event.time}
                     </p>
-                    <p className="text-gray-700 mb-1">
+                    <p className="text-gray-200 mb-1">
                       <span className="font-medium">Location:</span> {event.location}
                     </p>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-gray-200 mb-4">
                       <span className="font-medium">Type:</span> {event.type}
                     </p>
-                    <p className="text-gray-700">{event.description}</p>
+                    <p className="text-gray-200">{event.description}</p>
                   </div>
                 </div>
               ))}
