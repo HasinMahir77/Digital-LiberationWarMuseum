@@ -157,103 +157,98 @@ const CompetitionManagementPage: React.FC = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full" id="my-modal">
-          <div className="relative top-20 mx-auto p-5 w-96 shadow-lg rounded-md" style={{ backgroundColor: 'rgba(240, 240, 240, 0.9)' }}>
-            <h3 className="text-lg font-bold mb-4 text-gray-900">{editingCompetition ? 'Edit Competition' : 'Create Competition'}</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" id="my-modal">
+          <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl">
+            <div className="sticky top-0 flex items-center justify-between px-6 py-4 border-b rounded-t-2xl bg-white">
+              <h3 className="text-xl font-semibold text-gray-900">{editingCompetition ? 'Edit Competition' : 'Create Competition'}</h3>
+              <button type="button" onClick={handleCloseModal} aria-label="Close" className="text-gray-500 hover:text-gray-700">×</button>
+            </div>
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                <input type="text" name="title" id="title" value={formState.title} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+              <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="title" className="block text-gray-700 text-sm font-medium mb-1">Title</label>
+                    <input type="text" name="title" id="title" value={formState.title} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="thumbnail" className="block text-gray-700 text-sm font-medium mb-1">Thumbnail URL</label>
+                    <input type="url" name="thumbnail" id="thumbnail" value={(formState as any).thumbnail || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="description" className="block text-gray-700 text-sm font-medium mb-1">Description</label>
+                    <textarea name="description" id="description" value={formState.description} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={3} required></textarea>
+                  </div>
+                  <div>
+                    <label htmlFor="level" className="block text-gray-700 text-sm font-medium mb-1">Level</label>
+                    <select name="level" id="level" value={formState.level} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                      <option value="district">District</option>
+                      <option value="division">Division</option>
+                      <option value="national">National</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="type" className="block text-gray-700 text-sm font-medium mb-1">Type</label>
+                    <select name="type" id="type" value={(formState as any).type || 'essay'} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                      <option value="essay">Essay</option>
+                      <option value="art">Art</option>
+                      <option value="photography">Photography</option>
+                      <option value="poem-writing">Poem Writing</option>
+                      <option value="singing">Singing</option>
+                      <option value="debate">Debate</option>
+                      <option value="quiz">Quiz</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="startDate" className="block text-gray-700 text-sm font-medium mb-1">Start Date</label>
+                    <input type="date" name="startDate" id="startDate" value={formState.startDate} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="endDate" className="block text-gray-700 text-sm font-medium mb-1">End Date</label>
+                    <input type="date" name="endDate" id="endDate" value={formState.endDate} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="eligibilityCriteria" className="block text-gray-700 text-sm font-medium mb-1">Eligibility Criteria</label>
+                    <textarea name="eligibilityCriteria" id="eligibilityCriteria" value={formState.eligibilityCriteria} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={2} required></textarea>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="judgingCriteria" className="block text-gray-700 text-sm font-medium mb-1">Judging Criteria</label>
+                    <textarea name="judgingCriteria" id="judgingCriteria" value={formState.judgingCriteria} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={2} required></textarea>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="rewards" className="block text-gray-700 text-sm font-medium mb-1">Rewards</label>
+                    <textarea name="rewards" id="rewards" value={formState.rewards} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={2} required></textarea>
+                  </div>
+                  <div>
+                    <label htmlFor="status" className="block text-gray-700 text-sm font-medium mb-1">Status</label>
+                    <select name="status" id="status" value={formState.status} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
+                      <option value="draft">Draft</option>
+                      <option value="open">Open</option>
+                      <option value="closed">Closed</option>
+                      <option value="judging">Judging</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="adminUserId" className="block text-gray-700 text-sm font-medium mb-1">Admin User ID</label>
+                    <input type="text" name="adminUserId" id="adminUserId" value={formState.adminUserId} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="relatedExhibitionId" className="block text-gray-700 text-sm font-medium mb-1">Related Exhibition ID (optional)</label>
+                    <input type="text" name="relatedExhibitionId" id="relatedExhibitionId" value={(formState as any).relatedExhibitionId || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                  </div>
+                  <div>
+                    <label htmlFor="nextCompetitionId" className="block text-gray-700 text-sm font-medium mb-1">Next Competition ID (optional)</label>
+                    <input type="text" name="nextCompetitionId" id="nextCompetitionId" value={(formState as any).nextCompetitionId || ''} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                  </div>
+                  <div>
+                    <label htmlFor="maxParticipants" className="block text-gray-700 text-sm font-medium mb-1">Max Participants (optional)</label>
+                    <input type="number" name="maxParticipants" id="maxParticipants" value={(formState as any).maxParticipants ?? ''} onChange={handleChange} min={1} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                  </div>
+                </div>
               </div>
-              <div className="mb-4">
-                <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
-                <textarea name="description" id="description" value={formState.description} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="thumbnail" className="block text-gray-700 text-sm font-bold mb-2">Thumbnail URL</label>
-                <input type="url" name="thumbnail" id="thumbnail" value={(formState as any).thumbnail || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="level" className="block text-gray-700 text-sm font-bold mb-2">Level</label>
-                <select name="level" id="level" value={formState.level} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                  <option value="district">District</option>
-                  <option value="division">Division</option>
-                  <option value="national">National</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">Type</label>
-                <select name="type" id="type" value={(formState as any).type || 'essay'} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                  <option value="essay">Essay</option>
-                  <option value="art">Art</option>
-                  <option value="photography">Photography</option>
-                  <option value="poem-writing">Poem Writing</option>
-                  <option value="singing">Singing</option>
-                  <option value="debate">Debate</option>
-                  <option value="quiz">Quiz</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="eligibilityCriteria" className="block text-gray-700 text-sm font-bold mb-2">Eligibility Criteria</label>
-                <textarea name="eligibilityCriteria" id="eligibilityCriteria" value={formState.eligibilityCriteria} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="startDate" className="block text-gray-700 text-sm font-bold mb-2">Start Date</label>
-                <input type="date" name="startDate" id="startDate" value={formState.startDate} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="endDate" className="block text-gray-700 text-sm font-bold mb-2">End Date</label>
-                <input type="date" name="endDate" id="endDate" value={formState.endDate} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="judgingCriteria" className="block text-gray-700 text-sm font-bold mb-2">Judging Criteria</label>
-                <textarea name="judgingCriteria" id="judgingCriteria" value={formState.judgingCriteria} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="rewards" className="block text-gray-700 text-sm font-bold mb-2">Rewards</label>
-                <textarea name="rewards" id="rewards" value={formState.rewards} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="status" className="block text-gray-700 text-sm font-bold mb-2">Status</label>
-                <select name="status" id="status" value={formState.status} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                  <option value="draft">Draft</option>
-                  <option value="open">Open</option>
-                  <option value="closed">Closed</option>
-                  <option value="judging">Judging</option>
-                  <option value="completed">Completed</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="adminUserId" className="block text-gray-700 text-sm font-bold mb-2">Admin User ID</label>
-                <input type="text" name="adminUserId" id="adminUserId" value={formState.adminUserId} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              {/* Optional fields */}
-              <div className="mb-4">
-                <label htmlFor="relatedExhibitionId" className="block text-gray-700 text-sm font-bold mb-2">Related Exhibition ID (optional)</label>
-                <input type="text" name="relatedExhibitionId" id="relatedExhibitionId" value={(formState as any).relatedExhibitionId || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="nextCompetitionId" className="block text-gray-700 text-sm font-bold mb-2">Next Competition ID (optional)</label>
-                <input type="text" name="nextCompetitionId" id="nextCompetitionId" value={(formState as any).nextCompetitionId || ''} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="maxParticipants" className="block text-gray-700 text-sm font-bold mb-2">Max Participants (optional)</label>
-                <input type="number" name="maxParticipants" id="maxParticipants" value={(formState as any).maxParticipants ?? ''} onChange={handleChange} min={1} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
-                >
-                  {editingCompetition ? 'Update' : 'Create'}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Cancel
-                </button>
+              <div className="sticky bottom-0 flex items-center justify-end gap-2 px-6 py-4 border-t bg-white rounded-b-2xl">
+                <button type="button" onClick={handleCloseModal} className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">Cancel</button>
+                <button type="submit" className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700">{editingCompetition ? 'Update' : 'Create'}</button>
               </div>
             </form>
           </div>

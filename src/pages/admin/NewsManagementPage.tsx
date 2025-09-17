@@ -101,45 +101,48 @@ const NewsManagementPage: React.FC = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full">
-          <div className="relative top-20 mx-auto p-5 w-96 shadow-lg rounded-md" style={{ backgroundColor: 'rgba(240, 240, 240, 0.9)' }}>
-            <h3 className="text-lg font-bold mb-4 text-gray-900">{editingNews ? 'Edit News' : 'Create News'}</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl">
+            <div className="sticky top-0 flex items-center justify-between px-6 py-4 border-b rounded-t-2xl bg-white">
+              <h3 className="text-xl font-semibold text-gray-900">{editingNews ? 'Edit News' : 'Create News'}</h3>
+              <button type="button" onClick={closeModal} aria-label="Close" className="text-gray-500 hover:text-gray-700">×</button>
+            </div>
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                <input type="text" name="title" id="title" value={formState.title} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+              <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="title" className="block text-gray-700 text-sm font-medium mb-1">Title</label>
+                    <input type="text" name="title" id="title" value={formState.title} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="author" className="block text-gray-700 text-sm font-medium mb-1">Author</label>
+                    <input type="text" name="author" id="author" value={formState.author} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="date" className="block text-gray-700 text-sm font-medium mb-1">Date</label>
+                    <input type="date" name="date" id="date" value={formState.date} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div>
+                    <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-medium mb-1">Image URL</label>
+                    <input type="url" name="imageUrl" id="imageUrl" value={formState.imageUrl} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="summary" className="block text-gray-700 text-sm font-medium mb-1">Summary</label>
+                    <textarea name="summary" id="summary" value={formState.summary} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={2} required></textarea>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="content" className="block text-gray-700 text-sm font-medium mb-1">Content</label>
+                    <textarea name="content" id="content" value={formState.content} onChange={handleChange} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" rows={6} required></textarea>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label htmlFor="tags" className="block text-gray-700 text-sm font-medium mb-1">Tags (comma-separated)</label>
+                    <input type="text" name="tags" id="tags" value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                  </div>
+                </div>
               </div>
-              <div className="mb-4">
-                <label htmlFor="author" className="block text-gray-700 text-sm font-bold mb-2">Author</label>
-                <input type="text" name="author" id="author" value={formState.author} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">Date</label>
-                <input type="date" name="date" id="date" value={formState.date} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-bold mb-2">Image URL</label>
-                <input type="url" name="imageUrl" id="imageUrl" value={formState.imageUrl} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="summary" className="block text-gray-700 text-sm font-bold mb-2">Summary</label>
-                <textarea name="summary" id="summary" value={formState.summary} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2">Content</label>
-                <textarea name="content" id="content" value={formState.content} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-              </div>
-              <div className="mb-6">
-                <label htmlFor="tags" className="block text-gray-700 text-sm font-bold mb-2">Tags (comma-separated)</label>
-                <input type="text" name="tags" id="tags" value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-              </div>
-              <div className="flex items-center justify-between">
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-                  {editingNews ? 'Update' : 'Create'}
-                </button>
-                <button type="button" onClick={closeModal} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                  Cancel
-                </button>
+              <div className="sticky bottom-0 flex items-center justify-end gap-2 px-6 py-4 border-t bg-white rounded-b-2xl">
+                <button type="button" onClick={closeModal} className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">Cancel</button>
+                <button type="submit" className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700">{editingNews ? 'Update' : 'Create'}</button>
               </div>
             </form>
           </div>
