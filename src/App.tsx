@@ -19,6 +19,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CompetitionsPage from './pages/CompetitionsPage'; // Import the new CompetitionsPage
 import CompetitionDetailPage from './pages/CompetitionDetailPage'; // Import the new CompetitionDetailPage
 import NewsPage from './pages/NewsPage'; // Import the new NewsPage
+import EventsPage from './pages/EventsPage'; // Import the new EventsPage
+import EventDetailPage from './pages/EventDetailPage'; // Import the new EventDetailPage
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -183,6 +185,32 @@ function AppContent() {
                   transition={{ duration: 0.3 }}
                 >
                   <NewsPage />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/events"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <EventsPage />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/events/:id"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <EventDetailPage />
                 </motion.div>
               }
             />

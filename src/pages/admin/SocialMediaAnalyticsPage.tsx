@@ -248,7 +248,7 @@ const SocialMediaAnalyticsPage: React.FC = () => {
   const currentPlatformData = mockSocialMediaData.find(p => p.id === selectedPlatform);
 
   return (
-    <div className="bg-gray-50 text-gray-900 p-6 rounded-lg shadow-sm">
+    <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Social Media Analytics</h1>
 
       {/* Date Filters */}

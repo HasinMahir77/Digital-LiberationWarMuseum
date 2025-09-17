@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, User, Settings, LogOut } from 'lucide-react';
+import { Menu, X, User, Settings, LogOut } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [isHistoryDropdownOpen, setIsHistoryDropdownOpen] = useState(false); // New state for History dropdown
+  const [isProgramDropdownOpen, setIsProgramDropdownOpen] = useState(false); // New state for Program dropdown
+  const [historyDropdownTimeout, setHistoryDropdownTimeout] = useState<number | null>(null);
+  const [programDropdownTimeout, setProgramDropdownTimeout] = useState<number | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery('');
-    }
-  };
 
   const handleLogout = () => {
     logout();
@@ -54,30 +50,75 @@ const Header: React.FC = () => {
               >
                 Home
               </Link>
-              <Link 
-                to="/search" 
-                className={`text-sm font-medium transition-colors ${
-                  isActive('/search') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-                }`}
+              {/* History Dropdown */}
+              <div
+                className="relative group"
+                onMouseEnter={() => {
+                  if (historyDropdownTimeout) clearTimeout(historyDropdownTimeout);
+                  setIsHistoryDropdownOpen(true);
+                }}
+                onMouseLeave={() => {
+                  setHistoryDropdownTimeout(setTimeout(() => {
+                    setIsHistoryDropdownOpen(false);
+                  }, 200));
+                }}
               >
-                Browse Collection
-              </Link>
-              <Link 
-                to="/timeline" 
-                className={`text-sm font-medium transition-colors ${
-                  isActive('/timeline') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-                }`}
-              >
-                Timeline
-              </Link>
-              <Link 
-                to="/exhibitions" 
-                className={`text-sm font-medium transition-colors ${
-                  isActive('/exhibitions') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
-                }`}
-              >
-                Exhibitions
-              </Link>
+                <button
+                  className={`text-sm font-medium transition-colors flex items-center group-hover:text-green-700 ${
+                    isActive('/search') || isActive('/timeline') || isActive('/exhibitions')
+                      ? 'text-green-700'
+                      : 'text-gray-700 hover:text-green-600'
+                  }`}
+                >
+                  History
+                  <svg
+                    className={`ml-1 w-4 h-4 transform transition-transform group-hover:rotate-180 ${
+                      isHistoryDropdownOpen ? 'rotate-180' : 'rotate-0'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <AnimatePresence>
+                  {isHistoryDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50"
+                    >
+                      <div className="py-1">
+                        <Link
+                          to="/search"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setIsHistoryDropdownOpen(false)}
+                        >
+                          Artifacts
+                        </Link>
+                        <Link
+                          to="/timeline"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setIsHistoryDropdownOpen(false)}
+                        >
+                          Timeline
+                        </Link>
+                        <Link
+                          to="/exhibitions"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setIsHistoryDropdownOpen(false)}
+                        >
+                          Exhibitions
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <Link 
                 to="/virtual-tour" 
                 className={`text-sm font-medium transition-colors ${
@@ -92,23 +133,74 @@ const Header: React.FC = () => {
                   isActive('/news') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
                 }`}
               >
-                News & Notices
+                News
               </Link>
+
+              {/* Program Dropdown */}
+              <div
+                className="relative group"
+                onMouseEnter={() => {
+                  if (programDropdownTimeout) clearTimeout(programDropdownTimeout);
+                  setIsProgramDropdownOpen(true);
+                }}
+                onMouseLeave={() => {
+                  setProgramDropdownTimeout(setTimeout(() => {
+                    setIsProgramDropdownOpen(false);
+                  }, 200));
+                }}
+              >
+                <button
+                  className={`text-sm font-medium transition-colors flex items-center group-hover:text-green-700 ${
+                    isActive('/events') || isActive('/competitions')
+                      ? 'text-green-700'
+                      : 'text-gray-700 hover:text-green-600'
+                  }`}
+                >
+                  Program
+                  <svg
+                    className={`ml-1 w-4 h-4 transform transition-transform group-hover:rotate-180 ${
+                      isProgramDropdownOpen ? 'rotate-180' : 'rotate-0'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <AnimatePresence>
+                  {isProgramDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50"
+                    >
+                      <div className="py-1">
+                        <Link
+                          to="/events"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setIsProgramDropdownOpen(false)}
+                        >
+                          Events
+                        </Link>
+                        <Link
+                          to="/competitions"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setIsProgramDropdownOpen(false)}
+                        >
+                          Competitions
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </nav>
 
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="hidden lg:flex items-center">
-              <div className="relative w-64">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search artifacts, collections..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              </div>
-            </form>
+            {/* Removed Search Bar */}
           </div>
 
           {/* User Menu */}
@@ -174,18 +266,7 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="space-y-4">
-              <form onSubmit={handleSearch} className="lg:hidden">
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search artifacts..."
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                </div>
-              </form>
+              {/* Removed Search Bar from Mobile */}
               
               <nav className="space-y-2">
                 <Link 
@@ -195,27 +276,67 @@ const Header: React.FC = () => {
                 >
                   Home
                 </Link>
-                <Link 
-                  to="/search" 
-                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Browse Collection
-                </Link>
-                <Link 
-                  to="/timeline" 
-                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Timeline
-                </Link>
-                <Link 
-                  to="/exhibitions" 
-                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Exhibitions
-                </Link>
+                {/* History Dropdown for Mobile */}
+                <div>
+                  <button
+                    onClick={() => setIsHistoryDropdownOpen(!isHistoryDropdownOpen)}
+                    className={`flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:text-green-600 transition-colors ${
+                      isActive('/search') || isActive('/timeline') || isActive('/exhibitions')
+                        ? 'text-green-700'
+                        : 'text-gray-700 hover:text-green-600'
+                    }`}
+                  >
+                    History
+                    <svg
+                      className={`ml-1 w-4 h-4 transform transition-transform ${isHistoryDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <AnimatePresence>
+                    {isHistoryDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="pl-4 pr-3 py-2 space-y-2 bg-gray-50 rounded-md mt-1"
+                      >
+                        <Link
+                          to="/search"
+                          className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => {
+                            setIsHistoryDropdownOpen(false);
+                          }}
+                        >
+                          Artifacts
+                        </Link>
+                        <Link
+                          to="/timeline"
+                          className="block px-3 py-2 text-sm text-700 hover:bg-gray-100"
+                          onClick={() => {
+                            setIsHistoryDropdownOpen(false);
+                          }}
+                        >
+                          Timeline
+                        </Link>
+                        <Link
+                          to="/exhibitions"
+                          className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => {
+                            setIsHistoryDropdownOpen(false);
+                          }}
+                        >
+                          Exhibitions
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
                 <Link 
                   to="/virtual-tour" 
                   className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
@@ -228,8 +349,62 @@ const Header: React.FC = () => {
                   className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  News & Notices
+                  News
                 </Link>
+                {/* Program Dropdown for Mobile */}
+                <div>
+                  <button
+                    onClick={() => setIsProgramDropdownOpen(!isProgramDropdownOpen)}
+                    className={`flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:text-green-600 transition-colors ${
+                      isActive('/events') || isActive('/competitions')
+                        ? 'text-green-700'
+                        : 'text-gray-700 hover:text-green-600'
+                    }`}
+                  >
+                    Program
+                    <svg
+                      className={`ml-1 w-4 h-4 transform transition-transform ${isProgramDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <AnimatePresence>
+                    {isProgramDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="pl-4 pr-3 py-2 space-y-2 bg-gray-50 rounded-md mt-1"
+                      >
+                        <Link
+                          to="/events"
+                          className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => {
+                            setIsProgramDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Events
+                        </Link>
+                        <Link
+                          to="/competitions"
+                          className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => {
+                            setIsProgramDropdownOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Competitions
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </nav>
             </div>
           </div>
