@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import newlyBuiltLiberation from '../assets/images/newly-built-liberation.jpg';
+import image687 from '../assets/images/687-400x200.jpg';
+import image543 from '../assets/images/543-400x200.jpg';
 
 interface Event {
   id: string;
@@ -21,7 +24,7 @@ const sampleEvents: Event[] = [
     location: 'Museum Main Hall & Online',
     type: 'Festivals and Event Series',
     description: 'A grand celebration to honor the martyrs and freedom fighters of the Liberation War. Featuring speeches, cultural performances, and a special exhibition.',
-    imageUrl: '/src/assets/images/newly-built-liberation.jpg',
+    imageUrl: newlyBuiltLiberation,
   },
   {
     id: '2',
@@ -31,7 +34,7 @@ const sampleEvents: Event[] = [
     location: 'Museum Archive Wing',
     type: 'Workshops & Talks',
     description: 'An opportunity for freedom fighters, their families, and witnesses to share their personal stories and contribute to the museum\'s oral history collection.',
-    imageUrl: '/src/assets/images/687-400x200.jpg',
+    imageUrl: image687,
   },
   {
     id: '3',
@@ -41,7 +44,7 @@ const sampleEvents: Event[] = [
     location: 'Temporary Exhibition Gallery',
     type: 'Exhibitions',
     description: 'Opening of a new exhibition highlighting the invaluable contributions and sacrifices of women during the Liberation War.',
-    imageUrl: '/src/assets/images/543-400x200.jpg',
+    imageUrl: image543,
   },
   {
     id: '4',
@@ -51,7 +54,7 @@ const sampleEvents: Event[] = [
     location: 'Museum Auditorium',
     type: 'Film Screening',
     description: 'A special screening of a critically acclaimed documentary on the historical events leading to the independence of Bangladesh.',
-    imageUrl: '/src/assets/images/newly-built-liberation.jpg',
+    imageUrl: newlyBuiltLiberation,
   },
   {
     id: '5',
@@ -61,7 +64,7 @@ const sampleEvents: Event[] = [
     location: 'Educational Center',
     type: 'Kids & Families',
     description: 'An interactive workshop for young students to learn about the Liberation War through engaging activities and discussions.',
-    imageUrl: '/src/assets/images/687-400x200.jpg',
+    imageUrl: image687,
   },
   {
     id: '6',
@@ -71,7 +74,7 @@ const sampleEvents: Event[] = [
     location: 'Conference Hall & Online',
     type: 'Webcasts & Online',
     description: 'A seminar discussing the crucial international support and diplomatic efforts that aided Bangladesh during its fight for freedom.',
-    imageUrl: '/src/assets/images/543-400x200.jpg',
+    imageUrl: image543,
   },
   {
     id: '7',
@@ -81,7 +84,7 @@ const sampleEvents: Event[] = [
     location: 'Gallery I',
     type: 'Exhibitions',
     description: 'A powerful photographic journey showcasing the individuals who participated in and were affected by the Liberation War.',
-    imageUrl: '/src/assets/images/newly-built-liberation.jpg',
+    imageUrl: newlyBuiltLiberation,
   },
 ];
 
