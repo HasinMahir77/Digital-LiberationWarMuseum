@@ -10,7 +10,11 @@ import {
   Upload,
   Eye,
   Calendar,
-  Trophy // Added Trophy icon for competitions
+  Trophy, // Added Trophy icon for competitions
+  BarChart,
+  LineChart,
+  PieChart,
+  Share2 // Added Share2 icon for social media analytics
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
@@ -20,6 +24,7 @@ import ReportsPage from './ReportsPage';
 import AddArtifactPage from './AddArtifactPage';
 import CreateExhibitionPage from './CreateExhibitionPage';
 import CompetitionManagementPage from './CompetitionManagementPage'; // Import the new competition management page
+import SocialMediaAnalyticsPage from './SocialMediaAnalyticsPage'; // Import the social media analytics page
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
@@ -36,7 +41,8 @@ const AdminDashboard: React.FC = () => {
       { id: 'users', label: 'Users', icon: Users, path: '/admin/users' }
     ] : []),
     ...(user?.role === 'super_admin' || user?.role === 'archivist' ? [
-      { id: 'competition-management', label: 'Competitions', icon: Trophy, path: '/admin/competition-management' }
+      { id: 'competition-management', label: 'Competitions', icon: Trophy, path: '/admin/competition-management' },
+      { id: 'social-media-analytics', label: 'Social Media', icon: Share2, path: '/admin/social-media-analytics' } // New social media analytics link
     ] : []),
     { id: 'reports', label: 'Reports', icon: Download, path: '/admin/reports' },
   ];
@@ -219,6 +225,7 @@ const AdminDashboard: React.FC = () => {
               <Route path="/users" element={<UserManagement />} />
               <Route path="/reports" element={<ReportsPage />} />
               <Route path="/competition-management" element={<CompetitionManagementPage />} />
+              <Route path="/social-media-analytics" element={<SocialMediaAnalyticsPage />} />
             </Routes>
           </div>
         </div>

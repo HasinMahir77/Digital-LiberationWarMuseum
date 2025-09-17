@@ -18,6 +18,7 @@ import LoadingSpinner from './components/common/LoadingSpinner';
 import { AnimatePresence, motion } from 'framer-motion';
 import CompetitionsPage from './pages/CompetitionsPage'; // Import the new CompetitionsPage
 import CompetitionDetailPage from './pages/CompetitionDetailPage'; // Import the new CompetitionDetailPage
+import NewsPage from './pages/NewsPage'; // Import the new NewsPage
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -169,6 +170,19 @@ function AppContent() {
                   transition={{ duration: 0.3 }}
                 >
                   <CompetitionDetailPage />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/news"
+              element={
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <NewsPage />
                 </motion.div>
               }
             />

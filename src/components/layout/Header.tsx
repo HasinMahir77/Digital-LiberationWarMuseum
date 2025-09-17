@@ -86,6 +86,14 @@ const Header: React.FC = () => {
               >
                 Virtual Tour
               </Link>
+              <Link 
+                to="/news" 
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/news') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
+                }`}
+              >
+                News & Notices
+              </Link>
             </nav>
 
             {/* Search Bar */}
@@ -214,6 +222,13 @@ const Header: React.FC = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Virtual Tour
+                </Link>
+                <Link 
+                  to="/news" 
+                  className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  News & Notices
                 </Link>
               </nav>
             </div>
