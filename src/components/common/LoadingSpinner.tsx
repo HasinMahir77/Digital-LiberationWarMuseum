@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion'; // Import motion from framer-motion
 import banner from '../../assets/images/banner.png'; // Import the banner image
+import { useTranslation } from 'react-i18next';
 
 const LoadingSpinner: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -23,7 +25,7 @@ const LoadingSpinner: React.FC = () => {
           transition={{ duration: 2, ease: "linear", repeat: Infinity }}
           className="w-20 h-20 border-8 border-green-300 border-t-green-700 rounded-full mx-auto mb-6"
         ></motion.div>
-        <p className="text-white text-xl font-semibold">Loading Digital Liberation War Museum...</p>
+        <p className="text-white text-xl font-semibold">{t('loadingSpinner.loadingMessage')}</p>
       </motion.div>
     </motion.div>
   );

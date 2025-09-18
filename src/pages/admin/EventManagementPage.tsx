@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useData } from '../../contexts/DataContext';
 import { MuseumEvent } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 const EventManagementPage: React.FC = () => {
   const { events, addEvent, updateEvent, deleteEvent } = useData();
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<MuseumEvent | null>(null);
   const [formState, setFormState] = useState<Omit<MuseumEvent, 'id' | 'dateCreated'>>({
@@ -65,25 +67,25 @@ const EventManagementPage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Event Management</h1>
+      <h1 className="text-3xl font-bold mb-6">{t('eventManagementPage.header.title')}</h1>
 
       <button
         onClick={() => openModal()}
         className="bg-green-600 text-white px-4 py-2 rounded-lg mb-6 hover:bg-green-700 transition-colors"
       >
-        Create New Event
+        {t('eventManagementPage.header.createNewEvent')}
       </button>
 
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full leading-normal">
           <thead>
             <tr>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Title</th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Time</th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Location</th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.titleColumn')}</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.dateColumn')}</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.timeColumn')}</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.typeColumn')}</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.locationColumn')}</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{t('eventManagementPage.table.actionsColumn')}</th>
             </tr>
           </thead>
           <tbody>
@@ -95,8 +97,8 @@ const EventManagementPage: React.FC = () => {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{evt.type}</td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{evt.location}</td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <button onClick={() => openModal(evt)} className="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
-                  <button onClick={() => deleteEvent(evt.id)} className="text-red-600 hover:text-red-900">Delete</button>
+                  <button onClick={() => openModal(evt)} className="text-indigo-600 hover:text-indigo-900 mr-3">{t('eventManagementPage.table.editAction')}</button>
+                  <button onClick={() => deleteEvent(evt.id)} className="text-red-600 hover:text-red-900">{t('eventManagementPage.table.deleteAction')}</button>
                 </td>
               </tr>
             ))}
@@ -108,44 +110,44 @@ const EventManagementPage: React.FC = () => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full flex justify-center items-center p-4 z-50">
           <div className="relative bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-bold text-gray-900">{editingEvent ? 'Edit Event' : 'Create Event'}</h3>
+              <h3 className="text-2xl font-bold text-gray-900">{editingEvent ? t('eventManagementPage.modal.editTitle') : t('eventManagementPage.modal.createTitle')}</h3>
               <button onClick={closeModal} className="text-gray-500 hover:text-gray-800 text-3xl leading-none font-semibold">&times;</button>
             </div>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
               <div className="md:col-span-2">
-                <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.titleLabel')}</label>
                 <input type="text" name="title" id="title" value={formState.title} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
               </div>
               <div>
-                <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">Date</label>
+                <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.dateLabel')}</label>
                 <input type="date" name="date" id="date" value={formState.date} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
               </div>
               <div>
-                <label htmlFor="time" className="block text-gray-700 text-sm font-bold mb-2">Time</label>
-                <input type="text" name="time" id="time" placeholder="e.g., 10:00-14:00 BST" value={formState.time} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                <label htmlFor="time" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.timeLabel')}</label>
+                <input type="text" name="time" id="time" placeholder={t('eventManagementPage.modal.timePlaceholder')} value={formState.time} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
               </div>
               <div>
-                <label htmlFor="location" className="block text-gray-700 text-sm font-bold mb-2">Location</label>
+                <label htmlFor="location" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.locationLabel')}</label>
                 <input type="text" name="location" id="location" value={formState.location} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
               </div>
               <div>
-                <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">Type</label>
+                <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.typeLabel')}</label>
                 <input type="text" name="type" id="type" value={formState.type} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
               </div>
               <div className="md:col-span-2">
-                <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-bold mb-2">Image URL</label>
+                <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.imageUrlLabel')}</label>
                 <input type="url" name="imageUrl" id="imageUrl" value={formState.imageUrl} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
               <div className="md:col-span-2">
-                <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">{t('eventManagementPage.modal.descriptionLabel')}</label>
                 <textarea name="description" id="description" value={formState.description} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32" required></textarea>
               </div>
               <div className="md:col-span-2 flex justify-end items-center mt-4">
                 <button type="button" onClick={closeModal} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-                  Cancel
+                  {t('eventManagementPage.modal.cancelButton')}
                 </button>
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                  {editingEvent ? 'Update Event' : 'Create Event'}
+                  {editingEvent ? t('eventManagementPage.modal.updateButton') : t('eventManagementPage.modal.createButton')}
                 </button>
               </div>
             </form>

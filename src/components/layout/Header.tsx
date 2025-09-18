@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, User, Settings, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import LanguageToggle from '../common/LanguageToggle';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,6 +16,7 @@ const Header: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     logout();
@@ -33,10 +36,13 @@ const Header: React.FC = () => {
               <span className="text-white font-bold text-lg">LW</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Liberation War </h1>
-              <p className="text-xs text-gray-600">Digital Collection</p>
+              <h1 className="text-xl font-bold text-gray-900">{t('header.logo.title')}</h1>
+              <p className="text-xs text-gray-600">{t('header.logo.subtitle')}</p>
             </div>
           </Link>
+          <div className="ml-4">
+            
+          </div>
 
           {/* Centered Navigation and Search */}
           <div className="flex-1 flex items-center justify-center space-x-8 mx-8">
@@ -48,7 +54,7 @@ const Header: React.FC = () => {
                   isActive('/') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
                 }`}
               >
-                Home
+                {t('header.nav.home')}
               </Link>
               {/* History Dropdown */}
               <div
@@ -70,7 +76,7 @@ const Header: React.FC = () => {
                       : 'text-gray-700 hover:text-green-600'
                   }`}
                 >
-                  History
+                  {t('header.nav.history')}
                   <svg
                     className={`ml-1 w-4 h-4 transform transition-transform group-hover:rotate-180 ${
                       isHistoryDropdownOpen ? 'rotate-180' : 'rotate-0'
@@ -98,21 +104,21 @@ const Header: React.FC = () => {
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsHistoryDropdownOpen(false)}
                         >
-                          Artifacts
+                          {t('header.nav.artifacts')}
                         </Link>
                         <Link
                           to="/timeline"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsHistoryDropdownOpen(false)}
                         >
-                          Timeline
+                          {t('header.nav.timeline')}
                         </Link>
                         <Link
                           to="/exhibitions"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsHistoryDropdownOpen(false)}
                         >
-                          Exhibitions
+                          {t('header.nav.exhibitions')}
                         </Link>
                       </div>
                     </motion.div>
@@ -139,7 +145,7 @@ const Header: React.FC = () => {
                       : 'text-gray-700 hover:text-green-600'
                   }`}
                 >
-                  Program
+                  {t('header.nav.program')}
                   <svg
                     className={`ml-1 w-4 h-4 transform transition-transform group-hover:rotate-180 ${
                       isProgramDropdownOpen ? 'rotate-180' : 'rotate-0'
@@ -167,14 +173,14 @@ const Header: React.FC = () => {
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsProgramDropdownOpen(false)}
                         >
-                          Events
+                          {t('header.nav.events')}
                         </Link>
                         <Link
                           to="/competitions"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsProgramDropdownOpen(false)}
                         >
-                          Competitions
+                          {t('header.nav.competitions')}
                         </Link>
                       </div>
                     </motion.div>
@@ -187,7 +193,7 @@ const Header: React.FC = () => {
                   isActive('/news') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
                 }`}
               >
-                News
+                {t('header.nav.news')}
               </Link>
               <Link 
                 to="/virtual-tour" 
@@ -195,7 +201,7 @@ const Header: React.FC = () => {
                   isActive('/virtual-tour') ? 'text-green-700' : 'text-gray-700 hover:text-green-600'
                 }`}
               >
-                Virtual Tour
+                {t('header.nav.virtualTour')}
               </Link>
             </nav>
 
@@ -204,6 +210,7 @@ const Header: React.FC = () => {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
+            <LanguageToggle /> {/* Moved LanguageToggle here */}
             {user ? (
               <div className="relative">
                 <button
@@ -228,7 +235,7 @@ const Header: React.FC = () => {
                           onClick={() => setIsUserMenuOpen(false)}
                         >
                           <Settings className="w-4 h-4 mr-2" />
-                          Admin Dashboard
+                          {t('header.userMenu.adminDashboard')}
                         </Link>
                       )}
                       <button
@@ -236,7 +243,7 @@ const Header: React.FC = () => {
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
-                        Sign Out
+                        {t('header.userMenu.signOut')}
                       </button>
                     </div>
                   </div>
@@ -247,10 +254,9 @@ const Header: React.FC = () => {
                 to="/login"
                 className="bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-800 transition-colors"
               >
-                Sign In
+                {t('header.userMenu.signIn')}
               </Link>
             )}
-
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -265,7 +271,10 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4">
             <div className="space-y-4">
-              {/* Removed Search Bar from Mobile */}
+              {/* Language Toggle for Mobile */}
+              <div className="px-3">
+                <LanguageToggle />
+              </div>
               
               <nav className="space-y-2">
                 <Link 
@@ -273,7 +282,7 @@ const Header: React.FC = () => {
                   className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Home
+                  {t('header.nav.home')}
                 </Link>
                 {/* History Dropdown for Mobile */}
                 <div>
@@ -285,7 +294,7 @@ const Header: React.FC = () => {
                         : 'text-gray-700 hover:text-green-600'
                     }`}
                   >
-                    History
+                    {t('header.nav.history')}
                     <svg
                       className={`ml-1 w-4 h-4 transform transition-transform ${isHistoryDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
                       fill="none"
@@ -312,7 +321,7 @@ const Header: React.FC = () => {
                             setIsHistoryDropdownOpen(false);
                           }}
                         >
-                          Artifacts
+                          {t('header.nav.artifacts')}
                         </Link>
                         <Link
                           to="/timeline"
@@ -321,7 +330,7 @@ const Header: React.FC = () => {
                             setIsHistoryDropdownOpen(false);
                           }}
                         >
-                          Timeline
+                          {t('header.nav.timeline')}
                         </Link>
                         <Link
                           to="/exhibitions"
@@ -330,7 +339,7 @@ const Header: React.FC = () => {
                             setIsHistoryDropdownOpen(false);
                           }}
                         >
-                          Exhibitions
+                          {t('header.nav.exhibitions')}
                         </Link>
                       </motion.div>
                     )}
@@ -346,7 +355,7 @@ const Header: React.FC = () => {
                         : 'text-gray-700 hover:text-green-600'
                     }`}
                   >
-                    Program
+                    {t('header.nav.program')}
                     <svg
                       className={`ml-1 w-4 h-4 transform transition-transform ${isProgramDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
                       fill="none"
@@ -374,7 +383,7 @@ const Header: React.FC = () => {
                             setIsMenuOpen(false);
                           }}
                         >
-                          Events
+                          {t('header.nav.events')}
                         </Link>
                         <Link
                           to="/competitions"
@@ -384,7 +393,7 @@ const Header: React.FC = () => {
                             setIsMenuOpen(false);
                           }}
                         >
-                          Competitions
+                          {t('header.nav.competitions')}
                         </Link>
                       </motion.div>
                     )}
@@ -395,14 +404,14 @@ const Header: React.FC = () => {
                   className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  News
+                  {t('header.nav.news')}
                 </Link>
                 <Link 
                   to="/virtual-tour" 
                   className="block px-3 py-2 text-gray-700 hover:text-green-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Virtual Tour
+                  {t('header.nav.virtualTour')}
                 </Link>
               </nav>
             </div>

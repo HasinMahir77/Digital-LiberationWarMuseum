@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Filter, Grid, List, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import ArtifactCard from '../components/artifacts/ArtifactCard';
+import { useTranslation } from 'react-i18next';
 
 const SearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +17,7 @@ const SearchPage: React.FC = () => {
   });
   const [showFilters, setShowFilters] = useState(false);
   const [results, setResults] = useState(searchArtifacts(''));
+  const { t } = useTranslation();
 
   useEffect(() => {
     const query = searchParams.get('q') || '';
@@ -69,7 +71,7 @@ const SearchPage: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search artifacts, collections, descriptions..."
+                placeholder={t('searchPage.placeholder')}
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -88,7 +90,7 @@ const SearchPage: React.FC = () => {
                 }`}
               >
                 <Filter className="w-4 h-4" />
-                <span>Filters</span>
+                <span>{t('searchPage.filters')}</span>
                 {hasActiveFilters && (
                   <span className="bg-green-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {Object.values(filters).filter(v => v !== 'all').length}
@@ -102,14 +104,14 @@ const SearchPage: React.FC = () => {
                   className="text-gray-500 hover:text-gray-700 text-sm flex items-center space-x-1"
                 >
                   <X className="w-4 h-4" />
-                  <span>Clear filters</span>
+                  <span>{t('searchPage.clearFilters')}</span>
                 </button>
               )}
             </div>
 
             <div className="flex items-center space-x-4">
               <span className="text-gray-600 text-sm">
-                {results.length} artifact{results.length !== 1 ? 's' : ''} found
+                {t('searchPage.resultsFound', { count: results.length })}
               </span>
               <div className="flex bg-gray-100 rounded-lg">
                 <button
@@ -137,45 +139,45 @@ const SearchPage: React.FC = () => {
             <div className="mt-6 p-4 bg-gray-300 bg-opacity-70 rounded-lg">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Object Type</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('searchPage.objectType.label')}</label>
                   <select
                     value={filters.objectType}
                     onChange={(e) => handleFilterChange('objectType', e.target.value)}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
                   >
-                    <option value="all">All Types</option>
-                    <option value="Photograph">Photograph</option>
-                    <option value="Document">Document</option>
-                    <option value="Weapon">Weapon</option>
-                    <option value="Uniform">Uniform</option>
-                    <option value="Letter">Letter</option>
+                    <option value="all">{t('searchPage.objectType.allTypes')}</option>
+                    <option value="Photograph">{t('searchPage.objectType.photograph')}</option>
+                    <option value="Document">{t('searchPage.objectType.document')}</option>
+                    <option value="Weapon">{t('searchPage.objectType.weapon')}</option>
+                    <option value="Uniform">{t('searchPage.objectType.uniform')}</option>
+                    <option value="Letter">{t('searchPage.objectType.letter')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('searchPage.dateRange.label')}</label>
                   <select
                     value={filters.dateRange}
                     onChange={(e) => handleFilterChange('dateRange', e.target.value)}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
                   >
-                    <option value="all">All Periods</option>
-                    <option value="1971">1971</option>
-                    <option value="1970-1971">1970-1971</option>
-                    <option value="pre-1970">Before 1970</option>
+                    <option value="all">{t('searchPage.dateRange.allPeriods')}</option>
+                    <option value="1971">{t('searchPage.dateRange.1971')}</option>
+                    <option value="1970-1971">{t('searchPage.dateRange.1970-1971')}</option>
+                    <option value="pre-1970">{t('searchPage.dateRange.pre1970')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('searchPage.location.label')}</label>
                   <select
                     value={filters.location}
                     onChange={(e) => handleFilterChange('location', e.target.value)}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
                   >
-                    <option value="all">All Locations</option>
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Chittagong">Chittagong</option>
-                    <option value="Jessore">Jessore</option>
-                    <option value="Sylhet">Sylhet</option>
+                    <option value="all">{t('searchPage.location.allLocations')}</option>
+                    <option value="Dhaka">{t('searchPage.location.dhaka')}</option>
+                    <option value="Chittagong">{t('searchPage.location.chittagong')}</option>
+                    <option value="Jessore">{t('searchPage.location.jessore')}</option>
+                    <option value="Sylhet">{t('searchPage.location.sylhet')}</option>
                   </select>
                 </div>
               </div>
@@ -202,15 +204,15 @@ const SearchPage: React.FC = () => {
           ) : (
             <div className="text-center py-12 bg-gray-200 bg-opacity-75 rounded-lg p-8">
               <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No artifacts found</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('searchPage.noArtifactsFound')}</h3>
               <p className="text-gray-600 mb-6">
-                Try adjusting your search terms or filters to find what you're looking for.
+                {t('searchPage.adjustSearchTerms')}
               </p>
               <button
                 onClick={clearFilters}
                 className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors"
               >
-                Clear All Filters
+                {t('searchPage.clearAllFilters')}
               </button>
             </div>
           )}

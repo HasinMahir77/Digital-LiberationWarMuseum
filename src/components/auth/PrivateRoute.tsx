@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth, UserRole } from '../../contexts/AuthContext';
 import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslation } from 'react-i18next';
 
 interface PrivateRouteProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ const roleHierarchy: Record<UserRole, number> = {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole = 'researcher' }) => {
   const { user, isLoading } = useAuth();
   const location = useLocation();
+  const { t } = useTranslation();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -32,8 +34,8 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole = 'r
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h2>
-          <p className="text-gray-600 mb-6">You don't have permission to access this area.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('privateRoute.accessDenied')}</h2>
+          <p className="text-gray-600 mb-6">{t('privateRoute.noPermission')}</p>
           <Navigate to="/" replace />
         </div>
       </div>

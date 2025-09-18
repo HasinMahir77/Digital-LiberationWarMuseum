@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin, User, ArrowRight } from 'lucide-react';
 import { Artifact } from '../../contexts/DataContext';
+import { useTranslation } from 'react-i18next';
 
 interface ArtifactCardProps {
   artifact: Artifact;
@@ -9,6 +10,7 @@ interface ArtifactCardProps {
 }
 
 const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
+  const { t } = useTranslation();
   if (viewMode === 'list') {
     return (
       <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 p-6 hover:shadow-md transition-shadow">
@@ -16,7 +18,7 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
           <div className="flex-shrink-0">
             <img
               src={artifact.images[0]}
-              alt={artifact.objectHead}
+              alt={t(artifact.objectHead)}
               className="w-24 h-24 object-cover rounded-lg"
             />
           </div>
@@ -24,15 +26,15 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-lg font-semibold text-gray-900 hover:text-green-700">
                 <Link to={`/artifact/${artifact.id}`}>
-                  {artifact.objectHead}
+                  {t(artifact.objectHead)}
                 </Link>
               </h3>
               <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
-                {artifact.objectType}
+                {t(artifact.objectType)}
               </span>
             </div>
             <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-              {artifact.description}
+              {t(artifact.description)}
             </p>
             <div className="flex items-center space-x-4 text-xs text-gray-500">
               <div className="flex items-center space-x-1">
@@ -41,11 +43,11 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
               </div>
               <div className="flex items-center space-x-1">
                 <MapPin className="w-3 h-3" />
-                <span>{artifact.foundPlace}</span>
+                <span>{t(artifact.foundPlace)}</span>
               </div>
               <div className="flex items-center space-x-1">
                 <User className="w-3 h-3" />
-                <span>{artifact.contributorName}</span>
+                <span>{t(artifact.contributorName)}</span>
               </div>
             </div>
           </div>
@@ -67,26 +69,26 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={artifact.images[0]}
-          alt={artifact.objectHead}
+          alt={t(artifact.objectHead)}
           className="w-full h-48 object-cover"
         />
       </div>
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
-            {artifact.objectType}
+            {t(artifact.objectType)}
           </span>
           <span className="text-xs text-gray-500">{artifact.collectionNumber}</span>
         </div>
         
         <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-green-700">
           <Link to={`/artifact/${artifact.id}`}>
-            {artifact.objectHead}
+            {t(artifact.objectHead)}
           </Link>
         </h3>
         
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-          {artifact.description}
+          {t(artifact.description)}
         </p>
         
         <div className="space-y-2 text-xs text-gray-500">
@@ -96,7 +98,7 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
           </div>
           <div className="flex items-center space-x-1">
             <MapPin className="w-3 h-3" />
-            <span>{artifact.foundPlace}</span>
+            <span>{t(artifact.foundPlace)}</span>
           </div>
         </div>
         
@@ -119,7 +121,7 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
             to={`/artifact/${artifact.id}`}
             className="text-green-700 hover:text-green-800 font-medium text-sm inline-flex items-center"
           >
-            View Details
+            {t('artifactCard.grid.viewDetails')}
             <ArrowRight className="w-4 h-4 ml-1" />
           </Link>
         </div>

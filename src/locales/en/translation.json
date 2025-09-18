@@ -1,0 +1,1058 @@
+{
+  "welcome": "Welcome to the Digital Liberation War Museum!",
+  "hero": {
+    "title": "Liberation War Digital Archive",
+    "subtitle": "Preserving the memory of Bangladesh's struggle for independence through comprehensive digital heritage collection",
+    "exploreCollection": "Explore Collection",
+    "historicalTimeline": "Historical Timeline",
+    "competitions": "Competitions"
+  },
+  "newsPage": {
+    "title": "News & Notices",
+    "pagination": {
+      "prev": "Prev",
+      "next": "Next"
+    },
+    "news": {
+      "news1": {
+        "title": "Historic Surrender of Pakistan Army in Dhaka",
+        "summary": "On December 16, 1971, the Pakistan Army officially surrendered to the joint forces of Bangladesh and India, marking the end of the Liberation War and the birth of independent Bangladesh.",
+        "content": "The instrument of surrender was signed by Lieutenant General A. A. K. Niazi, commander of the Pakistani forces in East Pakistan, and Lieutenant General Jagjit Singh Aurora, GOC-in-C of the Indian and Bangladesh forces, at the Ramna Race Course in Dhaka. This historic event led to the unconditional surrender of approximately 93,000 Pakistani troops, the largest surrender since World War II. The joyous occasion was met with widespread celebrations across Bangladesh, symbolizing the culmination of nine months of valiant struggle and immense sacrifice."
+      },
+      "news2": {
+        "title": "The Role of Mukti Bahini in Bangladesh's Independence",
+        "summary": "The Mukti Bahini, or Freedom Fighters, played a pivotal role in the Bangladesh Liberation War, employing guerrilla tactics and immense bravery against the Pakistani military.",
+        "content": "Comprised of Bengali military, paramilitary, and civilians, the Mukti Bahini emerged as a formidable force following the crackdown by the Pakistani army on March 25, 1971. Their guerrilla warfare disrupted Pakistani supply lines, ambushed convoys, and liberated various areas, significantly contributing to the morale of the Bengali populace and weakening the Pakistani occupation forces. Their unwavering commitment and sacrifice were instrumental in achieving the long-sought independence."
+      },
+      "news3": {
+        "title": "March 7 Speech: A Call for Independence",
+        "summary": "Sheikh Mujibur Rahman's historic speech on March 7, 1971, at the Ramna Race Course in Dhaka, effectively declared Bangladesh's independence and galvanized the nation.",
+        "content": "In front of a massive gathering, Bangabandhu Sheikh Mujibur Rahman delivered a powerful and inspiring speech that is considered a de facto declaration of Bangladesh's independence. He famously declared, \"The struggle this time is for our emancipation! The struggle this time is for our independence!\" The speech outlined the grievances against West Pakistan, called for a non-cooperation movement, and prepared the Bengali people for the impending war. It remains a foundational document in the history of Bangladesh."
+      },
+      "news4": {
+        "title": "The Genocide of 1971: A Dark Chapter",
+        "summary": "The 1971 Bangladesh Genocide, initiated by the Pakistani military's Operation Searchlight, resulted in the systematic killing of millions of Bengalis and widespread atrocities.",
+        "content": "Beginning on March 25, 1971, with Operation Searchlight, the Pakistani army launched a brutal campaign of genocide against the Bengali population, targeting intellectuals, students, Hindus, and political activists. Estimates suggest that between 500,000 and 3,000,000 Bengalis were killed, and millions more were displaced and sought refuge in India. The atrocities included mass murders, rape, and forced displacement, leaving an indelible scar on the nation's history and highlighting the immense human cost of the Liberation War."
+      },
+      "news5": {
+        "title": "International Support for Bangladesh's Liberation War",
+        "summary": "The Bangladesh Liberation War garnered significant international support, particularly from India, which played a crucial role in providing military and humanitarian aid.",
+        "content": "Beyond India's direct military intervention, various countries and international organizations voiced support for Bangladesh's independence. India provided sanctuary to millions of refugees, trained and equipped the Mukti Bahini, and eventually intervened militarily. Other nations, through diplomatic pressure and humanitarian assistance, also contributed to the global recognition of the atrocities committed by Pakistan and the legitimacy of Bangladesh's struggle for self-determination. This international solidarity was vital in securing Bangladesh's swift victory."
+      }
+    }
+  },
+  "homePage": {
+    "quickStats": {
+      "digitalArtifacts": "Digital Artifacts",
+      "digitalArtifactsCount": "{{count}}+",
+      "historicalDocuments": "Historical Documents",
+      "historicalDocumentsCount": "50+",
+      "locationsCovered": "Locations Covered",
+      "locationsCoveredCount": "25+",
+      "daysOfLiberation": "Days of Liberation",
+      "daysOfLiberationCount": "271"
+    },
+    "featuredArtifacts": {
+      "title": "Featured Artifacts",
+      "subtitle": "Discover remarkable pieces from our collection that tell the story of Bangladesh's journey to independence",
+      "viewDetails": "View Details",
+      "viewAllArtifacts": "View All Artifacts"
+    },
+    "callToAction": {
+      "title": "Contribute to History",
+      "subtitle": "Help us preserve Bangladesh's liberation history. Share your family's artifacts, stories, and memories with our digital archive.",
+      "button": "Learn About Contributing"
+    }
+  },
+  "searchPage": {
+    "placeholder": "Search artifacts, collections, descriptions...",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "resultsFound_one": "{{count}} artifact found",
+    "resultsFound_other": "{{count}} artifacts found",
+    "objectType": {
+      "label": "Object Type",
+      "allTypes": "All Types",
+      "photograph": "Photograph",
+      "document": "Document",
+      "weapon": "Weapon",
+      "uniform": "Uniform",
+      "letter": "Letter"
+    },
+    "dateRange": {
+      "label": "Date Range",
+      "allPeriods": "All Periods",
+      "1971": "1971",
+      "1970-1971": "1970-1971",
+      "pre1970": "Before 1970"
+    },
+    "location": {
+      "label": "Location",
+      "allLocations": "All Locations",
+      "dhaka": "Dhaka",
+      "chittagong": "Chittagong",
+      "jessore": "Jessore",
+      "sylhet": "Sylhet"
+    },
+    "noArtifactsFound": "No artifacts found",
+    "adjustSearchTerms": "Try adjusting your search terms or filters to find what you're looking for.",
+    "clearAllFilters": "Clear All Filters"
+  },
+  "timelinePage": {
+    "hero": {
+      "title": "Liberation War Timeline",
+      "subtitle": "Follow the chronological events of Bangladesh's struggle for independence from March to December 1971"
+    },
+    "eventTypes": {
+      "political": "Political",
+      "military": "Military",
+      "social": "Social",
+      "international": "International"
+    },
+    "relatedArtifacts": "Related Artifacts",
+    "exploreFurther": "Explore Further",
+    "keyFigures": {
+      "title": "Key Figures",
+      "description": "Learn about the important personalities who shaped Bangladesh's independence movement.",
+      "viewButton": "View Key Figures →"
+    },
+    "battleMaps": {
+      "title": "Battle Maps",
+      "description": "Explore interactive maps showing major battles and strategic movements during the war.",
+      "viewButton": "View Battle Maps →"
+    },
+    "year": {
+      "1970": "1970",
+      "1971": "1971",
+      "1972": "1972"
+    },
+    "event1": {
+      "title": "National Assembly Elections",
+      "description": "The Awami League, led by Sheikh Mujibur Rahman, wins a landslide victory in the National Assembly elections.",
+      "location": "Pakistan"
+    },
+    "event2": {
+      "title": "Leaders Vow to Implement Programs",
+      "description": "Sheikh Mujib and other leaders meet at Ramna Race Course, vowing to implement the six-point program and an 11-point charter.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event3": {
+      "title": "Historic Speech at Race Course Ground",
+      "description": "Sheikh Mujib delivers a historic speech at Race Course Ground (now Suhrawardy Udyan), calling for civil disobedience and hinting at independence.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event4": {
+      "title": "Operation Searchlight Initiated",
+      "description": "The Pakistan Army initiates Operation Searchlight, a violent crackdown in Dhaka and other regions.",
+      "location": "East Pakistan (Bangladesh)"
+    },
+    "event5": {
+      "title": "Declaration of Independence",
+      "description": "Sheikh Mujib declares Bangladesh's independence before his arrest by Pakistani forces.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event6": {
+      "title": "Provisional Government Formed",
+      "description": "A provisional government-in-exile is formed, with Sheikh Mujib as President and Tajuddin Ahmad as Prime Minister.",
+      "location": "Mujibnagar, Bangladesh"
+    },
+    "event7": {
+      "title": "Operation Jackpot Executed",
+      "description": "Operation Jackpot is executed by Mukti Bahini naval commandos, targeting Pakistani naval ships.",
+      "location": "Various naval bases"
+    },
+    "event8": {
+      "title": "India Joins the War",
+      "description": "India officially joins the war after pre-emptive attacks by Pakistan on western borders.",
+      "location": "Indo-Pakistani Border"
+    },
+    "event9": {
+      "title": "Victory Day - Liberation of Bangladesh",
+      "description": "Pakistan surrenders, ending the nine-month war. An estimated 3 million people died in Bangladesh.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event10": {
+      "title": "Sheikh Mujib Returns to Dhaka",
+      "description": "Sheikh Mujib returns to Dhaka after being released from Pakistani custody.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event11": {
+      "title": "Sheikh Mujib Becomes Prime Minister",
+      "description": "Sheikh Mujib becomes the Prime Minister of Bangladesh.",
+      "location": "Dhaka, Bangladesh"
+    },
+    "event12": {
+      "title": "Constitution of Bangladesh Adopted",
+      "description": "The Constitution of Bangladesh is adopted.",
+      "location": "Dhaka, Bangladesh"
+    }
+  },
+  "exhibitionsPage": {
+    "hero": {
+      "title": "Digital Exhibitions",
+      "subtitle": "Explore carefully curated collections that tell specific stories about Bangladesh's Liberation War through thematic narratives and expert insights"
+    },
+    "featuredExhibition": {
+      "title": "Featured Exhibition",
+      "curatorNote": "Curator's Note",
+      "views_one": "{{count}} view",
+      "views_other": "{{count}} views",
+      "artifacts_one": "{{count}} artifact",
+      "artifacts_other": "{{count}} artifacts",
+      "exploreButton": "Explore Exhibition"
+    },
+    "allExhibitions": {
+      "title": "All Exhibitions",
+      "featuredTag": "Featured",
+      "views_one": "{{count}} view",
+      "views_other": "{{count}} views",
+      "artifacts_one": "{{count}} artifact",
+      "artifacts_other": "{{count}} artifacts",
+      "exploreButton": "Explore Exhibition"
+    },
+    "createExhibitionCTA": {
+      "title": "Create Your Own Exhibition",
+      "description": "Curators and researchers can create thematic exhibitions that tell specific stories using artifacts from our collection.",
+      "button": "Start Curating"
+    }
+  },
+  "virtualTourPage": {
+    "hero": {
+      "title": "Virtual Tour",
+      "subtitle": "Explore the Liberation War Museum via an interactive Matterport 3D tour. Use your mouse or touch to navigate through the museum."
+    }
+  },
+  "eventsPage": {
+    "hero": {
+      "title": "Upcoming Events"
+    },
+    "filters": {
+      "title": "Filters",
+      "byMonth": "Filter by Month",
+      "byEventType": "Filter by Event Type"
+    },
+    "eventDetails": {
+      "date": "Date:",
+      "time": "Time:",
+      "location": "Location:",
+      "type": "Type:"
+    },
+    "eventTypes": {
+      "festivalsandeventseries": "Festivals and Event Series",
+      "workshopsandtalks": "Workshops & Talks",
+      "exhibitions": "Exhibitions",
+      "filmscreening": "Film Screening",
+      "kidsandfamilies": "Kids & Families",
+      "webcastsandonline": "Webcasts & Online"
+    },
+    "events": {
+      "event1": {
+        "title": "Victory Day Celebration: Remembering Our Heroes",
+        "date": "12/16/2025",
+        "time": "10:00am – 2:00pm BST",
+        "location": "Museum Main Hall & Online",
+        "type": "Festivals and Event Series",
+        "description": "A grand celebration to honor the martyrs and freedom fighters of the Liberation War. Featuring speeches, cultural performances, and a special exhibition.",
+        "imageUrl": "/src/assets/images/eventBackground.jpeg"
+      },
+      "event2": {
+        "title": "Oral Histories Project: Share Your Story",
+        "date": "11/5/2025",
+        "time": "10:00am – 4:00pm BST",
+        "location": "Museum Archive Wing",
+        "type": "Workshops & Talks",
+        "description": "An opportunity for freedom fighters, their families, and witnesses to share their personal stories and contribute to the museum's oral history collection.",
+        "imageUrl": "/src/assets/images/eventBackground.jpeg"
+      },
+      "event3": {
+        "title": "Exhibition Opening: Women in the War",
+        "date": "10/27/2025",
+        "time": "3:00pm – 5:00pm BST",
+        "location": "Temporary Exhibition Gallery",
+        "type": "Exhibitions",
+        "description": "Opening of a new exhibition highlighting the invaluable contributions and sacrifices of women during the Liberation War.",
+        "imageUrl": "/src/assets/images/eventBackground.jpeg"
+      },
+      "event4": {
+        "title": "Documentary Screening: The Birth of a Nation",
+        "time": "6:00pm – 8:00pm BST",
+        "location": "Museum Auditorium",
+        "description": "A special screening of a critically acclaimed documentary on the historical events leading to the independence of Bangladesh."
+      },
+      "event5": {
+        "title": "Youth Education Workshop: Our History, Our Future",
+        "time": "9:00am – 1:00pm BST",
+        "location": "Educational Center",
+        "description": "An interactive workshop for young students to learn about the Liberation War through engaging activities and discussions."
+      },
+      "event6": {
+        "title": "Seminar: International Support for Bangladesh's Liberation",
+        "time": "2:00pm – 4:00pm BST",
+        "location": "Conference Hall & Online",
+        "description": "A seminar discussing the crucial international support and diplomatic efforts that aided Bangladesh during its fight for freedom."
+      },
+      "event7": {
+        "title": "Photo Exhibition: Faces of Freedom",
+        "time": "10:00am – 5:00pm BST",
+        "location": "Gallery I",
+        "description": "A powerful photographic journey showcasing the individuals who participated in and were affected by the Liberation War."
+      }
+    }
+  },
+  "artifactDetailPage": {
+    "notFound": {
+      "title": "Artifact Not Found",
+      "message": "The requested artifact could not be found.",
+      "browseCollection": "Browse Collection"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "collection": "Collection"
+    },
+    "backToCollection": "Back to Collection",
+    "actions": {
+      "save": "Save",
+      "share": "Share",
+      "download": "Download",
+      "viewImage": "View {{index}}"
+    },
+    "tabs": {
+      "details": "Details",
+      "provenance": "Provenance",
+      "media": "Media",
+      "citation": "Citation"
+    },
+    "detailsTab": {
+      "description": "Description",
+      "collectionDate": "Collection Date",
+      "foundPlace": "Found Place",
+      "contributor": "Contributor",
+      "measurement": "Measurement",
+      "gallery": "Gallery",
+      "tags": "Tags",
+      "significance": "Significance"
+    },
+    "provenanceTab": {
+      "title": "Provenance Information",
+      "accessionNumber": "Accession Number",
+      "originalContributor": "Original Contributor",
+      "dateAdded": "Date Added to Collection",
+      "currentLocation": "Current Location",
+      "museumLocation": "Gallery {{galleryNumber}}, Liberation War Museum"
+    },
+    "citationTab": {
+      "title": "Citation Formats",
+      "apaFormat": "APA Format",
+      "copyApa": "Copy APA Citation",
+      "mlaFormat": "MLA Format",
+      "copyMla": "Copy MLA Citation",
+      "chicagoFormat": "Chicago Format",
+      "copyChicago": "Copy Chicago Citation"
+    },
+    "relatedArtifacts": "Related Artifacts"
+  },
+  "exhibitionDetailPage": {
+    "loading": "Loading...",
+    "error": {
+      "title": "Error",
+      "message": "Failed to load exhibition",
+      "backButton": "Back to Exhibitions"
+    },
+    "notFound": {
+      "title": "Exhibition Not Found",
+      "message": "The exhibition you are looking for does not exist.",
+      "backButton": "Back to Exhibitions"
+    },
+    "backToAllExhibitions": "Back to All Exhibitions",
+    "views_one": "{{count}} View",
+    "views_other": "{{count}} Views",
+    "artifacts_one": "{{count}} Artifact",
+    "artifacts_other": "{{count}} Artifacts",
+    "curatorNote": "Curator's Note",
+    "artifactsInExhibition": {
+      "title": "Artifacts in this Exhibition",
+      "message": "Artifacts related to this exhibition will be displayed here."
+    }
+  },
+  "eventDetailPage": {
+    "notFound": {
+      "title": "Event Not Found",
+      "message": "The event you are looking for does not exist.",
+      "backButton": "Back to Events"
+    },
+    "backToAllEvents": "Back to All Events",
+    "details": {
+      "date": "Date:",
+      "time": "Time:",
+      "location": "Location:",
+      "eventType": "Event Type:"
+    }
+  },
+  "newsDetailPage": {
+    "backToNews": "Back to News",
+    "byAuthorOnDate": "By <span class=\"font-medium\">{{author}}</span> on <span class=\"capitalize\">{{date}}</span>",
+    "contentTitle": "Content",
+    "tagsTitle": "Tags"
+  },
+  "adminDashboard": {
+    "sidebar": {
+      "title": "Admin Dashboard",
+      "overview": "Overview",
+      "artifacts": "Artifacts",
+      "addArtifact": "Add Artifact",
+      "users": "Users",
+      "competitions": "Competitions",
+      "events": "Events",
+      "news": "News",
+      "socialMedia": "Social Media",
+      "reports": "Reports"
+    },
+    "header": {
+      "welcome": "Welcome back, {{userName}}",
+      "subtitle": "Manage your digital archive and track collection growth"
+    },
+    "stats": {
+      "totalArtifacts": "Total Artifacts",
+      "publicItems": "Public Items",
+      "thisMonth": "This Month",
+      "pendingReview": "Pending Review",
+      "fromLastMonth": "from last month"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "addArtifact": {
+        "title": "Add New Artifact",
+        "description": "Upload and catalog new items"
+      },
+      "bulkImport": {
+        "title": "Bulk Import",
+        "description": "Import multiple artifacts"
+      },
+      "generateReport": {
+        "title": "Generate Report",
+        "description": "Export collection data"
+      }
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "addedOn": "Added on {{date}}",
+      "publicStatus": "Public",
+      "draftStatus": "Draft"
+    }
+  },
+  "userManagementPage": {
+    "header": {
+      "title": "User Management",
+      "subtitle": "Manage user accounts and permissions",
+      "addNewUser": "Add New User"
+    },
+    "filters": {
+      "placeholder": "Search users by name or email...",
+      "allRoles": "All Roles"
+    },
+    "roles": {
+      "super_admin": "Super Admin",
+      "archivist": "Archivist",
+      "curator": "Curator",
+      "researcher": "Researcher",
+      "user": "User"
+    },
+    "table": {
+      "userColumn": "User",
+      "roleColumn": "Role",
+      "lastLoginColumn": "Last Login",
+      "statusColumn": "Status",
+      "actionsColumn": "Actions",
+      "activeStatus": "Active",
+      "inactiveStatus": "Inactive",
+      "editAction": "Edit",
+      "deleteAction": "Delete"
+    },
+    "statistics": {
+      "totalUsers": "Total Users",
+      "administrators": "Administrators",
+      "staffMembers": "Staff Members",
+      "activeUsers": "Active Users"
+    }
+  },
+  "artifactManagementPage": {
+    "header": {
+      "title": "Artifact Management",
+      "subtitle": "Manage your digital collection items",
+      "addNewArtifact": "Add New Artifact"
+    },
+    "filters": {
+      "placeholder": "Search artifacts...",
+      "allStatus": "All Status",
+      "public": "Public",
+      "draft": "Draft"
+    },
+    "table": {
+      "artifactColumn": "Artifact",
+      "collectionInfoColumn": "Collection Info",
+      "statusColumn": "Status",
+      "dateAddedColumn": "Date Added",
+      "actionsColumn": "Actions",
+      "viewAction": "View",
+      "makePrivateAction": "Make Private",
+      "makePublicAction": "Make Public",
+      "editAction": "Edit",
+      "deleteAction": "Delete",
+      "publicStatus": "Public",
+      "draftStatus": "Draft"
+    },
+    "confirmDelete": "Are you sure you want to delete this artifact? This action cannot be undone."
+  },
+  "competitions": {
+    "competition1": {
+      "title": "District Level Essay Competition: Liberation War",
+      "description": "Write an essay on the significance of the Bangladesh Liberation War."
+    },
+    "competition2": {
+      "title": "Division Level Art Competition: Figures of 1971",
+      "description": "Create artwork depicting key figures or events from the Liberation War."
+    },
+    "competition3": {
+      "title": "National Level Photography Competition: Echoes of Liberation",
+      "description": "Submit photographs that capture the spirit and legacy of the Liberation War."
+    },
+    "competition4": {
+      "title": "Poem Writing Competition: Verses of Valor",
+      "description": "Compose a poem reflecting on the bravery and sacrifices of the Liberation War. Express emotions, historical context, and aspirations for the future."
+    },
+    "competition5": {
+      "title": "Singing Competition: Melodies of Freedom",
+      "description": "Perform patriotic songs from the Liberation War era or original compositions inspired by the war. Solo and group performances welcome."
+    },
+    "competition6": {
+      "title": "Debate Competition: Historical Perspectives",
+      "description": "Engage in a debate on various historical perspectives and interpretations of the Liberation War. Critical thinking and evidence-based arguments are key."
+    },
+    "competition7": {
+      "title": "Quiz Competition: Know Your History",
+      "description": "Test your knowledge about the Bangladesh Liberation War in this exciting quiz competition. Teams of three."
+    }
+  },
+  "competitionDetailPage": {
+    "backToCompetitions": "Back to Competitions",
+    "levelPrefix": "Level:",
+    "statusPrefix": "Status:",
+    "loginToJoin": "Log in to Join",
+    "viewWithdrawApplication": "View/Withdraw Application",
+    "joinCompetition": "Join Competition",
+    "competitionStatus": "This competition is currently {{status}}.",
+    "descriptionTitle": "Description",
+    "eligibilityCriteriaTitle": "Eligibility Criteria",
+    "importantDatesTitle": "Important Dates",
+    "startDate": "Start Date:",
+    "submissionDeadline": "Submission Deadline:",
+    "judgingCriteriaTitle": "Judging Criteria",
+    "rewardsTitle": "Rewards",
+    "modal": {
+      "yourApplication": "Your Application",
+      "confirmApplication": "Confirm Application",
+      "confirmMessage": "By clicking 'Apply Now', you confirm your interest in participating in the <br /> <span class=\"font-semibold\">{{competitionTitle}}</span>. Submission details will be provided externally.",
+      "applySuccess": "Your application has been successfully received!",
+      "applyError": "Failed to apply. Please try again.",
+      "applying": "Applying...",
+      "applyNow": "Apply Now",
+      "alreadyApplied": "You have successfully applied to this competition!",
+      "applicationStatus": "Your application status:",
+      "score": "Score:",
+      "feedback": "Feedback:",
+      "appliedOn": "Applied on:",
+      "withdrawSuccess": "Your application has been successfully withdrawn.",
+      "withdrawError": "Failed to withdraw application. Please try again.",
+      "withdrawing": "Withdrawing...",
+      "withdrawApplication": "Withdraw Application",
+      "close": "Close"
+    },
+    "competitionStatuses": {
+      "open": "Open",
+      "judging": "Judging",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "competitionsPage": {
+    "hero": {
+      "title": "Competitions"
+    },
+    "filters": {
+      "title": "Filters",
+      "byTime": "Filter by Time",
+      "byType": "Filter by Type",
+      "byLevel": "Filter by Level"
+    },
+    "timeCategories": {
+      "current": "Current",
+      "upcoming": "Upcoming",
+      "past": "Past"
+    },
+    "types": {
+      "essay": "Essay",
+      "art": "Art",
+      "photography": "Photography",
+      "poem-writing": "Poem Writing",
+      "singing": "Singing",
+      "debate": "Debate",
+      "quiz": "Quiz"
+    },
+    "levels": {
+      "district": "District",
+      "division": "Division",
+      "national": "National"
+    },
+    "card": {
+      "level": "Level:",
+      "status": "Status:",
+      "ends": "Ends:"
+    },
+    "noCompetitionsFound": "No competitions found"
+  },
+  "addArtifactPage": {
+    "header": {
+      "title": "Add New Artifact",
+      "subtitle": "Enter complete information for the new artifact"
+    },
+    "basicInformation": {
+      "title": "Basic Information",
+      "collectionNumber": "Collection Number *",
+      "collectionNumberPlaceholder": "LW-001",
+      "accessionNumber": "Accession Number *",
+      "accessionNumberPlaceholder": "ACC-1971-001",
+      "collectionDate": "Collection Date *",
+      "objectType": "Object Type *",
+      "selectType": "Select Type",
+      "objectTypes": {
+        "photograph": "Photograph",
+        "document": "Document",
+        "weapon": "Weapon",
+        "uniform": "Uniform",
+        "letter": "Letter",
+        "medal": "Medal",
+        "map": "Map",
+        "audioRecording": "Audio Recording",
+        "video": "Video",
+        "other": "Other"
+      },
+      "objectHead": "Object Head (Title) *",
+      "objectHeadPlaceholder": "Enter a descriptive title",
+      "description": "Description *",
+      "descriptionPlaceholder": "Detailed description of the artifact"
+    },
+    "additionalDetails": {
+      "title": "Additional Details",
+      "contributorName": "Contributor Name *",
+      "contributorNamePlaceholder": "Name of person or organization",
+      "measurement": "Measurement",
+      "measurementPlaceholder": "e.g., 8 x 10 inches",
+      "galleryNumber": "Gallery Number",
+      "galleryNumberPlaceholder": "G-01",
+      "foundPlace": "Found Place *",
+      "foundPlacePlaceholder": "Location where artifact was found",
+      "experimentFormula": "Experiment Formula",
+      "experimentFormulaPlaceholder": "If applicable",
+      "tags": "Tags",
+      "tagsPlaceholder": "Comma-separated tags"
+    },
+    "images": {
+      "title": "Images",
+      "imageUrlPlaceholder": "Enter image URL",
+      "addAnotherImage": "Add Another Image"
+    },
+    "significanceAndNotes": {
+      "title": "Significance & Notes",
+      "significanceComment": "Significance Comment *",
+      "significanceCommentPlaceholder": "Explain the historical significance of this artifact",
+      "correctionNotes": "Correction Notes",
+      "correctionNotesPlaceholder": "Any corrections or additional notes"
+    },
+    "publicationSettings": {
+      "title": "Publication Settings",
+      "makePublic": "Make this artifact publicly visible",
+      "draftMessage": "Unchecked items will be saved as drafts and visible only to administrators"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "adding": "Adding...",
+      "addArtifact": "Add Artifact"
+    }
+  },
+  "createExhibitionPage": {
+    "header": {
+      "title": "Create New Exhibition",
+      "subtitle": "Fill in the details below to create a new digital exhibition."
+    },
+    "form": {
+      "titleLabel": "Title",
+      "descriptionLabel": "Description",
+      "curatorNoteLabel": "Curator's Note",
+      "featuredImageURLLabel": "Featured Image URL",
+      "numberOfArtifactsLabel": "Number of Artifacts",
+      "featureCheckbox": "Feature this exhibition on the homepage",
+      "createButton": "Create Exhibition"
+    }
+  },
+  "competitionManagementPage": {
+    "header": {
+      "title": "Competition Management",
+      "createNewCompetition": "Create New Competition"
+    },
+    "table": {
+      "titleColumn": "Title",
+      "levelColumn": "Level",
+      "statusColumn": "Status",
+      "startDateColumn": "Start Date",
+      "endDateColumn": "End Date",
+      "actionsColumn": "Actions",
+      "editAction": "Edit",
+      "deleteAction": "Delete"
+    },
+    "modal": {
+      "editTitle": "Edit Competition",
+      "createTitle": "Create Competition",
+      "close": "×",
+      "titleLabel": "Title",
+      "thumbnailURLLabel": "Thumbnail URL",
+      "descriptionLabel": "Description",
+      "levelLabel": "Level",
+      "levelOptions": {
+        "district": "District",
+        "division": "Division",
+        "national": "National"
+      },
+      "typeLabel": "Type",
+      "typeOptions": {
+        "essay": "Essay",
+        "art": "Art",
+        "photography": "Photography",
+        "poemWriting": "Poem Writing",
+        "singing": "Singing",
+        "debate": "Debate",
+        "quiz": "Quiz"
+      },
+      "startDateLabel": "Start Date",
+      "endDateLabel": "End Date",
+      "eligibilityCriteriaLabel": "Eligibility Criteria",
+      "judgingCriteriaLabel": "Judging Criteria",
+      "rewardsLabel": "Rewards",
+      "statusLabel": "Status",
+      "statusOptions": {
+        "draft": "Draft",
+        "open": "Open",
+        "closed": "Closed",
+        "judging": "Judging",
+        "completed": "Completed"
+      },
+      "adminUserIDLabel": "Admin User ID",
+      "relatedExhibitionIDLabel": "Related Exhibition ID (optional)",
+      "nextCompetitionIDLabel": "Next Competition ID (optional)",
+      "maxParticipantsLabel": "Max Participants (optional)",
+      "cancelButton": "Cancel",
+      "updateButton": "Update",
+      "createButton": "Create"
+    }
+  },
+  "eventManagementPage": {
+    "header": {
+      "title": "Event Management",
+      "createNewEvent": "Create New Event"
+    },
+    "table": {
+      "titleColumn": "Title",
+      "dateColumn": "Date",
+      "timeColumn": "Time",
+      "typeColumn": "Type",
+      "locationColumn": "Location",
+      "actionsColumn": "Actions",
+      "editAction": "Edit",
+      "deleteAction": "Delete"
+    },
+    "modal": {
+      "editTitle": "Edit Event",
+      "createTitle": "Create Event",
+      "close": "×",
+      "titleLabel": "Title",
+      "dateLabel": "Date",
+      "timeLabel": "Time",
+      "timePlaceholder": "e.g., 10:00-14:00 BST",
+      "locationLabel": "Location",
+      "typeLabel": "Type",
+      "imageUrlLabel": "Image URL",
+      "descriptionLabel": "Description",
+      "cancelButton": "Cancel",
+      "updateButton": "Update Event",
+      "createButton": "Create Event"
+    }
+  },
+  "newsManagementPage": {
+    "header": {
+      "title": "News Management",
+      "createNewArticle": "Create News Article"
+    },
+    "table": {
+      "titleColumn": "Title",
+      "authorColumn": "Author",
+      "dateColumn": "Date",
+      "actionsColumn": "Actions",
+      "editAction": "Edit",
+      "deleteAction": "Delete"
+    },
+    "modal": {
+      "editTitle": "Edit News",
+      "createTitle": "Create News",
+      "close": "×",
+      "titleLabel": "Title",
+      "authorLabel": "Author",
+      "dateLabel": "Date",
+      "imageUrlLabel": "Image URL",
+      "summaryLabel": "Summary",
+      "contentLabel": "Content",
+      "tagsLabel": "Tags (comma-separated)",
+      "cancelButton": "Cancel",
+      "updateButton": "Update",
+      "createButton": "Create"
+    }
+  },
+  "reportsPage": {
+    "header": {
+      "title": "Reports & Analytics",
+      "subtitle": "Generate comprehensive reports for your collection"
+    },
+    "quickStats": {
+      "totalArtifacts": "Total Artifacts",
+      "publicItems": "Public Items",
+      "draftItems": "Draft Items",
+      "thisMonth": "This Month"
+    },
+    "generateReports": {
+      "title": "Generate Reports",
+      "reportTypeLabel": "Report Type",
+      "dateRangeLabel": "Date Range",
+      "dateRangeOptions": {
+        "all": "All Time",
+        "thisYear": "This Year",
+        "thisMonth": "This Month",
+        "last30Days": "Last 30 Days",
+        "custom": "Custom Range"
+      },
+      "generating": "Generating...",
+      "downloadPdf": "Download PDF",
+      "downloadExcel": "Download Excel",
+      "downloadCsv": "Download CSV"
+    },
+    "reportTemplates": {
+      "collectionSummaryReport": {
+        "title": "Collection Summary Report",
+        "description": "Complete overview of all artifacts with metadata"
+      },
+      "analyticsReport": {
+        "title": "Analytics Report",
+        "description": "Visitor engagement and popular artifacts"
+      },
+      "acquisitionReport": {
+        "title": "Acquisition Report",
+        "description": "New additions and contributor information"
+      },
+      "inventoryReport": {
+        "title": "Inventory Report",
+        "description": "Physical location and condition status"
+      },
+      "selectThisReport": "Select This Report →"
+    },
+    "reportGeneratedAlert": "Report \"{{filename}}\" has been generated and would be downloaded."
+  },
+  "artifactCard": {
+    "list": {
+      "objectType": "Object Type",
+      "collectionDate": "Collection Date",
+      "foundPlace": "Found Place",
+      "contributorName": "Contributor Name"
+    },
+    "grid": {
+      "collectionNumber": "Collection Number",
+      "viewDetails": "View Details"
+    }
+  },
+  "socialMediaAnalyticsPage": {
+    "header": {
+      "title": "Social Media Analytics"
+    },
+    "dateFilters": {
+      "today": "Today",
+      "last7Days": "Last 7 Days",
+      "last30Days": "Last 30 Days",
+      "last90Days": "Last 90 Days",
+      "customRange": "Custom Range"
+    },
+    "platformSelector": {
+      "overview": "Overview - All Platforms",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter / X",
+      "youtube": "YouTube"
+    },
+    "platformOverview": {
+      "pageLikes": "Page Likes",
+      "followers": "Followers",
+      "avgRating": "Avg Rating",
+      "engagement": "Engagement",
+      "posts": "Posts",
+      "reach": "Reach",
+      "views": "Views",
+      "videos": "Videos",
+      "following": "Following",
+      "tweets": "Tweets",
+      "subscribers": "Subscribers"
+    },
+    "platformDetail": {
+      "backToOverview": "Back to Overview",
+      "analyticsTitle": "{{platformName}} Analytics",
+      "accountOverview": "Account Overview",
+      "statusVerified": "Verified",
+      "rating": "Rating ({{reviews}} reviews)",
+      "posts30Days": "Posts (30 days)",
+      "totalLikes": "Total Likes",
+      "totalComments": "Total Comments",
+      "totalShares": "Total Shares",
+      "avgReach": "Avg. Reach",
+      "engagementRate": "Engagement Rate",
+      "impressions": "Impressions",
+      "websiteClicks": "Website Clicks",
+      "newVideos": "New Videos",
+      "newSubscribers": "New Subscribers",
+      "watchTimeGrowth": "Watch Time Growth",
+      "recentPostsPerformance": "Recent Posts Performance",
+      "totalViews": "Total Views",
+      "watchHours": "Watch Hours",
+      "listed": "Listed",
+      "profileVisits": "Profile Visits"
+    }
+  },
+  "loadingSpinner": {
+    "loadingMessage": "Loading Digital Liberation War Museum..."
+  },
+  "footer": {
+    "archiveTitle": "Liberation War Archive",
+    "archiveDescription": "Preserving the history and heritage of Bangladesh's Liberation War for future generations through digital archival excellence.",
+    "quickLinks": {
+      "title": "Quick Links",
+      "browseCollection": "Browse Collection",
+      "historicalTimeline": "Historical Timeline",
+      "digitalExhibitions": "Digital Exhibitions",
+      "researchGuidelines": "Research Guidelines"
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "address": "Liberation War Museum, Dhaka"
+    },
+    "followUs": {
+      "title": "Follow Us"
+    },
+    "copyright": "© {{year}} Liberation War Digital Archive. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "accessibility": "Accessibility"
+  },
+  "header": {
+    "logo": {
+      "title": "Liberation War",
+      "subtitle": "Digital Collection"
+    },
+    "nav": {
+      "home": "Home",
+      "history": "History",
+      "artifacts": "Artifacts",
+      "timeline": "Timeline",
+      "exhibitions": "Exhibitions",
+      "program": "Program",
+      "events": "Events",
+      "competitions": "Competitions",
+      "news": "News",
+      "virtualTour": "Virtual Tour"
+    },
+    "userMenu": {
+      "adminDashboard": "Admin Dashboard",
+      "signOut": "Sign Out",
+      "signIn": "Sign In"
+    },
+    "privateRoute": {
+      "accessDenied": "Access Denied",
+      "noPermission": "You don't have permission to access this area."
+    },
+    "virtualTourComponent": {
+      "errorLoading": "Error Loading Virtual Tour",
+      "failedToLoad": "Failed to load Google Maps. Please check your API key and internet connection.",
+      "retry": "Retry",
+      "title": "Virtual Tour",
+      "subtitle": "Explore the Bangladesh Liberation War Museum and surroundings in Street View. Click a stop to jump.",
+      "prev": "◀ Prev",
+      "play": "▶ Play",
+      "pause": "⏸ Pause",
+      "next": "Next ▶",
+      "initializing": "Initializing Google Maps…",
+      "tip": "Tip: You can drag the Street View image, or zoom with mouse/trackpad for a closer look.",
+      "defaultStops": {
+        "mainEntrance": {
+          "title": "Liberation War Museum (Main Entrance)",
+          "description": "The primary campus at Sher-e-Bangla Nagar Civic Centre, Agargaon. Explore the grounds and galleries."
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "artifact1": {
+      "contributorName": "Abdul Kalam Memorial Foundation",
+      "objectType": "Photograph",
+      "objectHead": "Victory Day Celebration at Dhaka",
+      "description": "Historic photograph capturing the moment of victory celebration in Dhaka on December 16, 1971. Shows crowds gathering at Ramna Race Course.",
+      "foundPlace": "Dhaka, Bangladesh"
+    },
+    "artifact2": {
+      "contributorName": "Bangladesh National Archives",
+      "objectType": "Document",
+      "objectHead": "Declaration of Independence Transcript",
+      "description": "Original transcript of the Declaration of Independence of Bangladesh, broadcast on March 26, 1971.",
+      "foundPlace": "Chittagong, Bangladesh"
+    },
+    "artifact3": {
+      "contributorName": "Mukti Bahini Veterans Association",
+      "objectType": "Weapon",
+      "objectHead": "G3P3-7.62 Rifle",
+      "description": "Rifle used by freedom fighters during the Liberation War. Donated by veteran freedom fighter Abdul Rahman.",
+      "foundPlace": "Jessore, Bangladesh"
+    },
+    "artifact4": {
+      "contributorName": "Bangladesh Army Museum",
+      "objectType": "Weapon",
+      "objectHead": "Sten Gun Mk II",
+      "description": "A British-designed 9mm submachine gun, widely used by the Mukti Bahini during the 1971 Liberation War due to its simplicity and effectiveness in close-quarters combat.",
+      "foundPlace": "Various battlefields, Bangladesh"
+    },
+    "artifact5": {
+      "contributorName": "Individual Freedom Fighter Collection",
+      "objectType": "Weapon",
+      "objectHead": "AK-47 Assault Rifle",
+      "description": "A Soviet-designed assault rifle, some variants of which were utilized by freedom fighters during the 1971 Liberation War, obtained through various channels. Known for its reliability and robust design.",
+      "foundPlace": "Border regions, Bangladesh"
+    }
+  },
+  "exhibitions": {
+    "exhibition1": {
+      "title": "Voices of Freedom: Personal Stories from 1971",
+      "description": "Delve into the poignant and powerful personal narratives of individuals who lived through the tumultuous 1971 Bangladesh Liberation War. This exhibition presents a curated collection of diaries, letters, oral testimonies, and rare photographs, offering an intimate glimpse into the resilience, sacrifices, and unwavering spirit of ordinary people who became extraordinary heroes. Hear the echoes of their courage, their hopes, and their enduring fight for a sovereign nation.",
+      "curatorNote": "This exhibition is a tribute to the human spirit during adversity. Through these deeply personal accounts, we aim to transcend historical facts and connect visitors with the emotional landscape of the Liberation War. Each voice, whether of a freedom fighter, a civilian, or a refugee, contributes to a rich tapestry of remembrance, ensuring that their experiences are never forgotten and continue to inspire future generations."
+    },
+    "exhibition2": {
+      "title": "Weapons of Liberation: The Arsenal of Freedom",
+      "description": "Step into the arsenal of the Mukti Bahini, where ingenuity met necessity in the fight for independence. This exhibition showcases the diverse array of weaponry, from antiquated rifles to improvised explosives, that played a crucial role in the 1971 Liberation War. Beyond the artifacts themselves, explore the stories of how these tools were acquired, adapted, and wielded by brave freedom fighters against a formidable foe. Understand the logistical challenges and the sheer determination that fueled their armed struggle.",
+      "curatorNote": "This exhibition serves as a powerful reminder of the resourcefulness and unwavering resolve of the Mukti Bahini. Each weapon on display, regardless of its origin or sophistication, embodies a piece of their struggle and sacrifice. We aim to present not just the instruments of war, but the human stories behind them—the hands that held them, the courage they represented, and the ultimate victory they helped secure for Bangladesh."
+    },
+    "exhibition3": {
+      "title": "Documents of Destiny: Official Records and Declarations",
+      "description": "Journey through the pivotal official records, declarations, and diplomatic correspondences that meticulously charted the course of Bangladesh's independence. This exhibition uncovers the profound legal, political, and international dimensions of the 1971 Liberation War. From the historic Proclamation of Independence to key treaties and resolutions, these documents reveal the intricate diplomatic efforts and the unwavering commitment to self-determination that culminated in the birth of a new nation.",
+      "curatorNote": "The documents presented here are more than mere historical artifacts; they are the bedrock of Bangladesh's sovereignty and identity. This exhibition illuminates the intellectual and strategic battles fought in the halls of power and international forums, complementing the armed struggle on the ground. By delving into these crucial papers, visitors will gain a deeper appreciation for the foundational principles and the monumental efforts that underpinned the creation of an independent Bangladesh."
+    }
+  }
+}

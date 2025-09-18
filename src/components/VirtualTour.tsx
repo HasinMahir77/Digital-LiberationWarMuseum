@@ -12,6 +12,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
+import { useTranslation } from 'react-i18next';
 
 type LatLng = { lat: number; lng: number };
 
@@ -55,7 +56,7 @@ type VirtualTourProps = {
 };
 
 // Default: Bangladesh Liberation War Museum (Agargaon campus, current site)
-const DEFAULT_STOPS: TourStop[] = [
+const DEFAULT_STOPS_ORIGINAL: TourStop[] = [
   {
     id: "lwm-main",
     title: "Liberation War Museum (Main Entrance)",
@@ -74,7 +75,7 @@ const cn = (...parts: Array<string | undefined | false>) =>
 
 export const VirtualTour: React.FC<VirtualTourProps> = ({
   apiKey,
-  stops = DEFAULT_STOPS,
+  stops = [],
   autoPlay = false,
   autoPlayIntervalMs = 5500,
   initialZoom = 17,
@@ -98,16 +99,33 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [error, setError] = useState<string | null>(null);
 
+  const { t } = useTranslation();
+
+  const processedStops = useMemo(() => {
+    if (stops.length > 0) return stops;
+    return [
+      {
+        id: "lwm-main",
+        title: t('virtualTourComponent.defaultStops.mainEntrance.title'),
+        position: { lat: 23.775728, lng: 90.369718 },
+        description: t('virtualTourComponent.defaultStops.mainEntrance.description'),
+        heading: 90,
+        pitch: 0,
+        zoom: 1,
+      },
+    ];
+  }, [stops, t]);
+
   // Bounds for fitting all stops elegantly
   const bounds = useMemo(() => {
     if (typeof google === 'undefined' || !google.maps) {
       return null;
     }
     const b = new google.maps.LatLngBounds();
-    stops.forEach((s) => b.extend(s.position));
+    processedStops.forEach((s) => b.extend(s.position));
     return b;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(stops)]);
+  }, [JSON.stringify(processedStops)]);
 
   // Initialize Google Maps + Street View
   useEffect(() => {
@@ -126,8 +144,8 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 
         // Map (hidden - only used for Street View integration)
         const map = new google.maps.Map(document.createElement('div'), {
-          center: stops.length ? stops[0].position : { lat: 23.777, lng: 90.38 },
-          zoom: stops.length === 1 ? initialZoom : 14,
+          center: processedStops.length ? processedStops[0].position : { lat: 23.777, lng: 90.38 },
+          zoom: processedStops.length === 1 ? initialZoom : 14,
           mapTypeControl: false,
           streetViewControl: false,
           fullscreenControl: false,
@@ -165,7 +183,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error("Google Maps init failed:", err);
-        setError("Failed to load Google Maps. Please check your API key and internet connection.");
+        setError(t('virtualTourComponent.failedToLoad'));
       }
     })();
 
@@ -178,13 +196,13 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
       // Let the DOM nodes be GC'd by React unmount
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiKey, autoPlay, initialZoom, mapOptions, polylineOptions, streetViewOptions, JSON.stringify(stops)]);
+  }, [apiKey, autoPlay, initialZoom, mapOptions, polylineOptions, streetViewOptions, JSON.stringify(processedStops), t]);
 
   const startAutoplay = () => {
     if (autoplayTimerRef.current) return;
     setIsPlaying(true);
     autoplayTimerRef.current = window.setInterval(() => {
-      goToStop((activeIdx + 1) % stops.length, { smooth: true });
+      goToStop((activeIdx + 1) % processedStops.length, { smooth: true });
     }, Math.max(2200, autoPlayIntervalMs));
   };
 
@@ -212,7 +230,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
     idx: number,
     opts?: { centerMap?: boolean; openInfo?: boolean; smooth?: boolean }
   ) => {
-    const s = stops[idx];
+    const s = processedStops[idx];
     const pano = panoRef.current!;
     const svc = svServiceRef.current!;
     const iw = infoWindowRef.current!;
@@ -263,21 +281,21 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
     });
   };
 
-  const handlePrev = () => goToStop((activeIdx - 1 + stops.length) % stops.length, { smooth: true });
-  const handleNext = () => goToStop((activeIdx + 1) % stops.length, { smooth: true });
+  const handlePrev = () => goToStop((activeIdx - 1 + processedStops.length) % processedStops.length, { smooth: true });
+  const handleNext = () => goToStop((activeIdx + 1) % processedStops.length, { smooth: true });
 
   // Show error state
   if (error) {
     return (
       <div className={cn("w-full h-[78vh] flex items-center justify-center", className)}>
         <div className="text-center p-8 bg-red-50 border border-red-200 rounded-2xl shadow">
-          <h3 className="text-lg font-semibold text-red-800 mb-2">Error Loading Virtual Tour</h3>
+          <h3 className="text-lg font-semibold text-red-800 mb-2">{t('virtualTourComponent.errorLoading')}</h3>
           <p className="text-red-600 mb-4">{error}</p>
           <button 
             onClick={() => window.location.reload()} 
             className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
           >
-            Retry
+            {t('virtualTourComponent.retry')}
           </button>
         </div>
       </div>
@@ -289,14 +307,14 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
       {/* Sidebar */}
       <aside className="col-span-3 bg-white/70 backdrop-blur border rounded-2xl shadow p-4 overflow-y-auto">
         <header className="mb-3">
-          <h2 className="text-xl font-semibold leading-tight">Virtual Tour</h2>
+          <h2 className="text-xl font-semibold leading-tight">{t('virtualTourComponent.title')}</h2>
           <p className="text-sm opacity-80">
-            Explore the Bangladesh Liberation War Museum and surroundings in Street View. Click a stop to jump.
+            {t('virtualTourComponent.subtitle')}
           </p>
         </header>
 
         <ul className="space-y-2">
-          {stops.map((s, i) => (
+          {processedStops.map((s, i) => (
             <li key={s.id}>
               <button
                 onClick={() => goToStop(i)}
@@ -328,7 +346,7 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
             className="px-3 py-2 rounded-xl border shadow-sm hover:shadow transition text-sm"
             aria-label="Previous stop"
           >
-            ◀ Prev
+            {t('virtualTourComponent.prev')}
           </button>
           <button
             onClick={togglePlay}
@@ -336,16 +354,16 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
               "px-3 py-2 rounded-xl border shadow-sm hover:shadow transition text-sm",
               isPlaying ? "bg-emerald-600 text-white border-emerald-600" : ""
             )}
-            aria-label={isPlaying ? "Pause tour" : "Play tour"}
+            aria-label={isPlaying ? t('virtualTourComponent.pause') : t('virtualTourComponent.play')}
           >
-            {isPlaying ? "⏸ Pause" : "▶ Play"}
+            {isPlaying ? t('virtualTourComponent.pause') : t('virtualTourComponent.play')}
           </button>
           <button
             onClick={handleNext}
             className="px-3 py-2 rounded-xl border shadow-sm hover:shadow transition text-sm"
             aria-label="Next stop"
           >
-            Next ▶
+            {t('virtualTourComponent.next')}
           </button>
         </div>
 
@@ -353,13 +371,13 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
           <div className="mt-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
             <div className="flex items-center">
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-amber-600 mr-2"></div>
-              Initializing Google Maps…
+              {t('virtualTourComponent.initializing')}
             </div>
           </div>
         )}
 
         <footer className="mt-4 text-[11px] opacity-70">
-          Tip: You can drag the Street View image, or zoom with mouse/trackpad for a closer look.
+          {t('virtualTourComponent.tip')}
         </footer>
       </aside>
 
@@ -375,11 +393,11 @@ export const VirtualTour: React.FC<VirtualTourProps> = ({
 function escapeHtml(str: string) {
   return str.replace(/[&<>"']/g, (m) => {
     switch (m) {
-      case "&": return "&amp;";
-      case "<": return "&lt;";
-      case ">": return "&gt;";
-      case '"': return "&quot;";
-      case "'": return "&#39;";
+      case "&": return "&amp";
+      case "<": return "&lt";
+      case ">": return "&gt";
+      case '"': return "&quot";
+      case "'": return "&#39";
       default: return m;
     }
   });

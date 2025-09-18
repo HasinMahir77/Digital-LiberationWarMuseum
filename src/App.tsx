@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
@@ -16,15 +16,28 @@ import LoginPage from './pages/auth/LoginPage';
 import PrivateRoute from './components/auth/PrivateRoute';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import { AnimatePresence, motion } from 'framer-motion';
-import CompetitionsPage from './pages/CompetitionsPage'; // Import the new CompetitionsPage
-import CompetitionDetailPage from './pages/CompetitionDetailPage'; // Import the new CompetitionDetailPage
-import NewsPage from './pages/NewsPage'; // Import the new NewsPage
-import EventsPage from './pages/EventsPage'; // Import the new EventsPage
-import EventDetailPage from './pages/EventDetailPage'; // Import the new EventDetailPage
-import NewsDetailPage from './pages/NewsDetailPage'; // Import the new NewsDetailPage
+import CompetitionsPage from './pages/CompetitionsPage';
+import CompetitionDetailPage from './pages/CompetitionDetailPage';
+import NewsPage from './pages/NewsPage';
+import EventsPage from './pages/EventsPage';
+import EventDetailPage from './pages/EventDetailPage';
+import NewsDetailPage from './pages/NewsDetailPage';
+import { useTranslation } from 'react-i18next';
+// Admin Pages
+import ArtifactManagement from './pages/admin/ArtifactManagement';
+import UserManagement from './pages/admin/UserManagement';
+import ReportsPage from './pages/admin/ReportsPage';
+import AddArtifactPage from './pages/admin/AddArtifactPage';
+import CreateExhibitionPage from './pages/admin/CreateExhibitionPage';
+import CompetitionManagementPage from './pages/admin/CompetitionManagementPage';
+import SocialMediaAnalyticsPage from './pages/admin/SocialMediaAnalyticsPage';
+import EventManagementPage from './pages/admin/EventManagementPage';
+import NewsManagementPage from './pages/admin/NewsManagementPage';
+import AdminOverviewPage from './pages/admin/AdminOverviewPage';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation(); // Add this line to define 't'
 
   useEffect(() => {
     // Simulate initial app loading
@@ -41,7 +54,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <DataProvider>
+      <DataProvider t={t}>
         <Router>
           <AppContent />
         </Router>
@@ -52,6 +65,7 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
+  const { t } = useTranslation(); // Get the t function from useTranslation
 
   return (
     <div className="flex flex-col">
@@ -242,20 +256,24 @@ function AppContent() {
               }
             />
             <Route
-              path="/admin/*"
+              path="/admin"
               element={
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <PrivateRoute requiredRole="archivist">
-                    <AdminDashboard />
-                  </PrivateRoute>
-                </motion.div>
+                <PrivateRoute requiredRole="archivist">
+                  <AdminDashboard />
+                </PrivateRoute>
               }
-            />
+            >
+              <Route index element={<AdminOverviewPage />} />
+              <Route path="artifacts" element={<ArtifactManagement />} />
+              <Route path="add-artifact" element={<AddArtifactPage />} />
+              <Route path="create-exhibition" element={<CreateExhibitionPage />} />
+              <Route path="users" element={<UserManagement />} />
+              <Route path="reports" element={<ReportsPage />} />
+              <Route path="competition-management" element={<CompetitionManagementPage />} />
+              <Route path="event-management" element={<EventManagementPage />} />
+              <Route path="news-management" element={<NewsManagementPage />} />
+              <Route path="social-media-analytics" element={<SocialMediaAnalyticsPage />} />
+            </Route>
           </Routes>
         </AnimatePresence>
       </main>

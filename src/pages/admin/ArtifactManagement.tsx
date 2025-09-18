@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Edit, Trash2, Eye, EyeOff, Plus, Search } from 'lucide-react';
 import { useData } from '../../contexts/DataContext';
+import { useTranslation } from 'react-i18next';
 
 const ArtifactManagement: React.FC = () => {
   const { artifacts, updateArtifact, deleteArtifact } = useData();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const { t } = useTranslation();
 
   const filteredArtifacts = artifacts.filter(artifact => {
     const matchesSearch = artifact.objectHead.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -22,7 +24,7 @@ const ArtifactManagement: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-    if (window.confirm('Are you sure you want to delete this artifact? This action cannot be undone.')) {
+    if (window.confirm(t('artifactManagementPage.confirmDelete'))) {
       deleteArtifact(id);
     }
   };
@@ -32,15 +34,15 @@ const ArtifactManagement: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Artifact Management</h1>
-          <p className="text-gray-600">Manage your digital collection items</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('artifactManagementPage.header.title')}</h1>
+          <p className="text-gray-600">{t('artifactManagementPage.header.subtitle')}</p>
         </div>
         <Link
           to="/admin/add-artifact"
           className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition-colors inline-flex items-center"
         >
           <Plus className="w-4 h-4 mr-2" />
-          Add New Artifact
+          {t('artifactManagementPage.header.addNewArtifact')}
         </Link>
       </div>
 
@@ -53,7 +55,7 @@ const ArtifactManagement: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search artifacts..."
+                placeholder={t('artifactManagementPage.filters.placeholder')}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -65,9 +67,9 @@ const ArtifactManagement: React.FC = () => {
               onChange={(e) => setFilterStatus(e.target.value)}
               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
             >
-              <option value="all">All Status</option>
-              <option value="public">Public</option>
-              <option value="draft">Draft</option>
+              <option value="all">{t('artifactManagementPage.filters.allStatus')}</option>
+              <option value="public">{t('artifactManagementPage.filters.public')}</option>
+              <option value="draft">{t('artifactManagementPage.filters.draft')}</option>
             </select>
           </div>
         </div>
@@ -80,19 +82,19 @@ const ArtifactManagement: React.FC = () => {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Artifact
+                  {t('artifactManagementPage.table.artifactColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Collection Info
+                  {t('artifactManagementPage.table.collectionInfoColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  {t('artifactManagementPage.table.statusColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date Added
+                  {t('artifactManagementPage.table.dateAddedColumn')}
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  {t('artifactManagementPage.table.actionsColumn')}
                 </th>
               </tr>
             </thead>
@@ -124,7 +126,7 @@ const ArtifactManagement: React.FC = () => {
                         ? 'bg-green-100 text-green-800'
                         : 'bg-yellow-100 text-yellow-800'
                     }`}>
-                      {artifact.isPublic ? 'Public' : 'Draft'}
+                      {artifact.isPublic ? t('artifactManagementPage.table.publicStatus') : t('artifactManagementPage.table.draftStatus')}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">
@@ -135,27 +137,27 @@ const ArtifactManagement: React.FC = () => {
                       <Link
                         to={`/artifact/${artifact.id}`}
                         className="text-gray-400 hover:text-gray-600 transition-colors"
-                        title="View"
+                        title={t('artifactManagementPage.table.viewAction')}
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
                       <button
                         onClick={() => togglePublicStatus(artifact.id, artifact.isPublic)}
                         className="text-gray-400 hover:text-green-600 transition-colors"
-                        title={artifact.isPublic ? 'Make Private' : 'Make Public'}
+                        title={artifact.isPublic ? t('artifactManagementPage.table.makePrivateAction') : t('artifactManagementPage.table.makePublicAction')}
                       >
                         {artifact.isPublic ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                       <button
                         className="text-gray-400 hover:text-blue-600 transition-colors"
-                        title="Edit"
+                        title={t('artifactManagementPage.table.editAction')}
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(artifact.id)}
                         className="text-gray-400 hover:text-red-600 transition-colors"
-                        title="Delete"
+                        title={t('artifactManagementPage.table.deleteAction')}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
+import { useTranslation } from 'react-i18next';
 
 const NewsPage: React.FC = () => {
   const { news } = useData();
+  const { t } = useTranslation();
 
   // For now, we will use the news from DataContext. Notices will be integrated later if needed.
   // Filtering logic will be added here in the future.
@@ -14,7 +16,7 @@ const NewsPage: React.FC = () => {
       <section className="relative h-48 flex items-center mb-8">
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
-          <h1 className="text-4xl font-bold text-white">News & Notices</h1>
+          <h1 className="text-4xl font-bold text-white">{t('newsPage.title')}</h1>
         </div>
       </section>
 
@@ -50,10 +52,10 @@ const NewsPage: React.FC = () => {
               key={newsItem.id}
               className="block bg-gray-800 bg-opacity-70 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
-              <img src={newsItem.imageUrl} alt={newsItem.title} className="w-full h-48 object-cover" />
+              <img src={newsItem.imageUrl} alt={t(newsItem.title)} className="w-full h-48 object-cover" />
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-white hover:text-green-400 transition-colors">{newsItem.title}</h3>
-                <p className="text-gray-200 text-sm mb-4 line-clamp-3">{newsItem.summary}</p>
+                <h3 className="text-xl font-semibold mb-2 text-white hover:text-green-400 transition-colors">{t(newsItem.title)}</h3>
+                <p className="text-gray-200 text-sm mb-4 line-clamp-3">{t(newsItem.summary)}</p>
                 <time className="text-gray-400 text-xs">{new Date(newsItem.date).toLocaleDateString()}</time>
               </div>
             </Link>
@@ -77,11 +79,11 @@ const NewsPage: React.FC = () => {
         {/* Pagination - Simplified for now */}
         <nav className="flex justify-center mt-12">
           <ul className="flex items-center space-x-2">
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">Prev</a></li>
+            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.prev')}</a></li>
             <li><a href="#" className="px-4 py-2 border border-green-600 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors">1</a></li>
             <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">2</a></li>
             <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">3</a></li>
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">Next</a></li>
+            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.next')}</a></li>
           </ul>
         </nav>
       </div>

@@ -4,12 +4,14 @@ import { ArrowLeft, CalendarDays, Eye, GalleryVertical, BookOpenText } from 'luc
 import { exhibitions } from '../exhibitionData'; // Import the centralized data
 import { Exhibition } from '../types'; // Import the Exhibition interface
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import { useTranslation } from 'react-i18next';
 
 const ExhibitionDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [exhibition, setExhibition] = React.useState<Exhibition | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     // Simulate fetching data
@@ -21,10 +23,10 @@ const ExhibitionDetailPage: React.FC = () => {
         if (foundExhibition) {
           setExhibition(foundExhibition);
         } else {
-          setError('Exhibition not found');
+          setError(t('exhibitionDetailPage.notFound.message'));
         }
       } catch (err) {
-        setError('Failed to load exhibition');
+        setError(t('exhibitionDetailPage.error.message'));
         console.error(err);
       } finally {
         setLoading(false);
@@ -32,7 +34,7 @@ const ExhibitionDetailPage: React.FC = () => {
     };
 
     fetchExhibition();
-  }, [id]);
+  }, [id, t]);
 
   if (loading) {
     return (
@@ -43,11 +45,11 @@ const ExhibitionDetailPage: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6 text-red-400">
-        <h2 className="text-2xl font-bold mb-4">Error</h2>
+        <h2 className="text-2xl font-bold mb-4">{t('exhibitionDetailPage.error.title')}</h2>
         <p className="text-lg mb-6">{error}</p>
         <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Exhibitions
+          {t('exhibitionDetailPage.error.backButton')}
         </Link>
       </div>
     );
@@ -56,11 +58,11 @@ const ExhibitionDetailPage: React.FC = () => {
   if (!exhibition) {
     return (
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6">
-        <h2 className="text-2xl font-bold mb-4 text-white">Exhibition Not Found</h2>
-        <p className="text-lg mb-6 text-gray-200">The exhibition you are looking for does not exist.</p>
+        <h2 className="text-2xl font-bold mb-4 text-white">{t('exhibitionDetailPage.notFound.title')}</h2>
+        <p className="text-lg mb-6 text-gray-200">{t('exhibitionDetailPage.notFound.message')}</p>
         <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Exhibitions
+          {t('exhibitionDetailPage.notFound.backButton')}
         </Link>
       </div>
     );
@@ -74,7 +76,7 @@ const ExhibitionDetailPage: React.FC = () => {
           className="inline-flex items-center text-green-700 hover:text-green-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to All Exhibitions
+          {t('exhibitionDetailPage.backToAllExhibitions')}
         </Link>
 
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -94,11 +96,11 @@ const ExhibitionDetailPage: React.FC = () => {
               </span>
               <span className="flex items-center">
                 <Eye className="w-4 h-4 mr-1" />
-                {exhibition.viewCount.toLocaleString()} Views
+                {t('exhibitionDetailPage.views', { count: exhibition.viewCount })}
               </span>
               <span className="flex items-center">
                 <GalleryVertical className="w-4 h-4 mr-1" />
-                {exhibition.artifactCount} Artifacts
+                {t('exhibitionDetailPage.artifacts', { count: exhibition.artifactCount })}
               </span>
             </div>
 
@@ -109,7 +111,7 @@ const ExhibitionDetailPage: React.FC = () => {
             <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-8">
               <h3 className="text-xl font-semibold text-green-800 flex items-center mb-3">
                 <BookOpenText className="w-6 h-6 mr-2" />
-                Curator's Note
+                {t('exhibitionDetailPage.curatorNote')}
               </h3>
               <p className="text-green-700 italic">
                 "{exhibition.curatorNote}"
@@ -118,8 +120,8 @@ const ExhibitionDetailPage: React.FC = () => {
 
             {/* Placeholder for artifacts section - to be implemented later */}
             <div className="mt-10 pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Artifacts in this Exhibition</h2>
-              <p className="text-gray-600">Artifacts related to this exhibition will be displayed here.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('exhibitionDetailPage.artifactsInExhibition.title')}</h2>
+              <p className="text-gray-600">{t('exhibitionDetailPage.artifactsInExhibition.message')}</p>
             </div>
           </div>
         </div>

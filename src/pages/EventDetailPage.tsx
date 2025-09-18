@@ -4,6 +4,7 @@ import newlyBuiltLiberation from '../assets/images/newly-built-liberation.jpg';
 import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
 import victoryBackground from '../assets/images/victory.jpg';
+import { useTranslation } from 'react-i18next';
 
 // Assuming Event interface and sampleEvents are defined in EventsPage.tsx or a shared types file
 // For now, I'll copy the interface and a simplified version of sampleEvents here
@@ -96,6 +97,7 @@ const sampleEvents: Event[] = [
 const EventDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const event = sampleEvents.find(e => e.id === id);
+  const { t } = useTranslation();
 
   if (!event) {
     return (
@@ -106,10 +108,10 @@ const EventDetailPage: React.FC = () => {
         }}
       >
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-white text-center bg-gray-800 bg-opacity-60 rounded-lg p-8">
-          <h1 className="text-4xl font-bold mb-4">Event Not Found</h1>
-          <p className="text-lg">The event you are looking for does not exist.</p>
+          <h1 className="text-4xl font-bold mb-4">{t('eventDetailPage.notFound.title')}</h1>
+          <p className="text-lg">{t('eventDetailPage.notFound.message')}</p>
           <Link to="/events" className="mt-4 inline-block bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-800 transition-colors">
-            Back to Events
+            {t('eventDetailPage.notFound.backButton')}
           </Link>
         </div>
       </div>
@@ -126,7 +128,7 @@ const EventDetailPage: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-8 md:p-12">
           <Link to="/events" className="inline-block text-green-400 hover:text-green-500 transition-colors mb-6 text-lg font-medium">
-            &larr; Back to All Events
+            &larr; {t('eventDetailPage.backToAllEvents')}
           </Link>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center md:text-left">{event.title}</h1>
           
@@ -144,20 +146,20 @@ const EventDetailPage: React.FC = () => {
             <div className="md:w-1/2 flex flex-col justify-between">
               <div className="grid grid-cols-1 gap-4 mb-8 text-gray-200">
                 <div>
-                  <p className="font-semibold text-lg">Date:</p>
+                  <p className="font-semibold text-lg">{t('eventDetailPage.details.date')}</p>
                   <p className="text-md">{event.date}</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-lg">Time:</p>
+                  <p className="font-semibold text-lg">{t('eventDetailPage.details.time')}</p>
                   <p className="text-md">{event.time}</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-lg">Location:</p>
+                  <p className="font-semibold text-lg">{t('eventDetailPage.details.location')}</p>
                   <p className="text-md">{event.location}</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-lg">Event Type:</p>
-                  <p className="text-md capitalize">{event.type}</p>
+                  <p className="font-semibold text-lg">{t('eventDetailPage.details.eventType')}</p>
+                  <p className="text-md capitalize">{t(`eventsPage.eventTypes.${event.type.replace(/ /g, '').replace(/&/g, 'And').toLowerCase()}`)}</p>
                 </div>
               </div>
 

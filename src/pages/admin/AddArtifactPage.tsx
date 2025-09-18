@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Upload, X, Plus } from 'lucide-react';
 import { useData } from '../../contexts/DataContext';
+import { useTranslation } from 'react-i18next';
 
 const AddArtifactPage: React.FC = () => {
   const { addArtifact } = useData();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const [formData, setFormData] = useState({
     collectionNumber: '',
@@ -78,19 +80,19 @@ const AddArtifactPage: React.FC = () => {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Add New Artifact</h1>
-        <p className="text-gray-600">Enter complete information for the new artifact</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('addArtifactPage.header.title')}</h1>
+        <p className="text-gray-600">{t('addArtifactPage.header.subtitle')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Basic Information */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Basic Information</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">{t('addArtifactPage.basicInformation.title')}</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Collection Number *
+                  {t('addArtifactPage.basicInformation.collectionNumber')}
                 </label>
                 <input
                   type="text"
@@ -99,13 +101,13 @@ const AddArtifactPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="LW-001"
+                  placeholder={t('addArtifactPage.basicInformation.collectionNumberPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Accession Number *
+                  {t('addArtifactPage.basicInformation.accessionNumber')}
                 </label>
                 <input
                   type="text"
@@ -114,13 +116,13 @@ const AddArtifactPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="ACC-1971-001"
+                  placeholder={t('addArtifactPage.basicInformation.accessionNumberPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Collection Date *
+                  {t('addArtifactPage.basicInformation.collectionDate')}
                 </label>
                 <input
                   type="date"
@@ -134,7 +136,7 @@ const AddArtifactPage: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Object Type *
+                  {t('addArtifactPage.basicInformation.objectType')}
                 </label>
                 <select
                   name="objectType"
@@ -143,23 +145,23 @@ const AddArtifactPage: React.FC = () => {
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
                 >
-                  <option value="">Select Type</option>
-                  <option value="Photograph">Photograph</option>
-                  <option value="Document">Document</option>
-                  <option value="Weapon">Weapon</option>
-                  <option value="Uniform">Uniform</option>
-                  <option value="Letter">Letter</option>
-                  <option value="Medal">Medal</option>
-                  <option value="Map">Map</option>
-                  <option value="Audio Recording">Audio Recording</option>
-                  <option value="Video">Video</option>
-                  <option value="Other">Other</option>
+                  <option value="">{t('addArtifactPage.basicInformation.selectType')}</option>
+                  <option value="Photograph">{t('addArtifactPage.basicInformation.objectTypes.photograph')}</option>
+                  <option value="Document">{t('addArtifactPage.basicInformation.objectTypes.document')}</option>
+                  <option value="Weapon">{t('addArtifactPage.basicInformation.objectTypes.weapon')}</option>
+                  <option value="Uniform">{t('addArtifactPage.basicInformation.objectTypes.uniform')}</option>
+                  <option value="Letter">{t('addArtifactPage.basicInformation.objectTypes.letter')}</option>
+                  <option value="Medal">{t('addArtifactPage.basicInformation.objectTypes.medal')}</option>
+                  <option value="Map">{t('addArtifactPage.basicInformation.objectTypes.map')}</option>
+                  <option value="Audio Recording">{t('addArtifactPage.basicInformation.objectTypes.audioRecording')}</option>
+                  <option value="Video">{t('addArtifactPage.basicInformation.objectTypes.video')}</option>
+                  <option value="Other">{t('addArtifactPage.basicInformation.objectTypes.other')}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Object Head (Title) *
+                  {t('addArtifactPage.basicInformation.objectHead')}
                 </label>
                 <input
                   type="text"
@@ -168,13 +170,13 @@ const AddArtifactPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="Enter a descriptive title"
+                  placeholder={t('addArtifactPage.basicInformation.objectHeadPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Description *
+                  {t('addArtifactPage.basicInformation.description')}
                 </label>
                 <textarea
                   name="description"
@@ -183,7 +185,7 @@ const AddArtifactPage: React.FC = () => {
                   required
                   rows={4}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="Detailed description of the artifact"
+                  placeholder={t('addArtifactPage.basicInformation.descriptionPlaceholder')}
                 />
               </div>
             </div>
@@ -191,11 +193,11 @@ const AddArtifactPage: React.FC = () => {
 
           {/* Additional Details */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Additional Details</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">{t('addArtifactPage.additionalDetails.title')}</h2>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Contributor Name *
+                  {t('addArtifactPage.additionalDetails.contributorName')}
                 </label>
                 <input
                   type="text"
@@ -204,13 +206,13 @@ const AddArtifactPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="Name of person or organization"
+                  placeholder={t('addArtifactPage.additionalDetails.contributorNamePlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Measurement
+                  {t('addArtifactPage.additionalDetails.measurement')}
                 </label>
                 <input
                   type="text"
@@ -218,13 +220,13 @@ const AddArtifactPage: React.FC = () => {
                   value={formData.measurement}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="e.g., 8 x 10 inches"
+                  placeholder={t('addArtifactPage.additionalDetails.measurementPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Gallery Number
+                  {t('addArtifactPage.additionalDetails.galleryNumber')}
                 </label>
                 <input
                   type="text"
@@ -232,13 +234,13 @@ const AddArtifactPage: React.FC = () => {
                   value={formData.galleryNumber}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="G-01"
+                  placeholder={t('addArtifactPage.additionalDetails.galleryNumberPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Found Place *
+                  {t('addArtifactPage.additionalDetails.foundPlace')}
                 </label>
                 <input
                   type="text"
@@ -247,13 +249,13 @@ const AddArtifactPage: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="Location where artifact was found"
+                  placeholder={t('addArtifactPage.additionalDetails.foundPlacePlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Experiment Formula
+                  {t('addArtifactPage.additionalDetails.experimentFormula')}
                 </label>
                 <input
                   type="text"
@@ -261,13 +263,13 @@ const AddArtifactPage: React.FC = () => {
                   value={formData.experimentFormula}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="If applicable"
+                  placeholder={t('addArtifactPage.additionalDetails.experimentFormulaPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tags
+                  {t('addArtifactPage.additionalDetails.tags')}
                 </label>
                 <input
                   type="text"
@@ -275,7 +277,7 @@ const AddArtifactPage: React.FC = () => {
                   value={formData.tags}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                  placeholder="Comma-separated tags"
+                  placeholder={t('addArtifactPage.additionalDetails.tagsPlaceholder')}
                 />
               </div>
             </div>
@@ -284,7 +286,7 @@ const AddArtifactPage: React.FC = () => {
 
         {/* Images */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Images</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">{t('addArtifactPage.images.title')}</h2>
           <div className="space-y-4">
             {imageUrls.map((url, index) => (
               <div key={index} className="flex items-center space-x-3">
@@ -293,7 +295,7 @@ const AddArtifactPage: React.FC = () => {
                     type="url"
                     value={url}
                     onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                    placeholder="Enter image URL"
+                    placeholder={t('addArtifactPage.images.imageUrlPlaceholder')}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
                   />
                 </div>
@@ -314,18 +316,18 @@ const AddArtifactPage: React.FC = () => {
               className="flex items-center space-x-2 text-green-700 hover:text-green-800 transition-colors text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
-              <span>Add Another Image</span>
+              <span>{t('addArtifactPage.images.addAnotherImage')}</span>
             </button>
           </div>
         </div>
 
         {/* Significance & Notes */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Significance & Notes</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">{t('addArtifactPage.significanceAndNotes.title')}</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Significance Comment *
+                {t('addArtifactPage.significanceAndNotes.significanceComment')}
               </label>
               <textarea
                 name="significanceComment"
@@ -334,13 +336,13 @@ const AddArtifactPage: React.FC = () => {
                 required
                 rows={3}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                placeholder="Explain the historical significance of this artifact"
+                placeholder={t('addArtifactPage.significanceAndNotes.significanceCommentPlaceholder')}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Correction Notes
+                {t('addArtifactPage.significanceAndNotes.correctionNotes')}
               </label>
               <textarea
                 name="correction"
@@ -348,7 +350,7 @@ const AddArtifactPage: React.FC = () => {
                 onChange={handleInputChange}
                 rows={2}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
-                placeholder="Any corrections or additional notes"
+                placeholder={t('addArtifactPage.significanceAndNotes.correctionNotesPlaceholder')}
               />
             </div>
           </div>
@@ -356,7 +358,7 @@ const AddArtifactPage: React.FC = () => {
 
         {/* Publication Settings */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Publication Settings</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">{t('addArtifactPage.publicationSettings.title')}</h2>
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -367,11 +369,11 @@ const AddArtifactPage: React.FC = () => {
               className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
             />
             <label htmlFor="isPublic" className="ml-2 block text-sm text-gray-900">
-              Make this artifact publicly visible
+              {t('addArtifactPage.publicationSettings.makePublic')}
             </label>
           </div>
           <p className="mt-2 text-sm text-gray-600">
-            Unchecked items will be saved as drafts and visible only to administrators
+            {t('addArtifactPage.publicationSettings.draftMessage')}
           </p>
         </div>
 
@@ -382,14 +384,14 @@ const AddArtifactPage: React.FC = () => {
             onClick={() => navigate('/admin/artifacts')}
             className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
           >
-            Cancel
+            {t('addArtifactPage.actions.cancel')}
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
             className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Adding...' : 'Add Artifact'}
+            {isSubmitting ? t('addArtifactPage.actions.adding') : t('addArtifactPage.actions.addArtifact')}
           </button>
         </div>
       </form>

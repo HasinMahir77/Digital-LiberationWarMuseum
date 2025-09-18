@@ -4,6 +4,7 @@ import newlyBuiltLiberation from '../assets/images/newly-built-liberation.jpg';
 import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
 import victoryBackground from '../assets/images/victory.jpg';
+import { useTranslation } from 'react-i18next';
 
 interface Event {
   id: string;
@@ -19,72 +20,72 @@ interface Event {
 const sampleEvents: Event[] = [
   {
     id: '1',
-    title: 'Victory Day Celebration: Remembering Our Heroes',
-    date: 'December 16, 2025',
-    time: '10:00am – 2:00pm BST',
-    location: 'Museum Main Hall & Online',
-    type: 'Festivals and Event Series',
-    description: 'A grand celebration to honor the martyrs and freedom fighters of the Liberation War. Featuring speeches, cultural performances, and a special exhibition.',
+    title: 'eventsPage.events.event1.title',
+    date: '2025-12-16',
+    time: 'eventsPage.events.event1.time',
+    location: 'eventsPage.events.event1.location',
+    type: 'festivalsandeventseries', // Changed to translation key
+    description: 'eventsPage.events.event1.description',
     imageUrl: newlyBuiltLiberation,
   },
   {
     id: '2',
-    title: 'Oral Histories Project: Share Your Story',
-    date: 'November 5, 2025',
-    time: '10:00am – 4:00pm BST',
-    location: 'Museum Archive Wing',
-    type: 'Workshops & Talks',
-    description: 'An opportunity for freedom fighters, their families, and witnesses to share their personal stories and contribute to the museum\'s oral history collection.',
+    title: 'eventsPage.events.event2.title',
+    date: '2025-11-05',
+    time: 'eventsPage.events.event2.time',
+    location: 'eventsPage.events.event2.location',
+    type: 'workshopsandtalks', // Changed to translation key
+    description: 'eventsPage.events.event2.description',
     imageUrl: image687,
   },
   {
     id: '3',
-    title: 'Exhibition Opening: Women in the War',
-    date: 'October 27, 2025',
-    time: '3:00pm – 5:00pm BST',
-    location: 'Temporary Exhibition Gallery',
-    type: 'Exhibitions',
-    description: 'Opening of a new exhibition highlighting the invaluable contributions and sacrifices of women during the Liberation War.',
+    date: '2025-10-27',
+    title: 'eventsPage.events.event3.title',
+    time: 'eventsPage.events.event3.time',
+    location: 'eventsPage.events.event3.location',
+    type: 'exhibitions', // Changed to translation key
+    description: 'eventsPage.events.event3.description',
     imageUrl: image543,
   },
   {
     id: '4',
-    title: 'Documentary Screening: The Birth of a Nation',
-    date: 'October 10, 2025',
-    time: '6:00pm – 8:00pm BST',
-    location: 'Museum Auditorium',
-    type: 'Film Screening',
-    description: 'A special screening of a critically acclaimed documentary on the historical events leading to the independence of Bangladesh.',
+    date: '2025-10-10',
+    title: 'eventsPage.events.event4.title',
+    time: 'eventsPage.events.event4.time',
+    location: 'eventsPage.events.event4.location',
+    type: 'filmscreening', // Changed to translation key
+    description: 'eventsPage.events.event4.description',
     imageUrl: newlyBuiltLiberation,
   },
   {
     id: '5',
-    title: 'Youth Education Workshop: Our History, Our Future',
-    date: 'September 22, 2025',
-    time: '9:00am – 1:00pm BST',
-    location: 'Educational Center',
-    type: 'Kids & Families',
-    description: 'An interactive workshop for young students to learn about the Liberation War through engaging activities and discussions.',
+    date: '2025-09-22',
+    title: 'eventsPage.events.event5.title',
+    time: 'eventsPage.events.event5.time',
+    location: 'eventsPage.events.event5.location',
+    type: 'kidsandfamilies', // Changed to translation key
+    description: 'eventsPage.events.event5.description',
     imageUrl: image687,
   },
   {
     id: '6',
-    title: 'Seminar: International Support for Bangladesh\'s Liberation',
-    date: 'September 5, 2025',
-    time: '2:00pm – 4:00pm BST',
-    location: 'Conference Hall & Online',
-    type: 'Webcasts & Online',
-    description: 'A seminar discussing the crucial international support and diplomatic efforts that aided Bangladesh during its fight for freedom.',
+    date: '2025-09-05',
+    title: 'eventsPage.events.event6.title',
+    time: 'eventsPage.events.event6.time',
+    location: 'eventsPage.events.event6.location',
+    type: 'webcastsandonline', // Changed to translation key
+    description: 'eventsPage.events.event6.description',
     imageUrl: image543,
   },
   {
     id: '7',
-    title: 'Photo Exhibition: Faces of Freedom',
-    date: 'August 15, 2025',
-    time: '10:00am – 5:00pm BST',
-    location: 'Gallery I',
-    type: 'Exhibitions',
-    description: 'A powerful photographic journey showcasing the individuals who participated in and were affected by the Liberation War.',
+    date: '2025-08-15',
+    title: 'eventsPage.events.event7.title',
+    time: 'eventsPage.events.event7.time',
+    location: 'eventsPage.events.event7.location',
+    type: 'exhibitions', // Changed to translation key
+    description: 'eventsPage.events.event7.description',
     imageUrl: newlyBuiltLiberation,
   },
 ];
@@ -92,10 +93,11 @@ const sampleEvents: Event[] = [
 const EventsPage: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string[]>([]);
   const [selectedEventType, setSelectedEventType] = useState<string[]>([]);
+  const { t, i18n } = useTranslation();
 
   const getMonthFromDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleString('default', { month: 'long' });
+    return date.toLocaleString(i18n.language === 'bn' ? 'bn-BD' : 'default', { month: 'long' });
   };
 
   const filterEvents = () => {
@@ -129,15 +131,15 @@ const EventsPage: React.FC = () => {
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-8 text-white bg-gray-800 bg-opacity-60 rounded-lg p-4">Upcoming Events</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 text-white bg-gray-800 bg-opacity-60 rounded-lg p-4">{t('eventsPage.hero.title')}</h1>
 
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar for Filters */}
           <div className="md:w-1/4 bg-gray-800 bg-opacity-70 rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-white">Filters</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-white">{t('eventsPage.filters.title')}</h2>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Filter by Month</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('eventsPage.filters.byMonth')}</label>
                 <div className="space-y-2">
                   {months.map(month => (
                     <div key={month} className="flex items-center">
@@ -157,7 +159,7 @@ const EventsPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Filter by Event Type</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('eventsPage.filters.byEventType')}</label>
                 <div className="space-y-2">
                   {eventTypes.map(type => (
                     <div key={type} className="flex items-center">
@@ -170,7 +172,7 @@ const EventsPage: React.FC = () => {
                         onChange={() => handleEventTypeChange(type)}
                         className="h-4 w-4 text-green-500 border-gray-600 rounded focus:ring-green-500 bg-gray-700"
                       />
-                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-200 capitalize">{type}</label>
+                      <label htmlFor={`type-${type}`} className="ml-2 text-sm text-gray-200 capitalize">{t(`eventsPage.eventTypes.${type}`)}</label>
                     </div>
                   ))}
                 </div>
@@ -181,30 +183,30 @@ const EventsPage: React.FC = () => {
           {/* Main Content Area for Events */}
           <div className="md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filterEvents().map(event => (
+              {filterEvents().map((event, index) => (
                 <div key={event.id} className="bg-gray-800 bg-opacity-70 rounded-lg shadow-md overflow-hidden">
                   {event.imageUrl && (
-                    <img src={event.imageUrl} alt={event.title} className="w-full h-48 object-cover" />
+                    <img src={event.imageUrl} alt={t(`eventsPage.events.event${index + 1}.title`)} className="w-full h-48 object-cover" />
                   )}
                   <div className="p-6">
                     <h2 className="text-xl font-semibold mb-2">
                       <Link to={`/events/${event.id}`} className="hover:text-green-400 text-white">
-                        {event.title}
+                        {t(`eventsPage.events.event${index + 1}.title`)}
                       </Link>
                     </h2>
                     <p className="text-gray-200 mb-1">
-                      <span className="font-medium">Date:</span> {event.date}
+                      <span className="font-medium">{t('eventsPage.eventDetails.date')}</span> {new Date(event.date).toLocaleDateString(i18n.language)}
                     </p>
                     <p className="text-gray-200 mb-1">
-                      <span className="font-medium">Time:</span> {event.time}
+                      <span className="font-medium">{t('eventsPage.eventDetails.time')}</span> {t(event.time)}
                     </p>
                     <p className="text-gray-200 mb-1">
-                      <span className="font-medium">Location:</span> {event.location}
+                      <span className="font-medium">{t('eventsPage.eventDetails.location')}</span> {t(`eventsPage.events.event${index + 1}.location`)}
                     </p>
                     <p className="text-gray-200 mb-4">
-                      <span className="font-medium">Type:</span> {event.type}
+                      <span className="font-medium">{t('eventsPage.eventDetails.type')}</span> {t(`eventsPage.eventTypes.${event.type}`)}
                     </p>
-                    <p className="text-gray-200">{event.description}</p>
+                    <p className="text-gray-200">{t(`eventsPage.events.event${index + 1}.description`)}</p>
                   </div>
                 </div>
               ))}

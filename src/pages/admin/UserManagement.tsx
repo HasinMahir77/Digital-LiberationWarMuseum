@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Search, Shield, User } from 'lucide-react';
 import { UserRole } from '../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 interface User {
   id: string;
@@ -16,6 +17,7 @@ const UserManagement: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRole, setFilterRole] = useState('all');
   const [showAddUser, setShowAddUser] = useState(false);
+  const { t } = useTranslation();
 
   const users: User[] = [
     {
@@ -81,15 +83,15 @@ const UserManagement: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">User Management</h1>
-          <p className="text-gray-600">Manage user accounts and permissions</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('userManagementPage.header.title')}</h1>
+          <p className="text-gray-600">{t('userManagementPage.header.subtitle')}</p>
         </div>
         <button
           onClick={() => setShowAddUser(true)}
           className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition-colors inline-flex items-center"
         >
           <Plus className="w-4 h-4 mr-2" />
-          Add New User
+          {t('userManagementPage.header.addNewUser')}
         </button>
       </div>
 
@@ -102,7 +104,7 @@ const UserManagement: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search users by name or email..."
+                placeholder={t('userManagementPage.filters.placeholder')}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -114,11 +116,11 @@ const UserManagement: React.FC = () => {
               onChange={(e) => setFilterRole(e.target.value)}
               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
             >
-              <option value="all">All Roles</option>
-              <option value="super_admin">Super Admin</option>
-              <option value="archivist">Archivist</option>
-              <option value="curator">Curator</option>
-              <option value="researcher">Researcher</option>
+              <option value="all">{t('userManagementPage.filters.allRoles')}</option>
+              <option value="super_admin">{t('userManagementPage.roles.super_admin')}</option>
+              <option value="archivist">{t('userManagementPage.roles.archivist')}</option>
+              <option value="curator">{t('userManagementPage.roles.curator')}</option>
+              <option value="researcher">{t('userManagementPage.roles.researcher')}</option>
             </select>
           </div>
         </div>
@@ -131,19 +133,19 @@ const UserManagement: React.FC = () => {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  User
+                  {t('userManagementPage.table.userColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Role
+                  {t('userManagementPage.table.roleColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Last Login
+                  {t('userManagementPage.table.lastLoginColumn')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  {t('userManagementPage.table.statusColumn')}
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  {t('userManagementPage.table.actionsColumn')}
                 </th>
               </tr>
             </thead>
@@ -164,7 +166,7 @@ const UserManagement: React.FC = () => {
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center space-x-1 px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}>
                       {getRoleIcon(user.role)}
-                      <span className="capitalize">{user.role.replace('_', ' ')}</span>
+                      <span className="capitalize">{t(`userManagementPage.roles.${user.role}`)}</span>
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">
@@ -176,20 +178,20 @@ const UserManagement: React.FC = () => {
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                     }`}>
-                      {user.isActive ? 'Active' : 'Inactive'}
+                      {user.isActive ? t('userManagementPage.table.activeStatus') : t('userManagementPage.table.inactiveStatus')}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end space-x-2">
                       <button
                         className="text-gray-400 hover:text-blue-600 transition-colors"
-                        title="Edit"
+                        title={t('userManagementPage.table.editAction')}
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
                         className="text-gray-400 hover:text-red-600 transition-colors"
-                        title="Delete"
+                        title={t('userManagementPage.table.deleteAction')}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -209,7 +211,7 @@ const UserManagement: React.FC = () => {
             <User className="w-6 h-6 text-blue-600" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-1">{users.length}</h3>
-          <p className="text-gray-600 text-sm">Total Users</p>
+          <p className="text-gray-600 text-sm">{t('userManagementPage.statistics.totalUsers')}</p>
         </div>
         
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
@@ -219,7 +221,7 @@ const UserManagement: React.FC = () => {
           <h3 className="text-2xl font-bold text-gray-900 mb-1">
             {users.filter(u => u.role === 'super_admin').length}
           </h3>
-          <p className="text-gray-600 text-sm">Administrators</p>
+          <p className="text-gray-600 text-sm">{t('userManagementPage.statistics.administrators')}</p>
         </div>
         
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
@@ -229,7 +231,7 @@ const UserManagement: React.FC = () => {
           <h3 className="text-2xl font-bold text-gray-900 mb-1">
             {users.filter(u => u.role === 'archivist' || u.role === 'curator').length}
           </h3>
-          <p className="text-gray-600 text-sm">Staff Members</p>
+          <p className="text-gray-600 text-sm">{t('userManagementPage.statistics.staffMembers')}</p>
         </div>
         
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center">
@@ -239,7 +241,7 @@ const UserManagement: React.FC = () => {
           <h3 className="text-2xl font-bold text-gray-900 mb-1">
             {users.filter(u => u.isActive).length}
           </h3>
-          <p className="text-gray-600 text-sm">Active Users</p>
+          <p className="text-gray-600 text-sm">{t('userManagementPage.statistics.activeUsers')}</p>
         </div>
       </div>
     </div>

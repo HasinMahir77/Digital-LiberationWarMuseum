@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
 import { exhibitions } from '../../exhibitionData';
 import { Exhibition } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 const CreateExhibitionPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<Partial<Exhibition>>({
     title: '',
     description: '',
@@ -55,13 +57,13 @@ const CreateExhibitionPage: React.FC = () => {
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
           <PlusCircle className="w-8 h-8 mr-3 text-green-700" />
-          Create New Exhibition
+          {t('createExhibitionPage.header.title')}
         </h1>
-        <p className="text-gray-600 mb-8">Fill in the details below to create a new digital exhibition.</p>
+        <p className="text-gray-600 mb-8">{t('createExhibitionPage.header.subtitle')}</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700">{t('createExhibitionPage.form.titleLabel')}</label>
             <input
               type="text"
               name="title"
@@ -74,7 +76,7 @@ const CreateExhibitionPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700">{t('createExhibitionPage.form.descriptionLabel')}</label>
             <textarea
               name="description"
               id="description"
@@ -87,7 +89,7 @@ const CreateExhibitionPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="curatorNote" className="block text-sm font-medium text-gray-700">Curator's Note</label>
+            <label htmlFor="curatorNote" className="block text-sm font-medium text-gray-700">{t('createExhibitionPage.form.curatorNoteLabel')}</label>
             <textarea
               name="curatorNote"
               id="curatorNote"
@@ -99,7 +101,7 @@ const CreateExhibitionPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="featuredImage" className="block text-sm font-medium text-gray-700">Featured Image URL</label>
+            <label htmlFor="featuredImage" className="block text-sm font-medium text-gray-700">{t('createExhibitionPage.form.featuredImageURLLabel')}</label>
             <input
               type="url"
               name="featuredImage"
@@ -112,7 +114,7 @@ const CreateExhibitionPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="artifactCount" className="block text-sm font-medium text-gray-700">Number of Artifacts</label>
+            <label htmlFor="artifactCount" className="block text-sm font-medium text-gray-700">{t('createExhibitionPage.form.numberOfArtifactsLabel')}</label>
             <input
               type="number"
               name="artifactCount"
@@ -134,7 +136,7 @@ const CreateExhibitionPage: React.FC = () => {
               className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
             />
             <label htmlFor="featured" className="ml-2 block text-sm text-gray-900">
-              Feature this exhibition on the homepage
+              {t('createExhibitionPage.form.featureCheckbox')}
             </label>
           </div>
 
@@ -143,7 +145,7 @@ const CreateExhibitionPage: React.FC = () => {
               type="submit"
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
-              Create Exhibition
+              {t('createExhibitionPage.form.createButton')}
             </button>
           </div>
         </form>

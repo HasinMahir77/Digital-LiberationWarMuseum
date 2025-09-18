@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const VirtualTour2Page: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div 
       className="min-h-screen bg-cover bg-fixed bg-center" 
@@ -10,9 +12,9 @@ const VirtualTour2Page: React.FC = () => {
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 bg-gray-800 bg-opacity-60 rounded-lg p-6 text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Virtual Tour</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">{t('virtualTourPage.hero.title')}</h1>
           <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-            Explore the Liberation War Museum via an interactive Matterport 3D tour.
+            {t('virtualTourPage.hero.subtitle')}
           </p>
         </div>
 
