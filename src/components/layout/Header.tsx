@@ -32,8 +32,8 @@ const Header: React.FC = () => {
         <div className="flex items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-700 to-green-800 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">LW</span>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <img src="https://www.liberationwarmuseumbd.org/front/lwm/img/large-logo.png" alt="Liberation War Museum Logo" className="h-full w-full object-contain" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-900">{t('header.logo.title')}</h1>
@@ -221,33 +221,41 @@ const Header: React.FC = () => {
                   <span className="hidden md:inline text-sm font-medium">{user.name}</span>
                 </button>
                 
-                {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50">
-                    <div className="py-1">
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <p className="text-sm font-medium text-gray-900">{user.name}</p>
-                        <p className="text-xs text-gray-500 capitalize">{user.role.replace('_', ' ')}</p>
-                      </div>
-                      {(user.role === 'super_admin' || user.role === 'archivist' || user.role === 'curator') && (
-                        <Link
-                          to="/admin"
-                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={() => setIsUserMenuOpen(false)}
+                <AnimatePresence>
+                  {isUserMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50"
+                    >
+                      <div className="py-1">
+                        <div className="px-4 py-2 border-b border-gray-100">
+                          <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                          <p className="text-xs text-gray-500 capitalize">{user.role.replace('_', ' ')}</p>
+                        </div>
+                        {(user.role === 'super_admin' || user.role === 'archivist' || user.role === 'curator') && (
+                          <Link
+                            to="/admin"
+                            className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onClick={() => setIsUserMenuOpen(false)}
+                          >
+                            <Settings className="w-4 h-4 mr-2" />
+                            {t('header.userMenu.adminDashboard')}
+                          </Link>
+                        )}
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                          <Settings className="w-4 h-4 mr-2" />
-                          {t('header.userMenu.adminDashboard')}
-                        </Link>
-                      )}
-                      <button
-                        onClick={handleLogout}
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        <LogOut className="w-4 h-4 mr-2" />
-                        {t('header.userMenu.signOut')}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                          <LogOut className="w-4 h-4 mr-2" />
+                          {t('header.userMenu.signOut')}
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
               <Link

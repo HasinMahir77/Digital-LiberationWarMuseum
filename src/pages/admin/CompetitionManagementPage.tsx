@@ -123,7 +123,7 @@ const CompetitionManagementPage: React.FC = () => {
               <tr key={comp.id}>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <Link to={`/competitions/${comp.id}`} className="text-blue-600 hover:underline">
-                    {comp.title}
+                    {t(comp.title)}
                   </Link>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm capitalize">
@@ -228,6 +228,7 @@ const CompetitionManagementPage: React.FC = () => {
                       <option value="closed">{t('competitionManagementPage.modal.statusOptions.closed')}</option>
                       <option value="judging">{t('competitionManagementPage.modal.statusOptions.judging')}</option>
                       <option value="completed">{t('competitionManagementPage.modal.statusOptions.completed')}</option>
+                      <option value="upcoming">{t('competitionManagementPage.modal.statusOptions.upcoming')}</option>
                     </select>
                   </div>
                   <div>

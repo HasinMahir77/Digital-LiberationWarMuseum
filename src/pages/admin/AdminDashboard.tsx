@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import {
   BarChart3,
   Users,
@@ -22,11 +22,14 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
   const { artifacts } = useData();
   const { t } = useTranslation();
+
+  const location = useLocation();
 
   const stats = [
     {
@@ -69,7 +72,17 @@ const AdminDashboard: React.FC = () => {
 
           {/* Main Content */}
           <div className="flex-1">
-            <Outlet />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Outlet />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

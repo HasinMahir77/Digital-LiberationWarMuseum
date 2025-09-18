@@ -9,6 +9,7 @@ import {
   Upload,
   Download
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
 import { useTranslation } from 'react-i18next';
@@ -52,7 +53,11 @@ const AdminOverviewPage: React.FC = () => {
   ];
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -155,8 +160,9 @@ const AdminOverviewPage: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default AdminOverviewPage;
+

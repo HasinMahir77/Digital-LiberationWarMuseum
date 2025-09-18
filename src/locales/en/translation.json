@@ -743,7 +743,8 @@
         "open": "Open",
         "closed": "Closed",
         "judging": "Judging",
-        "completed": "Completed"
+        "completed": "Completed",
+        "upcoming": "Upcoming"
       },
       "adminUserIDLabel": "Admin User ID",
       "relatedExhibitionIDLabel": "Related Exhibition ID (optional)",
@@ -957,7 +958,7 @@
   },
   "header": {
     "logo": {
-      "title": "Liberation War",
+      "title": "Liberation War Museum",
       "subtitle": "Digital Collection"
     },
     "nav": {
