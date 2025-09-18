@@ -109,8 +109,8 @@ const ArtifactManagement: React.FC = () => {
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                       <div>
-                        <h3 className="text-sm font-medium text-gray-900">{artifact.objectHead}</h3>
-                        <p className="text-sm text-gray-600">{artifact.objectType}</p>
+                        <h3 className="text-sm font-medium text-gray-900">{t(artifact.objectHead)}</h3>
+                        <p className="text-sm text-gray-600">{t(artifact.objectType)}</p>
                       </div>
                     </div>
                   </td>

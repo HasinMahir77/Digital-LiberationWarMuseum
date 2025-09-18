@@ -20,6 +20,9 @@ i18n
     },
     fallbackLng: 'en',
     debug: true,
+    react: {
+      useSuspense: false,
+    },
 
     interpolation: {
       escapeValue: false, // react already escapes by default

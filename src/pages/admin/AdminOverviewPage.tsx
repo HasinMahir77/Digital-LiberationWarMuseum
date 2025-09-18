@@ -144,7 +144,7 @@ const AdminOverviewPage: React.FC = () => {
                 className="w-12 h-12 object-cover rounded-lg"
               />
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900">{artifact.objectHead}</h4>
+                <h4 className="font-medium text-gray-900">{t(artifact.objectHead)}</h4>
                 <p className="text-sm text-gray-600">
                   {t('adminDashboard.recentActivity.addedOn', { date: new Date(artifact.dateCreated).toLocaleDateString() })}
                 </p>
