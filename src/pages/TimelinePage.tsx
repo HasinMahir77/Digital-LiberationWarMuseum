@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Target } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 interface TimelineEvent {
   id: string;
@@ -12,6 +13,8 @@ interface TimelineEvent {
   artifacts: string[];
   year: string;
 }
+
+const MotionButton = motion.button;
 
   const TimelinePage: React.FC = () => {
     const [selectedYear, setSelectedYear] = useState('1970');
@@ -201,7 +204,7 @@ interface TimelineEvent {
         <div className="flex justify-center mb-8">
           <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-md border border-gray-700 p-1">
             {['1970', '1971', '1972'].map((year) => (
-              <button
+              <MotionButton
                 key={year}
                 onClick={() => {
                   const element = document.getElementById(`year-${year}`);
@@ -210,6 +213,8 @@ interface TimelineEvent {
                   }
                   setSelectedYear(year);
                 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   selectedYear === year
                     ? 'bg-green-600 text-white'
@@ -217,7 +222,7 @@ interface TimelineEvent {
                 }`}
               >
                 {t(`timelinePage.year.${year}`)}
-              </button>
+              </MotionButton>
             ))}
           </div>
         </div>
@@ -297,18 +302,26 @@ interface TimelineEvent {
               <p className="text-gray-200 mb-4">
                 {t('timelinePage.keyFigures.description')}
               </p>
-              <button className="text-green-400 hover:text-green-300 font-medium text-sm">
+              <MotionButton 
+                className="text-green-400 hover:text-green-300 font-medium text-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 {t('timelinePage.keyFigures.viewButton')}
-              </button>
+              </MotionButton>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white mb-3">{t('timelinePage.battleMaps.title')}</h3>
               <p className="text-gray-200 mb-4">
                 {t('timelinePage.battleMaps.description')}
               </p>
-              <button className="text-green-400 hover:text-green-300 font-medium text-sm">
+              <MotionButton 
+                className="text-green-400 hover:text-green-300 font-medium text-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 {t('timelinePage.battleMaps.viewButton')}
-              </button>
+              </MotionButton>
             </div>
           </div>
         </div>

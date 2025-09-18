@@ -3,17 +3,24 @@ import { Link } from 'react-router-dom';
 import { Calendar, MapPin, User, ArrowRight } from 'lucide-react';
 import { Artifact } from '../../contexts/DataContext';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 interface ArtifactCardProps {
   artifact: Artifact;
   viewMode: 'grid' | 'list';
 }
 
+const MotionLink = motion(Link);
+
 const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
   const { t } = useTranslation();
   if (viewMode === 'list') {
     return (
-      <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 p-6 hover:shadow-md transition-shadow">
+      <motion.div 
+        className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 p-6 hover:shadow-md transition-shadow"
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.98 }}
+      >
         <div className="flex gap-6">
           <div className="flex-shrink-0">
             <img
@@ -25,9 +32,9 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
           <div className="flex-1">
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-lg font-semibold text-gray-900 hover:text-green-700">
-                <Link to={`/artifact/${artifact.id}`}>
+                <MotionLink to={`/artifact/${artifact.id}`}>
                   {t(artifact.objectHead)}
-                </Link>
+                </MotionLink>
               </h3>
               <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
                 {t(artifact.objectType)}
@@ -52,20 +59,26 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <Link
+            <MotionLink
               to={`/artifact/${artifact.id}`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="text-green-700 hover:text-green-800 p-2 rounded-lg hover:bg-green-50 transition-colors"
             >
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </MotionLink>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow">
+    <motion.div 
+      className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow"
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+    >
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={artifact.images[0]}
@@ -82,9 +95,9 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
         </div>
         
         <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-green-700">
-          <Link to={`/artifact/${artifact.id}`}>
+          <MotionLink to={`/artifact/${artifact.id}`}>
             {t(artifact.objectHead)}
-          </Link>
+          </MotionLink>
         </h3>
         
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">
@@ -117,16 +130,18 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, viewMode }) => {
             )}
           </div>
           
-          <Link
+          <MotionLink
             to={`/artifact/${artifact.id}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="text-green-700 hover:text-green-800 font-medium text-sm inline-flex items-center"
           >
             {t('artifactCard.grid.viewDetails')}
             <ArrowRight className="w-4 h-4 ml-1" />
-          </Link>
+          </MotionLink>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

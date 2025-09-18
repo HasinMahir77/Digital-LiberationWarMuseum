@@ -5,6 +5,10 @@ import { useAuth } from '../contexts/AuthContext'; // Import useAuth
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import victoryBackground from '../assets/images/victory.jpg';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
+const MotionButton = motion.button;
 
 const CompetitionDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -83,15 +87,20 @@ const CompetitionDetailPage: React.FC = () => {
   return (
     <div 
       className="min-h-screen bg-cover bg-fixed bg-center text-white py-12"
-      style={{ 
+      style={{
         backgroundImage: `url(${victoryBackground})`
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-8 md:p-12">
-          <Link to="/competitions" className="text-green-400 hover:text-green-500 mb-4 inline-block">
+          <MotionLink 
+            to="/competitions" 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-green-400 hover:text-green-500 mb-4 inline-block"
+          >
             &larr; {t('competitionDetailPage.backToCompetitions')}
-          </Link>
+          </MotionLink>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center md:text-left">{competition.title}</h1>
           <p className="text-lg text-gray-200 mb-6 text-center md:text-left">{t('competitionDetailPage.levelPrefix')} <span className="capitalize">{t(`competitionsPage.levels.${competition.level}`)}</span></p>
 
@@ -105,26 +114,32 @@ const CompetitionDetailPage: React.FC = () => {
                 />
                 <div className="w-full text-center">
                   {!user ? (
-                    <button
+                    <MotionButton
                       onClick={() => navigate('/login')}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors"
                     >
                       {t('competitionDetailPage.loginToJoin')}
-                    </button>
+                    </MotionButton>
                   ) : userSubmission ? (
-                    <button
+                    <MotionButton
                       onClick={() => setIsModalOpen(true)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className="bg-gray-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-600 transition-colors inline-block"
                     >
                       {t('competitionDetailPage.viewWithdrawApplication')}
-                    </button>
+                    </MotionButton>
                   ) : isCompetitionOpen ? (
-                    <button
+                    <MotionButton
                       onClick={() => setIsModalOpen(true)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors inline-block"
                     >
                       {t('competitionDetailPage.joinCompetition')}
-                    </button>
+                    </MotionButton>
                   ) : (
                     <p className="text-gray-400">{t('competitionDetailPage.competitionStatus', { status: t(`competitionDetailPage.competitionStatuses.${competition.status}`)})}</p>
                   )}
@@ -176,13 +191,15 @@ const CompetitionDetailPage: React.FC = () => {
                 {submitSuccess ? (
                   <p className="text-green-400 text-sm mb-4">{submitSuccess}</p>
                 ) : (
-                  <button
+                  <MotionButton
                     onClick={handleApply}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 mr-2" 
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? t('competitionDetailPage.modal.applying') : t('competitionDetailPage.modal.applyNow')}
-                  </button>
+                  </MotionButton>
                 )}
               </>
             ) : (
@@ -198,22 +215,26 @@ const CompetitionDetailPage: React.FC = () => {
                 ) : withdrawError ? (
                   <p className="text-red-400 text-sm mt-4">{withdrawError}</p>
                 ) : (
-                  <button
+                  <MotionButton
                     onClick={handleWithdraw}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 mr-2" 
                     disabled={isWithdrawing}
                   >
                     {isWithdrawing ? t('competitionDetailPage.modal.withdrawing') : t('competitionDetailPage.modal.withdrawApplication')}
-                  </button>
+                  </MotionButton>
                 )}
               </>
             )}
-            <button
+            <MotionButton
               onClick={closeModal}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="mt-6 bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               {t('competitionDetailPage.modal.close')}
-            </button>
+            </MotionButton>
           </div>
         </div>
       )}

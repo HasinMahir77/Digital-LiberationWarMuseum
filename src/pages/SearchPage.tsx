@@ -4,6 +4,9 @@ import { Search, Filter, Grid, List, X } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import ArtifactCard from '../components/artifacts/ArtifactCard';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionButton = motion.button;
 
 const SearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,8 +84,10 @@ const SearchPage: React.FC = () => {
           {/* Filter Controls */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex items-center space-x-4">
-              <button
+              <MotionButton
                 onClick={() => setShowFilters(!showFilters)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
                   showFilters || hasActiveFilters
                     ? 'bg-green-50 border-green-300 text-green-700'
@@ -96,16 +101,18 @@ const SearchPage: React.FC = () => {
                     {Object.values(filters).filter(v => v !== 'all').length}
                   </span>
                 )}
-              </button>
+              </MotionButton>
               
               {hasActiveFilters && (
-                <button
+                <MotionButton
                   onClick={clearFilters}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className="text-gray-500 hover:text-gray-700 text-sm flex items-center space-x-1"
                 >
                   <X className="w-4 h-4" />
                   <span>{t('searchPage.clearFilters')}</span>
-                </button>
+                </MotionButton>
               )}
             </div>
 
@@ -114,22 +121,26 @@ const SearchPage: React.FC = () => {
                 {t('searchPage.resultsFound', { count: results.length })}
               </span>
               <div className="flex bg-gray-100 rounded-lg">
-                <button
+                <MotionButton
                   onClick={() => setViewMode('grid')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`p-2 rounded-lg transition-colors ${
                     viewMode === 'grid' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'
                   }`}
                 >
                   <Grid className="w-4 h-4" />
-                </button>
-                <button
+                </MotionButton>
+                <MotionButton
                   onClick={() => setViewMode('list')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`p-2 rounded-lg transition-colors ${
                     viewMode === 'list' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'
                   }`}
                 >
                   <List className="w-4 h-4" />
-                </button>
+                </MotionButton>
               </div>
             </div>
           </div>
@@ -208,12 +219,14 @@ const SearchPage: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 {t('searchPage.adjustSearchTerms')}
               </p>
-              <button
+              <MotionButton
                 onClick={clearFilters}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors"
               >
                 {t('searchPage.clearAllFilters')}
-              </button>
+              </MotionButton>
             </div>
           )}
         </div>

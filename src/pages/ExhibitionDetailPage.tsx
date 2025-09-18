@@ -5,6 +5,9 @@ import { exhibitions } from '../exhibitionData'; // Import the centralized data
 import { Exhibition } from '../types'; // Import the Exhibition interface
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
 
 const ExhibitionDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,10 +50,15 @@ const ExhibitionDetailPage: React.FC = () => {
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6 text-red-400">
         <h2 className="text-2xl font-bold mb-4">{t('exhibitionDetailPage.error.title')}</h2>
         <p className="text-lg mb-6">{error}</p>
-        <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
+        <MotionLink 
+          to="/exhibitions" 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="text-green-500 hover:underline flex items-center"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t('exhibitionDetailPage.error.backButton')}
-        </Link>
+        </MotionLink>
       </div>
     );
   }
@@ -60,10 +68,15 @@ const ExhibitionDetailPage: React.FC = () => {
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6">
         <h2 className="text-2xl font-bold mb-4 text-white">{t('exhibitionDetailPage.notFound.title')}</h2>
         <p className="text-lg mb-6 text-gray-200">{t('exhibitionDetailPage.notFound.message')}</p>
-        <Link to="/exhibitions" className="text-green-500 hover:underline flex items-center">
+        <MotionLink 
+          to="/exhibitions" 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="text-green-500 hover:underline flex items-center"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t('exhibitionDetailPage.notFound.backButton')}
-        </Link>
+        </MotionLink>
       </div>
     );
   }
@@ -71,13 +84,15 @@ const ExhibitionDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link
+        <MotionLink
           to="/exhibitions"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           className="inline-flex items-center text-green-700 hover:text-green-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
           {t('exhibitionDetailPage.backToAllExhibitions')}
-        </Link>
+        </MotionLink>
 
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <img

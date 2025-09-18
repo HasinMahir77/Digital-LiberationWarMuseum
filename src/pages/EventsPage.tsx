@@ -5,6 +5,7 @@ import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
 import victoryBackground from '../assets/images/victory.jpg';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 interface Event {
   id: string;
@@ -16,6 +17,8 @@ interface Event {
   description: string;
   imageUrl?: string;
 }
+
+const MotionLink = motion(Link);
 
 const sampleEvents: Event[] = [
   {
@@ -184,15 +187,25 @@ const EventsPage: React.FC = () => {
           <div className="md:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filterEvents().map((event, index) => (
-                <div key={event.id} className="bg-gray-800 bg-opacity-70 rounded-lg shadow-md overflow-hidden">
+                <motion.div 
+                  key={event.id} 
+                  whileHover={{ scale: 1.03 }} 
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-gray-800 bg-opacity-70 rounded-lg shadow-md overflow-hidden"
+                >
                   {event.imageUrl && (
                     <img src={event.imageUrl} alt={t(`eventsPage.events.event${index + 1}.title`)} className="w-full h-48 object-cover" />
                   )}
                   <div className="p-6">
                     <h2 className="text-xl font-semibold mb-2">
-                      <Link to={`/events/${event.id}`} className="hover:text-green-400 text-white">
+                      <MotionLink 
+                        to={`/events/${event.id}`} 
+                        whileHover={{ scale: 1.05 }} 
+                        whileTap={{ scale: 0.95 }}
+                        className="hover:text-green-400 text-white"
+                      >
                         {t(`eventsPage.events.event${index + 1}.title`)}
-                      </Link>
+                      </MotionLink>
                     </h2>
                     <p className="text-gray-200 mb-1">
                       <span className="font-medium">{t('eventsPage.eventDetails.date')}</span> {new Date(event.date).toLocaleDateString(i18n.language)}
@@ -208,7 +221,7 @@ const EventsPage: React.FC = () => {
                     </p>
                     <p className="text-gray-200">{t(`eventsPage.events.event${index + 1}.description`)}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

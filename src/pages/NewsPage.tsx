@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
 
 const NewsPage: React.FC = () => {
   const { news } = useData();
@@ -47,9 +50,11 @@ const NewsPage: React.FC = () => {
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {news.map((newsItem) => (
-            <Link 
+            <MotionLink 
               to={`/news/${newsItem.id}`}
               key={newsItem.id}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               className="block bg-gray-800 bg-opacity-70 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
               <img src={newsItem.imageUrl} alt={t(newsItem.title)} className="w-full h-48 object-cover" />
@@ -58,7 +63,7 @@ const NewsPage: React.FC = () => {
                 <p className="text-gray-200 text-sm mb-4 line-clamp-3">{t(newsItem.summary)}</p>
                 <time className="text-gray-400 text-xs">{new Date(newsItem.date).toLocaleDateString()}</time>
               </div>
-            </Link>
+            </MotionLink>
           ))}
         </div>
 
@@ -79,11 +84,31 @@ const NewsPage: React.FC = () => {
         {/* Pagination - Simplified for now */}
         <nav className="flex justify-center mt-12">
           <ul className="flex items-center space-x-2">
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.prev')}</a></li>
-            <li><a href="#" className="px-4 py-2 border border-green-600 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors">1</a></li>
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">2</a></li>
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">3</a></li>
-            <li><a href="#" className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.next')}</a></li>
+            <li><MotionLink 
+              to="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.prev')}</MotionLink></li>
+            <li><MotionLink 
+              to="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 border border-green-600 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors">1</MotionLink></li>
+            <li><MotionLink 
+              to="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">2</MotionLink></li>
+            <li><MotionLink 
+              to="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">3</MotionLink></li>
+            <li><MotionLink 
+              to="#"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 border border-gray-600 rounded-md hover:bg-gray-700 transition-colors text-white">{t('newsPage.pagination.next')}</MotionLink></li>
           </ul>
         </nav>
       </div>

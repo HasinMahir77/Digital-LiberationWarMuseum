@@ -5,6 +5,9 @@ import { exhibitions } from '../exhibitionData';
 import { Exhibition } from '../types';
 import { useAuth } from '../contexts/AuthContext'; // Import useAuth hook
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
 
 const ExhibitionsPage: React.FC = () => {
   const { user } = useAuth(); // Get the current user
@@ -75,13 +78,15 @@ const ExhibitionsPage: React.FC = () => {
                         </span>
                         <span>{t('exhibitionsPage.featuredExhibition.artifacts', { count: exhibition.artifactCount })}</span>
                       </div>
-                      <Link
+                      <MotionLink
                         to={`/exhibition/${exhibition.id}`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors inline-flex items-center justify-center"
                       >
                         {t('exhibitionsPage.featuredExhibition.exploreButton')}
                         <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
+                      </MotionLink>
                     </div>
                   </div>
                 </div>
@@ -94,7 +99,12 @@ const ExhibitionsPage: React.FC = () => {
           <h2 className="text-2xl font-bold text-white mb-8 bg-gray-800 bg-opacity-60 rounded-lg px-4 py-2">{t('exhibitionsPage.allExhibitions.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {exhibitions.map((exhibition) => (
-              <div key={exhibition.id} className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow">
+              <motion.div 
+                key={exhibition.id} 
+                whileHover={{ scale: 1.03 }} 
+                whileTap={{ scale: 0.98 }}
+                className="bg-gray-200 bg-opacity-80 rounded-lg shadow-sm border border-gray-300 overflow-hidden hover:shadow-md transition-shadow"
+              >
                 <div className="relative">
                   <img
                     src={exhibition.featuredImage}
@@ -133,32 +143,42 @@ const ExhibitionsPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Link
+                  <MotionLink
                     to={`/exhibition/${exhibition.id}`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className="w-full bg-green-700 text-white py-2 rounded-lg hover:bg-green-800 transition-colors text-center text-sm font-medium inline-flex items-center justify-center"
                   >
                     {t('exhibitionsPage.allExhibitions.exploreButton')}
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
+                  </MotionLink>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Create Exhibition CTA */}
         {canCurate && (
-          <div className="mt-16 bg-gray-200 bg-opacity-80 rounded-xl p-8 text-center">
+          <motion.div 
+            whileHover={{ scale: 1.03 }} 
+            whileTap={{ scale: 0.98 }}
+            className="mt-16 bg-gray-200 bg-opacity-80 rounded-xl p-8 text-center"
+          >
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               {t('exhibitionsPage.createExhibitionCTA.title')}
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               {t('exhibitionsPage.createExhibitionCTA.description')}
             </p>
-            <Link to="/admin/create-exhibition" className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors">
+            <MotionLink to="/admin/create-exhibition" 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-800 transition-colors"
+            >
               {t('exhibitionsPage.createExhibitionCTA.button')}
-            </Link>
-          </div>
+            </MotionLink>
+          </motion.div>
         )}
       </div>
     </div>

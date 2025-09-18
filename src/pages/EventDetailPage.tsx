@@ -5,10 +5,13 @@ import image687 from '../assets/images/687-400x200.jpg';
 import image543 from '../assets/images/543-400x200.jpg';
 import victoryBackground from '../assets/images/victory.jpg';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 // Assuming Event interface and sampleEvents are defined in EventsPage.tsx or a shared types file
 // For now, I'll copy the interface and a simplified version of sampleEvents here
 // In a larger application, this data would ideally come from a centralized store or API
+
+const MotionLink = motion(Link);
 
 interface Event {
   id: string;
@@ -110,9 +113,14 @@ const EventDetailPage: React.FC = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-white text-center bg-gray-800 bg-opacity-60 rounded-lg p-8">
           <h1 className="text-4xl font-bold mb-4">{t('eventDetailPage.notFound.title')}</h1>
           <p className="text-lg">{t('eventDetailPage.notFound.message')}</p>
-          <Link to="/events" className="mt-4 inline-block bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-800 transition-colors">
+          <MotionLink 
+            to="/events" 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-4 inline-block bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-green-800 transition-colors"
+          >
             {t('eventDetailPage.notFound.backButton')}
-          </Link>
+          </MotionLink>
         </div>
       </div>
     );
@@ -127,9 +135,14 @@ const EventDetailPage: React.FC = () => {
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-xl p-8 md:p-12">
-          <Link to="/events" className="inline-block text-green-400 hover:text-green-500 transition-colors mb-6 text-lg font-medium">
+          <MotionLink 
+            to="/events" 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block text-green-400 hover:text-green-500 transition-colors mb-6 text-lg font-medium"
+          >
             &larr; {t('eventDetailPage.backToAllEvents')}
-          </Link>
+          </MotionLink>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center md:text-left">{event.title}</h1>
           
           <div className="flex flex-col md:flex-row gap-8">

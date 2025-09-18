@@ -4,6 +4,9 @@ import { useData } from '../contexts/DataContext';
 import { Competition } from '../types';
 import victoryBackground from '../assets/images/victory.jpg';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+const MotionLink = motion(Link);
 
 const CompetitionsPage: React.FC = () => {
   const { competitions } = useData();
@@ -147,9 +150,11 @@ const CompetitionsPage: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filterCompetitions()
                   .map((comp) => (
-                  <Link 
+                  <MotionLink 
                     to={`/competitions/${comp.id}`}
                     key={comp.id}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                     className="block bg-gray-800 bg-opacity-70 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out overflow-hidden"
                   >
                     <img src={comp.thumbnail} alt={t(comp.title)} className="w-full h-48 object-cover" />
@@ -162,7 +167,7 @@ const CompetitionsPage: React.FC = () => {
                       </div>
                       <p className="text-xs text-gray-200 mt-2">{t('competitionsPage.card.ends')} {new Date(comp.endDate).toLocaleDateString(i18n.language)}</p>
                     </div>
-                  </Link>
+                  </MotionLink>
                 ))}
               </div>
             )}
