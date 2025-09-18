@@ -341,7 +341,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode, t: TFunction }>
   const [artifacts, setArtifacts] = useState<Artifact[]>(mockArtifacts);
   const [competitions, setCompetitions] = useState<Competition[]>(mockCompetitions);
   const [competitionSubmissions, setCompetitionSubmissions] = useState<CompetitionSubmission[]>(mockCompetitionSubmissions);
-  const [news, setNews] = useState<NewsArticle[]>(mockNews());
+  const [news, setNews] = useState<NewsArticle[]>(mockNews().map(article => ({ // Added map to translate news articles
+    ...article,
+    title: t(article.title),
+    summary: t(article.summary),
+    content: t(article.content),
+  })));
   const [events, setEvents] = useState<MuseumEvent[]>(mockEvents);
 
   const addArtifact = (artifactData: Omit<Artifact, 'id' | 'dateCreated'>) => {
