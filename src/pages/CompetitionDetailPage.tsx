@@ -101,7 +101,7 @@ const CompetitionDetailPage: React.FC = () => {
           >
             &larr; {t('competitionDetailPage.backToCompetitions')}
           </MotionLink>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center md:text-left">{competition.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center md:text-left">{t(competition.title)}</h1>
           <p className="text-lg text-gray-200 mb-6 text-center md:text-left">{t('competitionDetailPage.levelPrefix')} <span className="capitalize">{t(`competitionsPage.levels.${competition.level}`)}</span></p>
 
           <div className="flex flex-col md:flex-row gap-8">
@@ -109,7 +109,7 @@ const CompetitionDetailPage: React.FC = () => {
               <div className="md:w-1/2 flex flex-col items-center">
                 <img 
                   src={competition.thumbnail} 
-                  alt={competition.title} 
+                  alt={t(competition.title)} 
                   className="w-full h-96 object-contain rounded-lg shadow-md mb-6"
                 />
                 <div className="w-full text-center">
@@ -150,13 +150,13 @@ const CompetitionDetailPage: React.FC = () => {
             <div className="md:w-1/2 flex flex-col justify-between">
               <div className="text-gray-200 leading-relaxed text-lg mb-8">
                 <h2 className="text-2xl font-semibold mb-3 text-white">{t('competitionDetailPage.descriptionTitle')}</h2>
-                <p>{competition.description}</p>
+                <p>{t(competition.description)}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-200">
                 <div>
                   <h2 className="font-semibold text-xl mb-2 text-white">{t('competitionDetailPage.eligibilityCriteriaTitle')}</h2>
-                  <p>{competition.eligibilityCriteria}</p>
+                  <p>{t(competition.eligibilityCriteria)}</p>
                 </div>
                 <div>
                   <h2 className="font-semibold text-xl mb-2 text-white">{t('competitionDetailPage.importantDatesTitle')}</h2>
@@ -165,11 +165,11 @@ const CompetitionDetailPage: React.FC = () => {
                 </div>
                 <div>
                   <h2 className="font-semibold text-xl mb-2 text-white">{t('competitionDetailPage.judgingCriteriaTitle')}</h2>
-                  <p>{competition.judgingCriteria}</p>
+                  <p>{t(competition.judgingCriteria)}</p>
                 </div>
                 <div>
                   <h2 className="font-semibold text-xl mb-2 text-white">{t('competitionDetailPage.rewardsTitle')}</h2>
-                  <p>{competition.rewards}</p>
+                  <p>{t(competition.rewards)}</p>
                 </div>
               </div>
             </div>

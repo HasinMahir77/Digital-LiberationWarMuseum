@@ -44,8 +44,8 @@ const ArtifactDetailPage: React.FC = () => {
 
   const citationFormats = {
     apa: `${artifact.contributorName}. (${new Date(artifact.collectionDate).getFullYear()}). ${artifact.objectHead} [${artifact.objectType}]. ${t('hero.title')}. ${t('artifactDetailPage.provenanceTab.retrievedFrom')} https://lwarchive.gov.bd/artifact/${artifact.id}`,
-    mla: `${artifact.contributorName}. \"${artifact.objectHead}.\" ${t('hero.title')}, ${new Date(artifact.collectionDate).getFullYear()}, lwarchive.gov.bd/artifact/${artifact.id}.`,
-    chicago: `${artifact.contributorName}, \"${artifact.objectHead},\" ${t('hero.title')}, ${t('artifactDetailPage.provenanceTab.accessed')} ${new Date().toLocaleDateString()}, https://lwarchive.gov.bd/artifact/${artifact.id}.`
+    mla: `${artifact.contributorName}. "${artifact.objectHead}." ${t('hero.title')}, ${new Date(artifact.collectionDate).getFullYear()}, lwarchive.gov.bd/artifact/${artifact.id}.`,
+    chicago: `${artifact.contributorName}, "${artifact.objectHead}," ${t('hero.title')}, ${t('artifactDetailPage.provenanceTab.accessed')} ${new Date().toLocaleDateString()}, https://lwarchive.gov.bd/artifact/${artifact.id}.`
   };
 
   return (
@@ -128,11 +128,11 @@ const ArtifactDetailPage: React.FC = () => {
             {/* Header */}
             <div className="p-6 border-b border-gray-200">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                {artifact.objectHead}
+                {t(artifact.objectHead)}
               </h1>
               <div className="flex items-center space-x-4 text-sm text-gray-600">
                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium">
-                  {artifact.objectType}
+                  {t(artifact.objectType)}
                 </span>
                 <span>{artifact.collectionNumber}</span>
               </div>
@@ -163,7 +163,7 @@ const ArtifactDetailPage: React.FC = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('artifactDetailPage.detailsTab.description')}</h3>
-                    <p className="text-gray-700 leading-relaxed">{artifact.description}</p>
+                    <p className="text-gray-700 leading-relaxed">{t(artifact.description)}</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -172,7 +172,7 @@ const ArtifactDetailPage: React.FC = () => {
                         <Calendar className="w-5 h-5 text-gray-400" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">{t('artifactDetailPage.detailsTab.collectionDate')}</p>
-                          <p className="text-sm text-gray-600">{artifact.collectionDate}</p>
+                          <p className="text-sm text-gray-600">{t(artifact.collectionDate)}</p>
                         </div>
                       </div>
                       
@@ -180,7 +180,7 @@ const ArtifactDetailPage: React.FC = () => {
                         <MapPin className="w-5 h-5 text-gray-400" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">{t('artifactDetailPage.detailsTab.foundPlace')}</p>
-                          <p className="text-sm text-gray-600">{artifact.foundPlace}</p>
+                          <p className="text-sm text-gray-600">{t(artifact.foundPlace)}</p>
                         </div>
                       </div>
                       
@@ -188,7 +188,7 @@ const ArtifactDetailPage: React.FC = () => {
                         <User className="w-5 h-5 text-gray-400" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">{t('artifactDetailPage.detailsTab.contributor')}</p>
-                          <p className="text-sm text-gray-600">{artifact.contributorName}</p>
+                          <p className="text-sm text-gray-600">{t(artifact.contributorName)}</p>
                         </div>
                       </div>
                     </div>
@@ -198,7 +198,7 @@ const ArtifactDetailPage: React.FC = () => {
                         <Ruler className="w-5 h-5 text-gray-400" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">{t('artifactDetailPage.detailsTab.measurement')}</p>
-                          <p className="text-sm text-gray-600">{artifact.measurement}</p>
+                          <p className="text-sm text-gray-600">{t(artifact.measurement)}</p>
                         </div>
                       </div>
                       
@@ -206,7 +206,7 @@ const ArtifactDetailPage: React.FC = () => {
                         <Tag className="w-5 h-5 text-gray-400" />
                         <div>
                           <p className="text-sm font-medium text-gray-900">{t('artifactDetailPage.detailsTab.gallery')}</p>
-                          <p className="text-sm text-gray-600">{artifact.galleryNumber}</p>
+                          <p className="text-sm text-gray-600">{t(artifact.galleryNumber)}</p>
                         </div>
                       </div>
                     </div>
@@ -220,7 +220,7 @@ const ArtifactDetailPage: React.FC = () => {
                           key={tag}
                           className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
                         >
-                          {tag}
+                          {t(tag)}
                         </span>
                       ))}
                     </div>
@@ -229,7 +229,7 @@ const ArtifactDetailPage: React.FC = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 mb-2">{t('artifactDetailPage.detailsTab.significance')}</h4>
                     <p className="text-gray-700 text-sm leading-relaxed">
-                      {artifact.significanceComment}
+                      {t(artifact.significanceComment)}
                     </p>
                   </div>
                 </div>
@@ -242,11 +242,11 @@ const ArtifactDetailPage: React.FC = () => {
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-900 mb-1">{t('artifactDetailPage.provenanceTab.accessionNumber')}</label>
-                        <p className="text-gray-700">{artifact.accessionNumber}</p>
+                        <p className="text-gray-700">{t(artifact.accessionNumber)}</p>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-900 mb-1">{t('artifactDetailPage.provenanceTab.originalContributor')}</label>
-                        <p className="text-gray-700">{artifact.contributorName}</p>
+                        <p className="text-gray-700">{t(artifact.contributorName)}</p>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-900 mb-1">{t('artifactDetailPage.provenanceTab.dateAdded')}</label>
@@ -322,10 +322,10 @@ const ArtifactDetailPage: React.FC = () => {
                   />
                   <div className="p-4">
                     <h3 className="font-semibold text-gray-900 mb-1 text-sm">
-                      {relatedArtifact.objectHead}
+                      {t(relatedArtifact.objectHead)}
                     </h3>
                     <p className="text-gray-600 text-xs">
-                      {relatedArtifact.objectType} • {relatedArtifact.collectionDate}
+                      {t(relatedArtifact.objectType)} • {relatedArtifact.collectionDate}
                     </p>
                   </div>
                 </Link>

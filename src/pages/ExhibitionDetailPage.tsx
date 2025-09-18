@@ -102,7 +102,7 @@ const ExhibitionDetailPage: React.FC = () => {
           />
           <div className="p-8 lg:p-12">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-              {exhibition.title}
+              {t(exhibition.title)}
             </h1>
             <div className="flex items-center text-gray-500 text-sm mb-6 space-x-4">
               <span className="flex items-center">
@@ -120,7 +120,7 @@ const ExhibitionDetailPage: React.FC = () => {
             </div>
 
             <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-8">
-              <p>{exhibition.description}</p>
+              <p>{t(exhibition.description)}</p>
             </div>
 
             <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-8">
@@ -129,7 +129,7 @@ const ExhibitionDetailPage: React.FC = () => {
                 {t('exhibitionDetailPage.curatorNote')}
               </h3>
               <p className="text-green-700 italic">
-                "{exhibition.curatorNote}"
+                "{t(exhibition.curatorNote)}"
               </p>
             </div>
 
