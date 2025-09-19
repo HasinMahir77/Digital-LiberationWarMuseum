@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Artifact, Competition, CompetitionSubmission, SubmissionStatus, NewsArticle, MuseumEvent } from '../types';
+import { Artifact, Competition, CompetitionSubmission, NewsArticle, MuseumEvent, SubmissionStatus } from '../types';
 import { TFunction } from 'i18next';
 
 interface DataContextType {
@@ -338,8 +338,26 @@ const mockCompetitionSubmissions: CompetitionSubmission[] = [
 ];
 
 export const DataProvider: React.FC<{ children: React.ReactNode, t: TFunction }> = ({ children, t }) => {
-  const [artifacts, setArtifacts] = useState<Artifact[]>(mockArtifacts);
-  const [competitions, setCompetitions] = useState<Competition[]>(mockCompetitions);
+  const [artifacts, setArtifacts] = useState<Artifact[]>(
+    mockArtifacts.map(artifact => ({
+      ...artifact,
+      contributorName: t(artifact.contributorName),
+      objectType: t(artifact.objectType),
+      objectHead: t(artifact.objectHead),
+      description: t(artifact.description),
+      foundPlace: t(artifact.foundPlace),
+    }))
+  );
+  const [competitions, setCompetitions] = useState<Competition[]>(
+    mockCompetitions.map(competition => ({
+      ...competition,
+      title: t(competition.title),
+      description: t(competition.description),
+      level: t(`competitionsPage.levels.${competition.level}`),
+      type: t(`competitionsPage.types.${competition.type}`),
+      status: t(`competitionDetailPage.competitionStatuses.${competition.status}`),
+    }))
+  );
   const [competitionSubmissions, setCompetitionSubmissions] = useState<CompetitionSubmission[]>(mockCompetitionSubmissions);
   const [news, setNews] = useState<NewsArticle[]>(mockNews().map(article => ({ // Added map to translate news articles
     ...article,
